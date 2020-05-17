@@ -10,6 +10,7 @@
 		5BB131052471889A00110DBA /* Flag->Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB131042471889A00110DBA /* Flag->Emoji.swift */; };
 		5BB131082471A82100110DBA /* SF-Pro-Rounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB131072471A82100110DBA /* SF-Pro-Rounded-Bold.otf */; };
 		5BB1310A2471B24300110DBA /* SF-Pro-Rounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB131092471B24300110DBA /* SF-Pro-Rounded-Semibold.otf */; };
+		5BB1310C2471C63000110DBA /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1310B2471C63000110DBA /* DataController.swift */; };
 		5BCCA7C82471168300EE6C2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7C72471168300EE6C2B /* AppDelegate.swift */; };
 		5BCCA7CA2471168300EE6C2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */; };
 		5BCCA7CC2471168300EE6C2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7CB2471168300EE6C2B /* ViewController.swift */; };
@@ -28,6 +29,7 @@
 		5BB131042471889A00110DBA /* Flag->Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Flag->Emoji.swift"; sourceTree = "<group>"; };
 		5BB131072471A82100110DBA /* SF-Pro-Rounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Bold.otf"; sourceTree = "<group>"; };
 		5BB131092471B24300110DBA /* SF-Pro-Rounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Semibold.otf"; sourceTree = "<group>"; };
+		5BB1310B2471C63000110DBA /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		5BCCA7C42471168300EE6C2B /* CoronaTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoronaTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BCCA7C72471168300EE6C2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				5BCCA7E1247138D800EE6C2B /* CoronaClient.swift */,
 				5BCCA7E324713B5F00EE6C2B /* Country.swift */,
 				5BE091EF2471695200751057 /* Summary.swift */,
+				5BB1310B2471C63000110DBA /* DataController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				5BCCA7C82471168300EE6C2B /* AppDelegate.swift in Sources */,
 				5BB131052471889A00110DBA /* Flag->Emoji.swift in Sources */,
 				5BE091F22471707F00751057 /* HomeViewController.swift in Sources */,
+				5BB1310C2471C63000110DBA /* DataController.swift in Sources */,
 				5BCCA7E2247138D800EE6C2B /* CoronaClient.swift in Sources */,
 				5BCCA7E424713B5F00EE6C2B /* Country.swift in Sources */,
 				5BE091F42471741A00751057 /* HomeTableViewCell.swift in Sources */,

@@ -64,7 +64,7 @@ class CoronaClient {
         task.resume()
     }
     
-    class func FetchAllCountries(completion: @escaping ([Country], Error?) -> Void) {
+    class func FetchAllCountries(completion: @escaping ([CountryStruct], Error?) -> Void) {
         taskForGETRequest(url: Endpoints.countries.url, responseType: CountryData.self) { (response, error) in
             if let response = response{
                 completion(response.countries,nil)

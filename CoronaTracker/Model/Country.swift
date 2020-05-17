@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 
 struct CountryData : Codable{
-    let countries : [Country]
+    let countries : [CountryStruct]
 }
 
-struct Country : Codable{
+struct CountryStruct : Codable{
     let Country : String
     let Slug : String
     let ISO2 : String
