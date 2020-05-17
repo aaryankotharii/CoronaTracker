@@ -12,6 +12,31 @@ class HomeTableViewCell: UITableViewCell {
 
     @IBOutlet var countryNameLabel: UILabel!
     
+    @IBOutlet var graphView: UIView!
+    
+    var height : Double {
+        return Double(graphView.frame.height)
+    }
+    
+    var width : Double{
+        return Double(graphView.frame.width)
+    }
+    
+    var spacing : Double{
+        return width/3
+    }
+    var total : Int!
+    var recovered : Int!
+    var deaths : Int!
+    var active : Int {
+        return total-deaths-recovered
+    }
+
+    
+    
+    let colors : [UIColor] = [#colorLiteral(red: 0.9921568627, green: 0.1882352941, blue: 0.4117647059, alpha: 1),#colorLiteral(red: 0.9960784314, green: 0.6705882353, blue: 0, alpha: 1),#colorLiteral(red: 0.08235294118, green: 0.7960784314, blue: 0.2666666667, alpha: 1),#colorLiteral(red: 0.2549019608, green: 0.2549019608, blue: 0.2549019608, alpha: 1)]
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,8 +44,57 @@ class HomeTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        let i = calculatePercentages()
+        addLines(i)
+        print(total,recovered,deaths,active)
+        print(i)
     }
+    
+    func calculatePercentages()->[Double]{
+        let activePercentage = Double(active)/Double(total)
+        let deathPercentage = Double(deaths)/Double(total)
+        let recoveredPercentage = Double(recovered)/Double(total)
+        return [1,activePercentage,recoveredPercentage,deathPercentage]
+    }
+    
+    func addLines(_ array : [Double]){
+        self.graphView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        for i in 0...3{
+            let y = (array[i]) * height
+            let space = Double(spacing) * Double(i)
+            let start = CGPoint(x: space, y: height)
+            let end = CGPoint(x: space, y: height-y)
+            addLine(from: start, to: end, color: colors[i])
+        }
+    }
+    
+    
+    
+    func addLine(from fromPoint : CGPoint,to toPoint:CGPoint,color:UIColor){
+            let shapeLayer =  CAShapeLayer()
+
+            let path = UIBezierPath()
+            path.move(to: fromPoint)
+            path.addLine(to: toPoint)
+
+            // create shape layer for that path
+
+            shapeLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor
+            shapeLayer.strokeColor = color.cgColor
+            shapeLayer.lineWidth = CGFloat(width/10)
+            shapeLayer.path = path.cgPath
+            shapeLayer.lineCap = .round
+
+            // animate it
+
+            graphView.layer.addSublayer(shapeLayer)
+            let animation = CABasicAnimation(keyPath: "strokeEnd")
+            animation.fromValue = 0
+            animation.duration = 2
+            shapeLayer.add(animation, forKey: "MyAnimation")
+
+    }
+    
+    
 
 }

@@ -29,11 +29,10 @@ class HomeViewController: UIViewController {
     
     func handleSummary(summary:Summary? ,error:Error?){
         if let summary = summary {
-            print(summary)
             self.summary = summary
             return
         }
-        print(error!.localizedDescription)
+        print(error!.localizedDescription,"errr")
     }
     
 }
@@ -54,10 +53,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         
         cell.countryNameLabel.text = "\(emoji) \(name)"
         
+        cell.total = country?.TotalConfirmed
+        cell.deaths = country?.TotalDeaths
+        cell.recovered = country?.TotalRecovered
+        
         return cell
         
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 170
+    }
     
 }
 

@@ -63,7 +63,7 @@ class ViewController: UIViewController {
 
             shapeLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor
             shapeLayer.strokeColor = color.cgColor
-            shapeLayer.lineWidth = width/10
+            shapeLayer.lineWidth = CGFloat(width/10)
             shapeLayer.path = path.cgPath
             shapeLayer.lineCap = .round
 
