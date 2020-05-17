@@ -75,5 +75,4 @@ class CoronaClient {
             completion([],error)
         }
     }
-    
 }
