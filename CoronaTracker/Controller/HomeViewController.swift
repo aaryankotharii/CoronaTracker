@@ -9,6 +9,18 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    
+    @IBOutlet var tableView: UITableView!
+    
+    let cellIdentifier = "cell"
+    
+    var summary : Summary?{
+        didSet{
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +30,7 @@ class HomeViewController: UIViewController {
     func handleSummary(summary:Summary? ,error:Error?){
         if let summary = summary {
             print(summary)
+            self.summary = summary
             return
         }
         print(error!.localizedDescription)
@@ -27,11 +40,20 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return summary?.Countries.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! HomeTableViewCell
+        
+        let country = summary?.Countries[indexPath.row]
+        
+        let name = country?.Country
+        
+        cell.countryNameLabel.text = name
+        
+        return cell
+        
     }
     
     

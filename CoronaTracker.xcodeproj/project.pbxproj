@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5BB131052471889A00110DBA /* Flag->Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB131042471889A00110DBA /* Flag->Emoji.swift */; };
 		5BCCA7C82471168300EE6C2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7C72471168300EE6C2B /* AppDelegate.swift */; };
 		5BCCA7CA2471168300EE6C2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */; };
 		5BCCA7CC2471168300EE6C2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7CB2471168300EE6C2B /* ViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5BB131042471889A00110DBA /* Flag->Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Flag->Emoji.swift"; sourceTree = "<group>"; };
 		5BCCA7C42471168300EE6C2B /* CoronaTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoronaTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BCCA7C72471168300EE6C2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		5BCCA7E82471606100EE6C2B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5BB131042471889A00110DBA /* Flag->Emoji.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				5BCCA7D22471168300EE6C2B /* CoronaTracker.xcdatamodeld in Sources */,
 				5BCCA7CC2471168300EE6C2B /* ViewController.swift in Sources */,
 				5BCCA7C82471168300EE6C2B /* AppDelegate.swift in Sources */,
+				5BB131052471889A00110DBA /* Flag->Emoji.swift in Sources */,
 				5BE091F22471707F00751057 /* HomeViewController.swift in Sources */,
 				5BCCA7E2247138D800EE6C2B /* CoronaClient.swift in Sources */,
 				5BCCA7E424713B5F00EE6C2B /* Country.swift in Sources */,
