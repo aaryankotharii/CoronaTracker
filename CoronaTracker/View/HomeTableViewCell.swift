@@ -60,27 +60,29 @@ class HomeTableViewCell: UITableViewCell {
     func addLines(_ array : [Double]){
         self.graphView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         for i in 0...3{
-            let y = (array[i]) * height
-            let space = Double(spacing) * Double(i)
+            let y = array[i] * height
+            let space = spacing * Double(i)
             let start = CGPoint(x: space, y: height)
             let end = CGPoint(x: space, y: height-y)
-            addLine(from: start, to: end, color: colors[i])
+            let color = colors[i]
+            let graph = HomeGraph(start: start, end: end, color: color, space: space)
+            addLine(graph)
         }
     }
     
     
     
-    func addLine(from fromPoint : CGPoint,to toPoint:CGPoint,color:UIColor){
+    func addLine(_ graph : HomeGraph){
             let shapeLayer =  CAShapeLayer()
 
             let path = UIBezierPath()
-            path.move(to: fromPoint)
-            path.addLine(to: toPoint)
+        path.move(to: graph.start)
+        path.addLine(to: graph.end)
 
             // create shape layer for that path
 
             shapeLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor
-            shapeLayer.strokeColor = color.cgColor
+        shapeLayer.strokeColor = graph.color.cgColor
             shapeLayer.lineWidth = CGFloat(width/10)
             shapeLayer.path = path.cgPath
             shapeLayer.lineCap = .round
@@ -97,4 +99,11 @@ class HomeTableViewCell: UITableViewCell {
     
     
 
+}
+
+struct HomeGraph {
+    var start : CGPoint
+    var end : CGPoint
+    var color : UIColor
+    var space : Double
 }

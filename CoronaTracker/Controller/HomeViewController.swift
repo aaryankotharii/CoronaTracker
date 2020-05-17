@@ -32,7 +32,7 @@ class HomeViewController: UIViewController {
             self.summary = summary
             return
         }
-        print(error!.localizedDescription,"errr")
+        print(error!.localizedDescription,"errr",error.debugDescription)
     }
     
 }
