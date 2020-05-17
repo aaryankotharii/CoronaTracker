@@ -31,14 +31,18 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        CoronaClient.getSummary(completion: handleSummary(summary:error:))
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         moc = appDelegate.persistentContainer.viewContext
+        setupFetchedResultsController()    /// Setup fetchedResultsController
+
+        CoronaClient.getSummary(completion: handleSummary(summary:error:))
     }
     
     func handleSummary(summary:Summary? ,error:Error?){
         if let summary = summary {
-            self.summary = summary
+            for country in summary.Countries{
+                addCountry(country)
+            }
             return
         }
         print(error!.localizedDescription,"errr",error.debugDescription)
@@ -57,29 +61,27 @@ class HomeViewController: UIViewController {
             print(error.localizedDescription)
         }
     }
-
-    
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return summary?.Countries.count ?? 0
+        return fetchedResultsController.sections?[0].numberOfObjects ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! HomeTableViewCell
         
-        let country = summary?.Countries[indexPath.row]
+        let country = fetchedResultsController.object(at: indexPath)
         
-        let name = country?.Country ?? ""
+        let name = country.name
         
-        let emoji = convertToEmoji(str: country?.CountryCode ?? "") //TODO add default code
+        let emoji = convertToEmoji(str: country.countrycode ?? "") //TODO add default code
         
-        cell.countryNameLabel.text = "\(emoji) \(name)"
+        cell.countryNameLabel.text = "\(emoji) \(name ?? "")"
         
-        cell.total = country?.TotalConfirmed ?? 0
-        cell.deaths = country?.TotalDeaths ?? 0
-        cell.recovered = country?.TotalRecovered ?? 0
+        cell.total = Int(country.total)
+        cell.deaths = Int(country.deaths)
+        cell.recovered = Int(country.recoveries)
         
         cell.setupLabels()
         
@@ -95,17 +97,39 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
 extension HomeViewController : NSFetchedResultsControllerDelegate {
     
     //MARK:- Set FetchedResultsViewController
-    func setupFetchedResultsController(completion: @escaping (Bool)->()) {
+    func setupFetchedResultsController() {
         let fetchRequest : NSFetchRequest<Country> = Country.fetchRequest()
         fetchRequest.sortDescriptors = []
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: "Country")
         fetchedResultsController.delegate = self
         do{
             try fetchedResultsController.performFetch()
-            completion(true)
         } catch{
-            completion(false)
             fatalError(error.localizedDescription)
+        }
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update:
+              tableView.reloadRows(at: [indexPath!], with: .fade)
+          case .move:
+              tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        @unknown default:
+            break
         }
     }
 }
