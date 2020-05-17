@@ -53,9 +53,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         
         cell.countryNameLabel.text = "\(emoji) \(name)"
         
-        cell.total = country?.TotalConfirmed
-        cell.deaths = country?.TotalDeaths
-        cell.recovered = country?.TotalRecovered
+        cell.total = country?.TotalConfirmed ?? 0
+        cell.deaths = country?.TotalDeaths ?? 0
+        cell.recovered = country?.TotalRecovered ?? 0
+        
+        cell.setupLabels()
         
         return cell
         

@@ -14,6 +14,13 @@ class HomeTableViewCell: UITableViewCell {
     
     @IBOutlet var graphView: UIView!
     
+    
+    @IBOutlet var totalLabel: UILabel!
+    @IBOutlet var recoveredLabel: UILabel!
+    @IBOutlet var deathsLabel: UILabel!
+    @IBOutlet var activeLabel: UILabel!
+    
+    
     var height : Double {
         return Double(graphView.frame.height)
     }
@@ -25,11 +32,24 @@ class HomeTableViewCell: UITableViewCell {
     var spacing : Double{
         return width/3
     }
-    var total : Int!
-    var recovered : Int!
-    var deaths : Int!
-    var active : Int {
-        return total-deaths-recovered
+    var total : Int = 0 {
+        didSet{
+            totalLabel.text = String(total)
+        }
+    }
+    var recovered : Int = 0 {
+        didSet{
+            recoveredLabel.text = String(recovered)
+        }
+    }
+    var deaths : Int = 0{
+        didSet{
+            deathsLabel.text = String(deaths)
+        }
+    }
+    
+    var active : Int{
+        return total - recovered - deaths
     }
 
     
@@ -39,7 +59,13 @@ class HomeTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+    }
+    
+    func setupLabels(){
+        totalLabel.text = "\(total)"
+          recoveredLabel.text = "\(recovered)"
+          deathsLabel.text = "\(deaths)"
+          activeLabel.text = "\(active)"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

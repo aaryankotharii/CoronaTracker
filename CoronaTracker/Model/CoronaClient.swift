@@ -43,7 +43,7 @@ class CoronaClient {
     
     
     //MARK:- GET REQUEST
-    class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionDataTask {
+    class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void){
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 DispatchQueue.main.async {
@@ -62,8 +62,6 @@ class CoronaClient {
             }
         }
         task.resume()
-        
-        return task
     }
     
     class func FetchAllCountries(completion: @escaping ([Country], Error?) -> Void) {
@@ -78,6 +76,7 @@ class CoronaClient {
     
     class func getSummary(completion: @escaping (Summary?, Error?) -> Void) {
         taskForGETRequest(url: Endpoints.summary.url, responseType: Summary.self) { (response, error) in
+            print(Endpoints.summary.url)
             if let response = response{
                 print(response)
                 completion(response,nil)
