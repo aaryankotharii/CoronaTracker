@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5BB131052471889A00110DBA /* Flag->Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB131042471889A00110DBA /* Flag->Emoji.swift */; };
+		5BB131082471A82100110DBA /* SF-Pro-Rounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB131072471A82100110DBA /* SF-Pro-Rounded-Bold.otf */; };
+		5BB1310A2471B24300110DBA /* SF-Pro-Rounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB131092471B24300110DBA /* SF-Pro-Rounded-Semibold.otf */; };
 		5BCCA7C82471168300EE6C2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7C72471168300EE6C2B /* AppDelegate.swift */; };
 		5BCCA7CA2471168300EE6C2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */; };
 		5BCCA7CC2471168300EE6C2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7CB2471168300EE6C2B /* ViewController.swift */; };
@@ -24,6 +26,8 @@
 
 /* Begin PBXFileReference section */
 		5BB131042471889A00110DBA /* Flag->Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Flag->Emoji.swift"; sourceTree = "<group>"; };
+		5BB131072471A82100110DBA /* SF-Pro-Rounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Bold.otf"; sourceTree = "<group>"; };
+		5BB131092471B24300110DBA /* SF-Pro-Rounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Semibold.otf"; sourceTree = "<group>"; };
 		5BCCA7C42471168300EE6C2B /* CoronaTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoronaTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BCCA7C72471168300EE6C2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,10 +55,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5BB131062471A81500110DBA /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				5BB131072471A82100110DBA /* SF-Pro-Rounded-Bold.otf */,
+				5BB131092471B24300110DBA /* SF-Pro-Rounded-Semibold.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		5BCCA7BB2471168300EE6C2B = {
 			isa = PBXGroup;
 			children = (
 				5BCCA7C62471168300EE6C2B /* CoronaTracker */,
+				5BB131062471A81500110DBA /* Fonts */,
 				5BCCA7C52471168300EE6C2B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -179,8 +193,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BCCA7D72471168600EE6C2B /* LaunchScreen.storyboard in Resources */,
+				5BB131082471A82100110DBA /* SF-Pro-Rounded-Bold.otf in Resources */,
 				5BCCA7D42471168600EE6C2B /* Assets.xcassets in Resources */,
 				5BCCA7CF2471168300EE6C2B /* Main.storyboard in Resources */,
+				5BB1310A2471B24300110DBA /* SF-Pro-Rounded-Semibold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

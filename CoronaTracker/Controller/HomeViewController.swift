@@ -47,7 +47,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         
         let country = summary?.Countries[indexPath.row]
         
-        let name = country?.Country
+        let name = country?.Country ?? ""
         
         let emoji = convertToEmoji(str: country?.CountryCode ?? "") //TODO add default code
         
