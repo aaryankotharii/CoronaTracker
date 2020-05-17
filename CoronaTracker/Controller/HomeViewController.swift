@@ -50,7 +50,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         
         let name = country?.Country
         
-        cell.countryNameLabel.text = name
+        let emoji = convertToEmoji(str: country?.CountryCode ?? "") //TODO add default code
+        
+        cell.countryNameLabel.text = "\(emoji) \(name)"
         
         return cell
         
