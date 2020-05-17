@@ -58,6 +58,9 @@
 		5BCCA7C62471168300EE6C2B /* CoronaTracker */ = {
 			isa = PBXGroup;
 			children = (
+				5BCCA7DE247138A300EE6C2B /* Model */,
+				5BCCA7DF247138A400EE6C2B /* View */,
+				5BCCA7E0247138A500EE6C2B /* Controller */,
 				5BCCA7C72471168300EE6C2B /* AppDelegate.swift */,
 				5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */,
 				5BCCA7CB2471168300EE6C2B /* ViewController.swift */,
@@ -68,6 +71,27 @@
 				5BCCA7D02471168300EE6C2B /* CoronaTracker.xcdatamodeld */,
 			);
 			path = CoronaTracker;
+			sourceTree = "<group>";
+		};
+		5BCCA7DE247138A300EE6C2B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5BCCA7DF247138A400EE6C2B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5BCCA7E0247138A500EE6C2B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
