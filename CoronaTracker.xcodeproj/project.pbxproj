@@ -17,6 +17,7 @@
 		5BCCA7E2247138D800EE6C2B /* CoronaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7E1247138D800EE6C2B /* CoronaClient.swift */; };
 		5BCCA7E424713B5F00EE6C2B /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7E324713B5F00EE6C2B /* Country.swift */; };
 		5BCCA7E62471601500EE6C2B /* CountriesData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BCCA7E52471601500EE6C2B /* CountriesData.json */; };
+		5BCCA7EA2471607300EE6C2B /* JSON+Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7E92471607300EE6C2B /* JSON+Load.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		5BCCA7E1247138D800EE6C2B /* CoronaClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoronaClient.swift; sourceTree = "<group>"; };
 		5BCCA7E324713B5F00EE6C2B /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		5BCCA7E52471601500EE6C2B /* CountriesData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CountriesData.json; sourceTree = "<group>"; };
+		5BCCA7E92471607300EE6C2B /* JSON+Load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Load.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 		5BCCA7C62471168300EE6C2B /* CoronaTracker */ = {
 			isa = PBXGroup;
 			children = (
+				5BCCA7E82471606100EE6C2B /* Utilities */,
 				5BCCA7DE247138A300EE6C2B /* Model */,
 				5BCCA7DF247138A400EE6C2B /* View */,
 				5BCCA7E0247138A500EE6C2B /* Controller */,
@@ -101,6 +104,14 @@
 			children = (
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		5BCCA7E82471606100EE6C2B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5BCCA7E92471607300EE6C2B /* JSON+Load.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,6 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BCCA7EA2471607300EE6C2B /* JSON+Load.swift in Sources */,
 				5BCCA7D22471168300EE6C2B /* CoronaTracker.xcdatamodeld in Sources */,
 				5BCCA7CC2471168300EE6C2B /* ViewController.swift in Sources */,
 				5BCCA7C82471168300EE6C2B /* AppDelegate.swift in Sources */,
