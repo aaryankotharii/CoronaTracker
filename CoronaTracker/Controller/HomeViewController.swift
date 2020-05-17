@@ -19,48 +19,86 @@ class HomeViewController: UIViewController {
     
     /// Fetched Results controller to fetch data from Database
     var fetchedResultsController : NSFetchedResultsController<Country>!
-
     
-    var summary : Summary?{
-        didSet{
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         moc = appDelegate.persistentContainer.viewContext
         setupFetchedResultsController()    /// Setup fetchedResultsController
+        print(fetchedResultsController.fetchedObjects)
+        if fetchedResultsController.fetchedObjects?.count == 0{
 
         CoronaClient.getSummary(completion: handleSummary(summary:error:))
+        } else {
+            CoronaClient.getSummary(completion: handleUpdate(summary:error:))
+        }
     }
     
     func handleSummary(summary:Summary? ,error:Error?){
         if let summary = summary {
-            for country in summary.Countries{
-                addCountry(country)
+                for country in summary.Countries{
+                    addCountry(country)
             }
-            return
-        }
-        print(error!.localizedDescription,"errr",error.debugDescription)
+        } else {
+        return
+    
+    print(error!.localizedDescription,"errr",error.debugDescription)
+}
     }
     
-    func addCountry(_ country: Countries){
-        let countryToSave = Country(context: moc)
-        countryToSave.name = country.Country
-        countryToSave.deaths = Int32(country.TotalDeaths)
-        countryToSave.total = Int32(country.TotalConfirmed)
-        countryToSave.recoveries = Int32(country.TotalRecovered)
-        countryToSave.countrycode = country.CountryCode
-        do{
-            try moc.save()
-        } catch {
-            print(error.localizedDescription)
-        }
+        func handleUpdate(summary:Summary? ,error:Error?){
+            if let summary = summary {
+                                 for country in summary.Countries{
+                        
+                        upDate(country)
+                    }
+            } else {
+            return
+        
+        print(error!.localizedDescription,"errr",error.debugDescription)
     }
+        }
+    
+    
+    
+
+             
+
+func addCountry(_ country: Countries){
+    let countryToSave = Country(context: moc)
+    countryToSave.name = country.Country
+    countryToSave.deaths = Int32(country.TotalDeaths)
+    countryToSave.total = Int32(country.TotalConfirmed)
+    countryToSave.recoveries = Int32(country.TotalRecovered)
+    countryToSave.countrycode = country.CountryCode
+    do{
+        try moc.save()
+    } catch {
+        print(error.localizedDescription)
+    }
+}
+
+func upDate(_ country: Countries){
+    let CountryToUpdate = fetchCountry(country.Country)
+    CountryToUpdate?.deaths = Int32(country.TotalDeaths)
+    CountryToUpdate?.total = Int32(country.TotalConfirmed)
+    CountryToUpdate?.recoveries = Int32(country.TotalRecovered)
+    CountryToUpdate?.countrycode = country.CountryCode
+    do{
+        try moc.save()
+    } catch {
+        print(error.localizedDescription)
+    }
+}
+
+func fetchCountry(_ name : String)-> Country?{
+    if let countries = fetchedResultsController.fetchedObjects{
+        let country = countries.filter{ $0.name == name}
+        return country.first!
+    }
+    return nil
+}
+
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
@@ -99,7 +137,10 @@ extension HomeViewController : NSFetchedResultsControllerDelegate {
     //MARK:- Set FetchedResultsViewController
     func setupFetchedResultsController() {
         let fetchRequest : NSFetchRequest<Country> = Country.fetchRequest()
-        fetchRequest.sortDescriptors = []
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        let resultPredicate = NSPredicate(format: "name contains[c] %@", "f")
+        //  fetchRequest.predicate = resultPredicate
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: "Country")
         fetchedResultsController.delegate = self
         do{
@@ -125,9 +166,10 @@ extension HomeViewController : NSFetchedResultsControllerDelegate {
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .fade)
         case .update:
-              tableView.reloadRows(at: [indexPath!], with: .fade)
-          case .move:
-              tableView.moveRow(at: indexPath!, to: newIndexPath!)
+            tableView.reloadRows(at: [indexPath!], with: .fade)
+            print("update")
+        case .move:
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
         @unknown default:
             break
         }
