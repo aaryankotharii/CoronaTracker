@@ -8,7 +8,11 @@
 
 import Foundation
 
-struct Country {
+struct CountryData : Codable{
+    let countries : [Country]
+}
+
+struct Country : Codable{
     let Country : String
     let Slug : String
     let ISO2 : String

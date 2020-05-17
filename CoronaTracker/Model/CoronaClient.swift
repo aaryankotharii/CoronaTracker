@@ -58,21 +58,22 @@ class CoronaClient {
                     completion(responseObject, nil)
                 }
             } catch {
-                do {
-                    let errorResponse = try decoder.decode(ErrorResponse.self, from: data) as Error
-                    DispatchQueue.main.async {
-                        completion(nil, errorResponse)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        completion(nil, error)
-                    }
-                }
+                    completion(nil, error)
             }
         }
         task.resume()
         
         return task
+    }
+    
+    class func FetchAllCountries(completion: @escaping ([Country], Error?) -> Void) {
+        taskForGETRequest(url: Endpoints.countries.url, responseType: CountryData.self) { (response, error) in
+            if let response = response{
+                completion(response.countries,nil)
+                return
+            }
+            completion([],error)
+        }
     }
     
 }
