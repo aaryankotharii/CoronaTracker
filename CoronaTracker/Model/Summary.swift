@@ -9,29 +9,29 @@
 import Foundation
 
 
-struct Summary {
-    var global : Global
-    var countries : [Countries]
+struct Summary : Codable{
+    var Global : Global
+    var Countries : [Countries]
 }
 
-struct Global {
-    var newConfirmed : Int
-    var  totalConfirmed: Int
-    var newDeaths : Int
-    var totalDeaths : Int
-    var newRecovered : Int
-    var  totalRecovered : Int
+struct Global: Codable {
+    var NewConfirmed : Int
+    var  TotalConfirmed: Int
+    var NewDeaths : Int
+    var TotalDeaths : Int
+    var NewRecovered : Int
+    var  TotalRecovered : Int
 }
 
-struct Countries {
-    var country: String
-    var countryCode : String
-    var slug: String
-    var newConfirmed: Int
-    var totalConfirmed: Int
-    var newDeaths: Int
-    var totalDeaths: Int
-    var newRecovered: Int
-    var totalRecovered: Int
-    var  date: Date
+struct Countries: Codable {
+    var Country: String
+    var CountryCode : String
+    var Slug: String
+    var NewConfirmed: Int
+    var TotalConfirmed: Int
+    var NewDeaths: Int
+    var TotalDeaths: Int
+    var NewRecovered: Int
+    var TotalRecovered: Int
+    var  Date: String
 }

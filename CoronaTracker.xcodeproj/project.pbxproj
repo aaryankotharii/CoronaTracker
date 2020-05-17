@@ -17,6 +17,7 @@
 		5BCCA7E2247138D800EE6C2B /* CoronaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7E1247138D800EE6C2B /* CoronaClient.swift */; };
 		5BCCA7E424713B5F00EE6C2B /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7E324713B5F00EE6C2B /* Country.swift */; };
 		5BE091F02471695200751057 /* Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE091EF2471695200751057 /* Summary.swift */; };
+		5BE091F22471707F00751057 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE091F12471707F00751057 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		5BCCA7E1247138D800EE6C2B /* CoronaClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoronaClient.swift; sourceTree = "<group>"; };
 		5BCCA7E324713B5F00EE6C2B /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		5BE091EF2471695200751057 /* Summary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summary.swift; sourceTree = "<group>"; };
+		5BE091F12471707F00751057 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 		5BCCA7E0247138A500EE6C2B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5BE091F12471707F00751057 /* HomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				5BCCA7D22471168300EE6C2B /* CoronaTracker.xcdatamodeld in Sources */,
 				5BCCA7CC2471168300EE6C2B /* ViewController.swift in Sources */,
 				5BCCA7C82471168300EE6C2B /* AppDelegate.swift in Sources */,
+				5BE091F22471707F00751057 /* HomeViewController.swift in Sources */,
 				5BCCA7E2247138D800EE6C2B /* CoronaClient.swift in Sources */,
 				5BCCA7E424713B5F00EE6C2B /* Country.swift in Sources */,
 				5BCCA7CA2471168300EE6C2B /* SceneDelegate.swift in Sources */,
