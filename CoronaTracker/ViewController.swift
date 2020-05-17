@@ -10,18 +10,5 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        CoronaClient.getSummary(completion: handleSummary(summary:error:))
-    }
-    
-    func handleSummary(summary:Summary? ,error:Error?){
-        if let summary = summary {
-            print(summary)
-            return
-        }
-        print(error!.localizedDescription)
-    }
 }
 
