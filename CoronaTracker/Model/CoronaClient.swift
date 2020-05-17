@@ -75,4 +75,16 @@ class CoronaClient {
             completion([],error)
         }
     }
+    
+    class func getSummary(completion: @escaping (Summary?, Error?) -> Void) {
+        taskForGETRequest(url: Endpoints.summary.url, responseType: Summary.self) { (response, error) in
+            if let response = response{
+                print(response)
+                completion(response,nil)
+                return
+            }
+            completion(nil,error)
+        }
+    }
+    
 }

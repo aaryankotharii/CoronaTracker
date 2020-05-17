@@ -20,4 +20,4 @@ struct Country : Codable{
 }
 
 
-//let landmarkData: [Landmark] = load("landmarkData.json")
+//let landmarkData: [Country] = load("landmarkData.json")
