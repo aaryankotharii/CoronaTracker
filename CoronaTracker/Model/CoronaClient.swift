@@ -76,9 +76,7 @@ class CoronaClient {
     
     class func getSummary(completion: @escaping (Summary?, Error?) -> Void) {
         taskForGETRequest(url: Endpoints.summary.url, responseType: Summary.self) { (response, error) in
-            print(Endpoints.summary.url)
             if let response = response{
-                print(response)
                 completion(response,nil)
                 return
             }

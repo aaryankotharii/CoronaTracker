@@ -20,22 +20,38 @@ class HomeViewController: UIViewController {
     /// Fetched Results controller to fetch data from Database
     var fetchedResultsController : NSFetchedResultsController<Country>!
     
+    var searchPredicate = NSPredicate()
+    
+    var search = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
+        
+      //  self.navigationItem.searchController = search
+
+        search.delegate = self
+        search.searchBar.delegate = self
+                
         super.viewDidLoad()
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         moc = appDelegate.persistentContainer.viewContext
         
         let sort = NSSortDescriptor(key: "name", ascending: true)
-        let resultPredicate = NSPredicate(format: "name contains[c] %@", "in")
+        //let resultPredicate = NSPredicate(format: "name contains[c] %@", "in")
         
         setupFetchedResultsController(sort: sort)    /// Setup fetchedResultsController
-        print(fetchedResultsController.fetchedObjects)
+        //print(fetchedResultsController.fetchedObjects)
         if fetchedResultsController.fetchedObjects?.count == 0{
 
         CoronaClient.getSummary(completion: handleDownload(summary:error:))
         } else {
             CoronaClient.getSummary(completion: handleUpdate(summary:error:))
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.tableHeaderView = search.searchBar
+
     }
     
     func handleDownload(summary:Summary? ,error:Error?){
@@ -146,10 +162,12 @@ extension HomeViewController : NSFetchedResultsControllerDelegate {
         if let predicate = predicate {
          fetchRequest.predicate = predicate
         }
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: "Country")
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
         do{
             try fetchedResultsController.performFetch()
+            tableView.reloadData()
+            print(fetchedResultsController.fetchedObjects)
         } catch{
             fatalError(error.localizedDescription)
         }
@@ -172,7 +190,7 @@ extension HomeViewController : NSFetchedResultsControllerDelegate {
             tableView.deleteRows(at: [indexPath!], with: .fade)
         case .update:
             tableView.reloadRows(at: [indexPath!], with: .fade)
-            print("update")
+            //print("update")
         case .move:
             tableView.moveRow(at: indexPath!, to: newIndexPath!)
         @unknown default:
@@ -181,3 +199,47 @@ extension HomeViewController : NSFetchedResultsControllerDelegate {
     }
 }
 
+extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // Add your search logic here
+        var predicate: NSPredicate? = nil
+
+        fetchedResultsController = nil
+        if searchBar.text?.count != 0 {
+            predicate = NSPredicate(format: "name contains[c] %@", searchBar.text!)
+        }
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        setupFetchedResultsController(sort: sort, predicate: predicate)
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        setupFetchedResultsController(sort: sort)
+        tableView.reloadData()
+    }
+    
+    
+    func updateSearchResults(_ text : String) {
+        var predicate: NSPredicate?
+        
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        let resultPredicate = NSPredicate(format: "name contains[c] %@", "in")
+        
+        setupFetchedResultsController(sort: sort,predicate: resultPredicate)    /// Setup fetchedResultsController
+}
+
+}
+//func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+//    let topIndex = IndexPath(row: 0, section: 0)
+//    if let navController = viewController as? UINavigationController,
+//        navController.childViewControllers.count > 0 {
+//        let childController = navController.childViewControllers[0]
+//        if let vc = childController as? AlbumsTableViewController {
+//            vc.tableView.scrollToRow(at: topIndex, at: .top, animated: true)
+//        } else if let vc = childController as? ArtistsTableViewController {
+//            vc.tableView.scrollToRow(at: topIndex, at: .top, animated: true)
+//        }
+//    }
+//}
+//

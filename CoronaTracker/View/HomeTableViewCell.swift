@@ -21,6 +21,12 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet var activeLabel: UILabel!
     
     
+    @IBOutlet var totalPercentLabel: UILabel!
+    @IBOutlet var activePercentLabel: UILabel!
+    @IBOutlet var deathsPercentLabel: UILabel!
+    @IBOutlet var recoveredPercentLabel: UILabel!
+    
+    
     var height : Double {
         return Double(graphView.frame.height)
     }
@@ -54,7 +60,7 @@ class HomeTableViewCell: UITableViewCell {
 
     
     
-    let colors : [UIColor] = [#colorLiteral(red: 0.9921568627, green: 0.1882352941, blue: 0.4117647059, alpha: 1),#colorLiteral(red: 0.9960784314, green: 0.6705882353, blue: 0, alpha: 1),#colorLiteral(red: 0.08235294118, green: 0.7960784314, blue: 0.2666666667, alpha: 1),#colorLiteral(red: 0.2549019608, green: 0.2549019608, blue: 0.2549019608, alpha: 1)]
+    let colors : [UIColor] = [#colorLiteral(red: 0.9921568627, green: 0.1882352941, blue: 0.4117647059, alpha: 1),#colorLiteral(red: 0.9960784314, green: 0.6705882353, blue: 0, alpha: 1),#colorLiteral(red: 0.2549019608, green: 0.2549019608, blue: 0.2549019608, alpha: 1),#colorLiteral(red: 0.08235294118, green: 0.7960784314, blue: 0.2666666667, alpha: 1)]
 
     
     override func awakeFromNib() {
@@ -66,21 +72,25 @@ class HomeTableViewCell: UITableViewCell {
           recoveredLabel.text = "\(recovered)"
           deathsLabel.text = "\(deaths)"
           activeLabel.text = "\(active)"
+        
+        let percentages = calculatePercentages()
+        totalPercentLabel.text = "\(Int(percentages[0]*100))"
+        activePercentLabel.text = " \(Int(percentages[1]*100))"
+        deathsPercentLabel.text = "  \(Int(percentages[2]*100))"
+        recoveredPercentLabel.text = "\(Int(percentages[3]*100))"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         let i = calculatePercentages()
         addLines(i)
-        print(total,recovered,deaths,active)
-        print(i)
     }
     
     func calculatePercentages()->[Double]{
         let activePercentage = Double(active)/Double(total)
         let deathPercentage = Double(deaths)/Double(total)
         let recoveredPercentage = Double(recovered)/Double(total)
-        return [1,activePercentage,recoveredPercentage,deathPercentage]
+        return [1,activePercentage,deathPercentage,recoveredPercentage]
     }
     
     func addLines(_ array : [Double]){
@@ -91,7 +101,8 @@ class HomeTableViewCell: UITableViewCell {
             let start = CGPoint(x: space, y: height)
             let end = CGPoint(x: space, y: height-y)
             let color = colors[i]
-            let graph = HomeGraph(start: start, end: end, color: color, space: space)
+            let percentage = calculatePercentages().map{Int($0*100)}[i]
+            let graph = HomeGraph(start: start, end: end, color: color, space: space, percentage: percentage)
             addLine(graph)
         }
     }
@@ -104,8 +115,15 @@ class HomeTableViewCell: UITableViewCell {
             let path = UIBezierPath()
         path.move(to: graph.start)
         path.addLine(to: graph.end)
-
-            // create shape layer for that path
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 24, height: 10))
+        label.center = CGPoint(x: graph.start.x, y: graph.start.y+12)
+        label.textAlignment = .center
+        label.text = "\(graph.percentage)%"
+        label.font = UIFont.systemFont(ofSize: 7, weight: .regular)
+        label.textColor = graph.color
+        self.graphView.addSubview(label)
+    
 
             shapeLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor
         shapeLayer.strokeColor = graph.color.cgColor
@@ -132,4 +150,5 @@ struct HomeGraph {
     var end : CGPoint
     var color : UIColor
     var space : Double
+    var percentage : Int
 }
