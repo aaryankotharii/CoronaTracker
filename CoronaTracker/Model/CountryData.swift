@@ -12,7 +12,10 @@ import Combine
 final class CurrentCountryData: ObservableObject {
     @Published  var current : CountryCaseCount?
     
-    @Published var active : CountryCaseCount()ç
+    @Published var active : [Double]?
+    @Published var dead : [Double]?
+    @Published var Recovered : [Double]?
+
     
     init(){
         self.fetch()
@@ -32,6 +35,9 @@ extension CurrentCountryData{
             let recoveredArray = recovered.map{Double($0)}
 
                 self.current = CountryCaseCount(active: activeArray, deaths: deathArray, recovered: recoveredArray)
+            self.active = activeArray
+            self.dead = deathArray
+            self.Recovered = recoveredArray
             print("result",CountryCaseCount(active: activeArray, deaths: deathArray, recovered: recoveredArray))
         }
     }

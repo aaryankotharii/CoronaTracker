@@ -15,9 +15,9 @@ struct CountryDetailView: View {
             
     var body: some View {
         VStack{
-            LineChartView(data: country.current?.active ?? [], title: hello)
+            LineChartView(data: country.active ?? [], title: hello)
             
-            MultiLineChartView(data: [(country.current?.active ?? [], GradientColors.green), ([90,99,78,111,70,60,77], GradientColors.purple), ([34,56,72,38,43,100,50], GradientColors.orngPink)], title: "Title")
+            MultiLineChartView(data: [(country.current?.active ?? [], GradientColors.green), (country.current?.deaths ?? [], GradientColors.purple), (country.current?.recovered ?? [], GradientColors.orngPink)], title: "Title")
             Button(action: fetch){
                 Text("hi")
             }

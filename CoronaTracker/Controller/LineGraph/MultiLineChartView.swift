@@ -18,6 +18,7 @@ public struct MultiLineChartView: View {
     public var dropShadow: Bool
     public var valueSpecifier:String
     
+    
     @State private var touchLocation:CGPoint = .zero
     @State private var showIndicatorDot: Bool = false
     @State private var currentValue: Double = 2 {
@@ -44,6 +45,8 @@ public struct MultiLineChartView: View {
     }
     
     let frame = CGSize(width: 400, height: 120)
+    
+    //var frame : CGSize
     private var rateValue: Int
     
     public init(data: [([Double], GradientColor)],
