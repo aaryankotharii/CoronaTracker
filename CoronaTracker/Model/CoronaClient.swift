@@ -87,11 +87,11 @@ class CoronaClient {
         }
     }
     
-    class func getCountryLive(country: String,completion: @escaping ([CountryStruct]?) -> Void){
+    class func getCountryLive(country: String,completion: @escaping ([CountryStruct]) -> Void){
         taskForGETRequest(url: Endpoints.countryTotal(country: country).url, responseType: [CountryStruct].self) { (response, error) in
             if let response = response{
             completion(response)
-                return
+            return
             }
             print(error?.localizedDescription)
         }

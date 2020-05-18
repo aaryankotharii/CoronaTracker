@@ -27,3 +27,9 @@ struct CountryStruct : Codable{
     var Active: Int
     var Date: String
 }
+
+struct CountryCaseCount {
+    var active : [Double]
+    var deaths : [Double]
+    var recovered : [Double]
+}

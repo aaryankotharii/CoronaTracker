@@ -10,11 +10,9 @@ import Foundation
 import Combine
 
 final class CurrentCountryData: ObservableObject {
-    @Published  var current : CountryData?
+    @Published  var current : CountryCaseCount?
     
-    var dataList =  [CountryData?]()
-    
-    var deathList = [Double]()
+    @Published var active : CountryCaseCount()ç
     
     init(){
         self.fetch()
@@ -24,8 +22,17 @@ final class CurrentCountryData: ObservableObject {
 extension CurrentCountryData{
     func fetch(_ country: String = "india"){
         CoronaClient.getCountryLive(country: country){ result in
-            self.current?.countries = result ?? []
-            print(result)
+            let deaths = result.map { $0.Deaths}
+            let deathArray = deaths.map{Double($0)}
+            
+            let active = result.map { $0.Active }
+            let activeArray = active.map{Double($0)}
+
+                let recovered = result.map { $0.Recovered }
+            let recoveredArray = recovered.map{Double($0)}
+
+                self.current = CountryCaseCount(active: activeArray, deaths: deathArray, recovered: recoveredArray)
+            print("result",CountryCaseCount(active: activeArray, deaths: deathArray, recovered: recoveredArray))
         }
     }
 }
