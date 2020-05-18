@@ -24,17 +24,21 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         moc = appDelegate.persistentContainer.viewContext
-        setupFetchedResultsController()    /// Setup fetchedResultsController
+        
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        let resultPredicate = NSPredicate(format: "name contains[c] %@", "in")
+        
+        setupFetchedResultsController(sort: sort)    /// Setup fetchedResultsController
         print(fetchedResultsController.fetchedObjects)
         if fetchedResultsController.fetchedObjects?.count == 0{
 
-        CoronaClient.getSummary(completion: handleSummary(summary:error:))
+        CoronaClient.getSummary(completion: handleDownload(summary:error:))
         } else {
             CoronaClient.getSummary(completion: handleUpdate(summary:error:))
         }
     }
     
-    func handleSummary(summary:Summary? ,error:Error?){
+    func handleDownload(summary:Summary? ,error:Error?){
         if let summary = summary {
                 for country in summary.Countries{
                     addCountry(country)
@@ -48,9 +52,8 @@ class HomeViewController: UIViewController {
     
         func handleUpdate(summary:Summary? ,error:Error?){
             if let summary = summary {
-                                 for country in summary.Countries{
-                        
-                        upDate(country)
+                    for country in summary.Countries{
+                        updateCountry(country)
                     }
             } else {
             return
@@ -78,7 +81,7 @@ func addCountry(_ country: Countries){
     }
 }
 
-func upDate(_ country: Countries){
+func updateCountry(_ country: Countries){
     let CountryToUpdate = fetchCountry(country.Country)
     CountryToUpdate?.deaths = Int32(country.TotalDeaths)
     CountryToUpdate?.total = Int32(country.TotalConfirmed)
@@ -91,6 +94,8 @@ func upDate(_ country: Countries){
     }
 }
 
+    
+    //TODO new fetch request wih=thout predicate
 func fetchCountry(_ name : String)-> Country?{
     if let countries = fetchedResultsController.fetchedObjects{
         let country = countries.filter{ $0.name == name}
@@ -135,12 +140,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
 extension HomeViewController : NSFetchedResultsControllerDelegate {
     
     //MARK:- Set FetchedResultsViewController
-    func setupFetchedResultsController() {
+    func setupFetchedResultsController(sort : NSSortDescriptor,predicate:NSPredicate? = nil) {
         let fetchRequest : NSFetchRequest<Country> = Country.fetchRequest()
-        let sort = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sort]
-        let resultPredicate = NSPredicate(format: "name contains[c] %@", "f")
-        //  fetchRequest.predicate = resultPredicate
+        if let predicate = predicate {
+         fetchRequest.predicate = predicate
+        }
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: "Country")
         fetchedResultsController.delegate = self
         do{
