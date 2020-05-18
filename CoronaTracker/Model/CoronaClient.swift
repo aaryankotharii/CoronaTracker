@@ -20,6 +20,7 @@ class CoronaClient {
         case dayone(country:String)
         case dayonelive(country:String)
         case dayonetotal(country:String)
+        case countryTotal(country:String)
         
         var stringValue : String{
             switch self {
@@ -33,6 +34,8 @@ class CoronaClient {
                 return Endpoints.base + "/dayone/country/\(country)/status/confirmed/live"
             case .dayonetotal(let country):
                 return Endpoints.base + "/dayone/country/\(country)/status/confirmed"
+            case .countryTotal(let country):
+                return Endpoints.base + "/total/country/\(country)"
             }
         }
         
@@ -84,4 +87,13 @@ class CoronaClient {
         }
     }
     
+    class func getCountryLive(country: String,completion: @escaping ([CountryStruct]?) -> Void){
+        taskForGETRequest(url: Endpoints.countryTotal(country: country).url, responseType: [CountryStruct].self) { (response, error) in
+            if let response = response{
+            completion(response)
+                return
+            }
+            print(error?.localizedDescription)
+        }
+    }
 }

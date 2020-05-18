@@ -35,9 +35,20 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        addLines([89,33,50,50])
+        
     }
+    
+    
+    func addCircles(){
+        
+    }
+    
+    
+    
+    
+    
+    
+    
     
     func addLines(_ array : [Double]){
         self.someView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }

@@ -10,14 +10,20 @@ import Foundation
 import UIKit
 
 struct CountryData : Codable{
-    let countries : [CountryStruct]
+    var countries : [CountryStruct]
 }
 
 struct CountryStruct : Codable{
-    let Country : String
-    let Slug : String
-    let ISO2 : String
+    var Country: String
+    var CountryCode: String
+    var Province:String
+    var City: String
+    var CityCode: String
+    var Lat: String
+    var Lon: String
+    var Confirmed: Int
+    var Deaths: Int
+    var Recovered: Int
+    var Active: Int
+    var Date: String
 }
-
-
-//let landmarkData: [Country] = load("landmarkData.json")

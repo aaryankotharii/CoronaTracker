@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SwiftUI
 
 class HomeViewController: UIViewController {
     
@@ -23,6 +24,8 @@ class HomeViewController: UIViewController {
     var searchPredicate = NSPredicate()
     
     var search = UISearchController(searchResultsController: nil)
+    
+    var rootView = CountryDetailView(hello: "lol")
     
     override func viewDidLoad() {
         
@@ -53,6 +56,13 @@ class HomeViewController: UIViewController {
         tableView.tableHeaderView = search.searchBar
 
     }
+    
+    @IBSegueAction func goToCountryData(_ coder: NSCoder) -> UIViewController? {
+        return UIHostingController(coder: coder, rootView: rootView)
+    }
+    
+
+    
     
     func handleDownload(summary:Summary? ,error:Error?){
         if let summary = summary {
@@ -147,6 +157,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         return cell
         
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! HomeTableViewCell
+        self.rootView = CountryDetailView(hello: cell.countryNameLabel.text ?? "no")
+        performSegue(withIdentifier: "countryData", sender: nil)
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 170
     }

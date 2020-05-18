@@ -21,11 +21,6 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet var activeLabel: UILabel!
     
     
-    @IBOutlet var totalPercentLabel: UILabel!
-    @IBOutlet var activePercentLabel: UILabel!
-    @IBOutlet var deathsPercentLabel: UILabel!
-    @IBOutlet var recoveredPercentLabel: UILabel!
-    
     
     var height : Double {
         return Double(graphView.frame.height)
@@ -72,12 +67,6 @@ class HomeTableViewCell: UITableViewCell {
           recoveredLabel.text = "\(recovered)"
           deathsLabel.text = "\(deaths)"
           activeLabel.text = "\(active)"
-        
-        let percentages = calculatePercentages()
-        totalPercentLabel.text = "\(Int(percentages[0]*100))"
-        activePercentLabel.text = " \(Int(percentages[1]*100))"
-        deathsPercentLabel.text = "  \(Int(percentages[2]*100))"
-        recoveredPercentLabel.text = "\(Int(percentages[3]*100))"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

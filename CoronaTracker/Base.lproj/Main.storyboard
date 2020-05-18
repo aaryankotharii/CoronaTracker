@@ -186,43 +186,10 @@
                                                         <constraint firstItem="iUf-xH-5YH" firstAttribute="height" secondItem="brY-ck-aPp" secondAttribute="height" multiplier="0.5" id="skF-nP-csV"/>
                                                     </constraints>
                                                 </view>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="ANm-i2-Lev">
-                                                    <rect key="frame" x="304" y="153" width="100" height="10"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZE-zU-eVG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="24" height="10"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="7"/>
-                                                            <color key="textColor" red="0.91615206000000005" green="0.33354511860000002" blue="0.41475248339999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RCG-bu-758">
-                                                            <rect key="frame" x="25.5" y="0.0" width="24" height="10"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="7"/>
-                                                            <color key="textColor" red="0.78877395390000005" green="0.54950416089999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  99%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QSz-Jv-hBf">
-                                                            <rect key="frame" x="50.5" y="0.0" width="24.5" height="10"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="7"/>
-                                                            <color key="textColor" red="0.2117426097" green="0.21177878980000001" blue="0.2117346823" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Mb-c1-iB4">
-                                                            <rect key="frame" x="76" y="0.0" width="24" height="10"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="7"/>
-                                                            <color key="textColor" red="0.1003146991" green="0.63564473389999998" blue="0.17575776579999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ijC-2i-ALS" firstAttribute="height" secondItem="qgI-Cc-zRK" secondAttribute="height" multiplier="0.529412" id="61j-eu-YVQ"/>
                                                 <constraint firstAttribute="trailing" secondItem="ijC-2i-ALS" secondAttribute="trailing" constant="20" id="BfD-R2-RT2"/>
-                                                <constraint firstItem="ANm-i2-Lev" firstAttribute="trailing" secondItem="ijC-2i-ALS" secondAttribute="trailing" constant="10" id="E7p-XU-hkB"/>
                                                 <constraint firstItem="brY-ck-aPp" firstAttribute="height" secondItem="qgI-Cc-zRK" secondAttribute="height" multiplier="0.470588" id="HRZ-C7-jEx"/>
                                                 <constraint firstAttribute="bottom" secondItem="brY-ck-aPp" secondAttribute="bottom" constant="20" id="IfA-U9-8uG"/>
                                                 <constraint firstItem="g5s-WN-wdi" firstAttribute="leading" secondItem="qgI-Cc-zRK" secondAttribute="leading" constant="35" id="Kvv-UE-A6y"/>
@@ -231,21 +198,15 @@
                                                 <constraint firstItem="ijC-2i-ALS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="U5k-Kc-IH8" secondAttribute="trailing" constant="40" id="WpQ-K4-LdD"/>
                                                 <constraint firstItem="brY-ck-aPp" firstAttribute="leading" secondItem="qgI-Cc-zRK" secondAttribute="leading" priority="400" constant="20" id="cwg-cg-aIC"/>
                                                 <constraint firstItem="U5k-Kc-IH8" firstAttribute="top" secondItem="qgI-Cc-zRK" secondAttribute="top" constant="20" id="fd3-Ub-YHY"/>
-                                                <constraint firstItem="ANm-i2-Lev" firstAttribute="top" secondItem="ijC-2i-ALS" secondAttribute="bottom" constant="8" id="gRx-GL-AOz"/>
-                                                <constraint firstItem="ANm-i2-Lev" firstAttribute="leading" secondItem="ijC-2i-ALS" secondAttribute="leading" constant="-10" id="zBG-j4-ZNL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="activeLabel" destination="ZYt-ei-MQ9" id="5Bf-sJ-HBV"/>
-                                            <outlet property="activePercentLabel" destination="RCG-bu-758" id="WjH-kD-PKE"/>
                                             <outlet property="countryNameLabel" destination="U5k-Kc-IH8" id="2Tu-ce-f26"/>
                                             <outlet property="deathsLabel" destination="WEf-jW-TGN" id="7pu-0p-o82"/>
-                                            <outlet property="deathsPercentLabel" destination="QSz-Jv-hBf" id="PBp-Vh-PJh"/>
                                             <outlet property="graphView" destination="ijC-2i-ALS" id="0dA-YO-WUB"/>
                                             <outlet property="recoveredLabel" destination="8To-cV-HT5" id="4YR-jq-Hmh"/>
-                                            <outlet property="recoveredPercentLabel" destination="2Mb-c1-iB4" id="Aru-vJ-Mjd"/>
                                             <outlet property="totalLabel" destination="OTR-dB-hcR" id="OJ3-gG-znF"/>
-                                            <outlet property="totalPercentLabel" destination="LZE-zU-eVG" id="3v2-iS-2FW"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -267,11 +228,22 @@
                     <navigationItem key="navigationItem" title="World Stats" id="Er4-Ln-srC"/>
                     <connections>
                         <outlet property="tableView" destination="Pob-XS-YcB" id="zWG-wX-RJW"/>
+                        <segue destination="c92-Mc-VGc" kind="show" identifier="countryData" destinationCreationSelector="goToCountryData:" id="yRZ-tt-XfE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1034.7826086956522" y="81.696428571428569"/>
+        </scene>
+        <!--Hosting Controller-->
+        <scene sceneID="uPL-PM-tIb">
+            <objects>
+                <hostingController id="c92-Mc-VGc" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="v0e-j4-4ip"/>
+                </hostingController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7eh-D7-dXu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1059" y="875"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="NVn-yd-Sty">
