@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B4EA29724746B3700811D4C /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4EA29624746B3700811D4C /* SwiftUIView.swift */; };
 		5B7E6AF12472D52E00023650 /* CountryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E6AF02472D52E00023650 /* CountryDetailView.swift */; };
 		5B7E6B062473062500023650 /* CountryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E6B052473062500023650 /* CountryData.swift */; };
 		5B7E6B102473B1C700023650 /* IndicatorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E6B082473B1C700023650 /* IndicatorPoint.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B4EA29624746B3700811D4C /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		5B7E6AF02472D52E00023650 /* CountryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailView.swift; sourceTree = "<group>"; };
 		5B7E6B052473062500023650 /* CountryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryData.swift; sourceTree = "<group>"; };
 		5B7E6B082473B1C700023650 /* IndicatorPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorPoint.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				5BCCA7D52471168600EE6C2B /* LaunchScreen.storyboard */,
 				5BCCA7D82471168600EE6C2B /* Info.plist */,
 				5BCCA7D02471168300EE6C2B /* CoronaTracker.xcdatamodeld */,
+				5B4EA29624746B3700811D4C /* SwiftUIView.swift */,
 			);
 			path = CoronaTracker;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				5BCCA7E2247138D800EE6C2B /* CoronaClient.swift in Sources */,
 				5B7E6B192473B1EC00023650 /* Helpers.swift in Sources */,
 				5BCCA7E424713B5F00EE6C2B /* Country.swift in Sources */,
+				5B4EA29724746B3700811D4C /* SwiftUIView.swift in Sources */,
 				5B7E6B112473B1C700023650 /* LineView.swift in Sources */,
 				5BE091F42471741A00751057 /* HomeTableViewCell.swift in Sources */,
 				5B7E6B142473B1C700023650 /* MagnifierRect.swift in Sources */,

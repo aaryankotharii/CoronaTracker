@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet var searchbar: UISearchBar!
     let cellIdentifier = "cell"
     
     var moc : NSManagedObjectContext!
@@ -29,10 +30,10 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         
-        self.navigationItem.searchController = search
+   //     self.navigationItem.searchController = search
 
-        search.delegate = self
-        search.searchBar.delegate = self
+        //search.delegate = self
+       // search.searchBar.delegate = self
                 
         super.viewDidLoad()
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
