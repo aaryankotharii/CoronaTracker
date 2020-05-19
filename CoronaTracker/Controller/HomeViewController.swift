@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         moc = appDelegate.persistentContainer.viewContext
         
-        let sort = NSSortDescriptor(key: "name", ascending: true)
+        let sort = NSSortDescriptor(key: "deaths", ascending: true)
         //let resultPredicate = NSPredicate(format: "name contains[c] %@", "in")
         
         setupFetchedResultsController(sort: sort)    /// Setup fetchedResultsController
