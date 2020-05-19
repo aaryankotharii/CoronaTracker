@@ -100,6 +100,7 @@ func addCountry(_ country: Countries){
     countryToSave.total = Int32(country.TotalConfirmed)
     countryToSave.recoveries = Int32(country.TotalRecovered)
     countryToSave.countrycode = country.CountryCode
+    countryToSave.slug = country.Slug
     do{
         try moc.save()
     } catch {
@@ -160,7 +161,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! HomeTableViewCell
-        self.rootView = CountryDetailView(hello: cell.countryNameLabel.text ?? "no")
+        let country = fetchCountry(cell.countryNameLabel.text ?? "india")
+        self.rootView = CountryDetailView(hello: cell.countryNameLabel.text ?? "no",slug: country!.slug)
         performSegue(withIdentifier: "countryData", sender: nil)
     }
     

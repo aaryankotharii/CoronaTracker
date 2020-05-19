@@ -1,21 +1,19 @@
 //
-//  LineCard.swift
-//  LineChart
+//  File.swift
+//  
 //
-//  Created by András Samu on 2019. 08. 31..
-//  Copyright © 2019. András Samu. All rights reserved.
+//  Created by Samu András on 2020. 02. 19..
 //
 
 import SwiftUI
 
-public struct LineChartView: View {
+public struct MultiLineChartView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    @ObservedObject var data:ChartData
+    var data:[MultiLineChartData]
     public var title: String
     public var legend: String?
     public var style: ChartStyle
     public var darkModeStyle: ChartStyle
-    
     public var formSize:CGSize
     public var dropShadow: Bool
     public var valueSpecifier:String
@@ -31,11 +29,24 @@ public struct LineChartView: View {
         }
     }
     
-    let frame = CGSize(width: 400, height: 120)
+    var globalMin:Double {
+        if let min = data.flatMap({$0.onlyPoints()}).min() {
+            return min
+        }
+        return 0
+    }
     
-    private var rateValue: Int?
+    var globalMax:Double {
+        if let max = data.flatMap({$0.onlyPoints()}).max() {
+            return max
+        }
+        return 0
+    }
     
-    public init(data: [Double],
+    let frame = CGSize(width: 180, height: 120)
+    private var rateValue: Int
+    
+    public init(data: [([Double], GradientColor)],
                 title: String,
                 legend: String? = nil,
                 style: ChartStyle = Styles.lineChartStyleOne,
@@ -44,15 +55,15 @@ public struct LineChartView: View {
                 dropShadow: Bool? = true,
                 valueSpecifier: String? = "%.1f") {
         
-        self.data = ChartData(points: data)
+        self.data = data.map({ MultiLineChartData(points: $0.0, gradient: $0.1)})
         self.title = title
         self.legend = legend
         self.style = style
         self.darkModeStyle = style.darkModeStyle != nil ? style.darkModeStyle! : Styles.lineViewDarkMode
         self.formSize = form!
+        self.rateValue = rateValue!
         self.dropShadow = dropShadow!
         self.valueSpecifier = valueSpecifier!
-        self.rateValue = rateValue
     }
     
     public var body: some View {
@@ -60,7 +71,7 @@ public struct LineChartView: View {
             RoundedRectangle(cornerRadius: 20)
                 .fill(self.colorScheme == .dark ? self.darkModeStyle.backgroundColor : self.style.backgroundColor)
                 .frame(width: frame.width, height: 240, alignment: .center)
-                .shadow(color: self.style.dropShadowColor, radius: self.dropShadow ? 8 : 0)
+                .shadow(radius: self.dropShadow ? 8 : 0)
             VStack(alignment: .leading){
                 if(!self.showIndicatorDot){
                     VStack(alignment: .leading, spacing: 8){
@@ -71,19 +82,15 @@ public struct LineChartView: View {
                         if (self.legend != nil){
                             Text(self.legend!)
                                 .font(.callout)
-                                .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.legendTextColor :self.style.legendTextColor)
+                                .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.legendTextColor : self.style.legendTextColor)
                         }
                         HStack {
-                            
-                            if (self.rateValue ?? 0 != 0)
-                            {
-                                if (self.rateValue ?? 0 >= 0){
-                                    Image(systemName: "arrow.up")
-                                }else{
-                                    Image(systemName: "arrow.down")
-                                }
-                                Text("\(self.rateValue!)%")
+                            if (self.rateValue >= 0){
+                                Image(systemName: "arrow.up")
+                            }else{
+                                Image(systemName: "arrow.down")
                             }
+                            Text("\(self.rateValue)%")
                         }
                     }
                     .transition(.opacity)
@@ -101,13 +108,19 @@ public struct LineChartView: View {
                 }
                 Spacer()
                 GeometryReader{ geometry in
-                    Line(data: self.data,
-                         frame: .constant(geometry.frame(in: .local)),
-                         touchLocation: self.$touchLocation,
-                         showIndicator: self.$showIndicatorDot,
-                         minDataValue: .constant(nil),
-                         maxDataValue: .constant(nil)
-                    )
+                    ZStack{
+                        ForEach(0..<self.data.count) { i in
+                            Line(data: self.data[i],
+                                 frame: .constant(geometry.frame(in: .local)),
+                                 touchLocation: self.$touchLocation,
+                                 showIndicator: self.$showIndicatorDot,
+                                 minDataValue: .constant(self.globalMin),
+                                 maxDataValue: .constant(self.globalMax),
+                                 showBackground: false,
+                                 gradient: self.data[i].getGradient(),
+                                 index: i)
+                        }
+                    }
                 }
                 .frame(width: frame.width, height: frame.height + 30)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
@@ -116,9 +129,9 @@ public struct LineChartView: View {
         }
         .gesture(DragGesture()
         .onChanged({ value in
-            self.touchLocation = value.location
-            self.showIndicatorDot = true
-            self.getClosestDataPoint(toPoint: value.location, width:self.frame.width, height: self.frame.height)
+//            self.touchLocation = value.location
+//            self.showIndicatorDot = true
+//            self.getClosestDataPoint(toPoint: value.location, width:self.frame.width, height: self.frame.height)
         })
             .onEnded({ value in
                 self.showIndicatorDot = false
@@ -126,24 +139,24 @@ public struct LineChartView: View {
         )
     }
     
-    @discardableResult func getClosestDataPoint(toPoint: CGPoint, width:CGFloat, height: CGFloat) -> CGPoint {
-        let points = self.data.onlyPoints()
-        let stepWidth: CGFloat = width / CGFloat(points.count-1)
-        let stepHeight: CGFloat = height / CGFloat(points.max()! + points.min()!)
-        
-        let index:Int = Int(round((toPoint.x)/stepWidth))
-        if (index >= 0 && index < points.count){
-            self.currentValue = points[index]
-            return CGPoint(x: CGFloat(index)*stepWidth, y: CGFloat(points[index])*stepHeight)
-        }
-        return .zero
-    }
+//    @discardableResult func getClosestDataPoint(toPoint: CGPoint, width:CGFloat, height: CGFloat) -> CGPoint {
+//        let points = self.data.onlyPoints()
+//        let stepWidth: CGFloat = width / CGFloat(points.count-1)
+//        let stepHeight: CGFloat = height / CGFloat(points.max()! + points.min()!)
+//
+//        let index:Int = Int(round((toPoint.x)/stepWidth))
+//        if (index >= 0 && index < points.count){
+//            self.currentValue = points[index]
+//            return CGPoint(x: CGFloat(index)*stepWidth, y: CGFloat(points[index])*stepHeight)
+//        }
+//        return .zero
+//    }
 }
 
-struct WidgetView_Previews: PreviewProvider {
+struct MultiWidgetView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LineChartView(data: [8,23,54,32,12,37,7,23,43], title: "Line chart", legend: "Basic")
+            MultiLineChartView(data: [([8,23,54,32,12,37,7,23,43], GradientColors.orange)], title: "Line chart", legend: "Basic")
                 .environment(\.colorScheme, .light)
         }
     }

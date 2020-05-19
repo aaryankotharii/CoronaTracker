@@ -15,6 +15,8 @@ final class CurrentCountryData: ObservableObject {
     @Published var active : [Double]?
     @Published var dead : [Double]?
     @Published var Recovered : [Double]?
+    
+    @Published var dailyNew : [Double]?
 
     
     init(){
@@ -38,7 +40,31 @@ extension CurrentCountryData{
             self.active = activeArray
             self.dead = deathArray
             self.Recovered = recoveredArray
+            
+            var arrayToReturn = activeArray
+                if arrayToReturn.count >= 0{
+                    for i in stride(from: (arrayToReturn.count-1), to: 1, by: -1) {
+                        arrayToReturn[i] = arrayToReturn[i] - arrayToReturn[i-1]
+                        self.dailyNew = arrayToReturn
+                  }
+              }
+            
             print("result",CountryCaseCount(active: activeArray, deaths: deathArray, recovered: recoveredArray))
         }
     }
+    
+    func getFrequencyArray(_ array : [Double]?)->[Double]{
+        var arrayToReturn = array
+        if arrayToReturn != nil{
+            if arrayToReturn!.count >= 0{
+            for i in stride(from: (arrayToReturn!.count-1), to: 1, by: -1) {
+                      arrayToReturn![i] = arrayToReturn![i] - arrayToReturn![i-1]
+                      print(arrayToReturn![i] - arrayToReturn![i-1])
+                return arrayToReturn ?? []
+              }
+          }
+        }
+        return []
+    }
 }
+

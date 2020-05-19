@@ -12,12 +12,15 @@ struct CountryDetailView: View {
     @ObservedObject var country = CurrentCountryData()
         
     var hello : String = "India"
+    var slug : String = "india"
             
     var body: some View {
         VStack{
-            LineChartView(data: country.active ?? [], title: hello)
+            LineView(data: country.dailyNew ?? [], title: "Line chart", legend: "Full screen").padding()
             
-            MultiLineChartView(data: [(country.current?.active ?? [], GradientColors.green), (country.current?.deaths ?? [], GradientColors.purple), (country.current?.recovered ?? [], GradientColors.orngPink)], title: "Title")
+//            LineChartView(data: country.active ?? [], title: hello)
+//
+            MultiLineChartView(data: [(country.current?.active ?? [], GradientColors.green), (country.current?.deaths ?? [], GradientColors.purple), (country.current?.recovered ?? [], GradientColors.orngPink)], title: "Title",legend: "Full screen")
             Button(action: fetch){
                 Text("hi")
             }
@@ -26,7 +29,7 @@ struct CountryDetailView: View {
     
     private  func fetch(){
         print("fetching")
-        self.country.fetch("India")
+        self.country.fetch(slug)
     }
 }
 
