@@ -52,7 +52,6 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
        // tableView.tableHeaderView = search.searchBar
-
     }
     
     @IBSegueAction func goToCountryData(_ coder: NSCoder) -> UIViewController? {
@@ -83,9 +82,6 @@ class HomeViewController: UIViewController {
         print(error!.localizedDescription,"errr",error.debugDescription)
     }
         }
-    
-    
-    
 
              
 
@@ -183,9 +179,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.cellForRow(at: indexPath) as! HomeTableViewCell
         let country = fetchCountry(cell.name ?? "india")
         
-        let str = objectToStruct(country!)
+        let worldData = objectToStruct(country!)
         
-        self.rootView = CountryDetailView(hello: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
+        self.rootView = CountryDetailView(worldData: worldData, hello: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
 
         performSegue(withIdentifier: "countryData", sender: nil)
     }

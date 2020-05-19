@@ -11,6 +11,8 @@ import SwiftUI
 struct CountryDetailView: View {
     @ObservedObject var country = CurrentCountryData()
     
+    var worldData : Countries!
+    
    // var countryTotalData = CountryStruct()
         
     var hello : String = "India"
@@ -18,6 +20,7 @@ struct CountryDetailView: View {
             
     var body: some View {
         VStack{
+            Text(worldData.Country)
             LineView(data: country.dailyNew ?? [], title: "Line chart", legend: "Full screen").padding()
             
 //            LineChartView(data: country.active ?? [], title: hello)
@@ -36,10 +39,9 @@ struct CountryDetailView: View {
 }
 
 struct CountryCases : View {
-    @State var hello = "India"
     var body: some View {
         VStack{
-            Text(hello)
+            Text("India")
         }
     }
 }
