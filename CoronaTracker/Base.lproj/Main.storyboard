@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="35G-s5-JoK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vJD-xk-AXo">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
@@ -15,6 +15,23 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Item-->
+        <scene sceneID="xat-Nf-mbT">
+            <objects>
+                <navigationController id="2CQ-2a-edl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="BOS-mM-pLX"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="eTp-iU-RTS">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="6fs-ld-xCx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nku-mz-spC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1009" y="82"/>
+        </scene>
         <!--World Stats-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -290,25 +307,6 @@
             </objects>
             <point key="canvasLocation" x="3136.2318840579715" y="75"/>
         </scene>
-        <!--Item-->
-        <scene sceneID="MCn-rZ-Ndn">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="35G-s5-JoK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="jXc-yb-AC4"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="6WI-pM-3KF">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="vJD-xk-AXo" kind="relationship" relationship="rootViewController" id="SAQ-d2-RW0"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IqG-Wd-vrL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-719" y="82"/>
-        </scene>
         <!--LOL-->
         <scene sceneID="P8N-Mz-RVY">
             <objects>
@@ -317,9 +315,12 @@
                     <navigationItem key="navigationItem" title="LOL" id="xq0-ZR-g96">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="ysx-zn-uCs">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tPQ-y5-MeD">
-                                <rect key="frame" x="-23" y="-15" width="182" height="128"/>
+                                <rect key="frame" x="294" y="0.0" width="100" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="arrow.counterclockwise.icloud" catalog="system"/>
+                                <connections>
+                                    <action selector="reloadClicked:" destination="9wL-2X-isY" eventType="touchUpInside" id="fiY-7l-3cK"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -329,10 +330,11 @@
                     </tabBar>
                     <connections>
                         <segue destination="Xir-Ac-UEq" kind="relationship" relationship="viewControllers" id="6VU-MM-T3k"/>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="tfF-nX-YdR"/>
+                        <segue destination="2CQ-2a-edl" kind="relationship" relationship="viewControllers" id="jvl-9k-j20"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Lb-zZ-lKc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="9wL-2X-isY" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="124.6376811594203" y="81.696428571428569"/>
         </scene>
@@ -345,7 +347,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mAE-yb-5pe">
-                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

@@ -38,9 +38,7 @@ class HomeViewController: UIViewController {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         moc = appDelegate.persistentContainer.viewContext
         
-        let sort = NSSortDescriptor(key: "deaths", ascending: true)
-        //let resultPredicate = NSPredicate(format: "name contains[c] %@", "in")
-        
+        let sort = NSSortDescriptor(key: "name", ascending: true)        
         setupFetchedResultsController(sort: sort)    /// Setup fetchedResultsController
         //print(fetchedResultsController.fetchedObjects)
         if fetchedResultsController.fetchedObjects?.count == 0{
@@ -212,7 +210,7 @@ extension HomeViewController : NSFetchedResultsControllerDelegate {
         do{
             try fetchedResultsController.performFetch()
             tableView.reloadData()
-        } catch{
+        } catch {
             fatalError(error.localizedDescription)
         }
     }

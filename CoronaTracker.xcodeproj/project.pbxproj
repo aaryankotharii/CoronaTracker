@@ -19,7 +19,6 @@
 		5B7E6B172473B1C700023650 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E6B0F2473B1C700023650 /* Line.swift */; };
 		5B7E6B192473B1EC00023650 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E6B182473B1EC00023650 /* Helpers.swift */; };
 		5B7E6B1B2473DA2E00023650 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E6B1A2473DA2E00023650 /* MapViewController.swift */; };
-		5B7E6B1D2474076500023650 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E6B1C2474076500023650 /* TabViewController.swift */; };
 		5BB131052471889A00110DBA /* Flag->Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB131042471889A00110DBA /* Flag->Emoji.swift */; };
 		5BB131082471A82100110DBA /* SF-Pro-Rounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB131072471A82100110DBA /* SF-Pro-Rounded-Bold.otf */; };
 		5BB1310A2471B24300110DBA /* SF-Pro-Rounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB131092471B24300110DBA /* SF-Pro-Rounded-Semibold.otf */; };
@@ -51,7 +50,6 @@
 		5B7E6B0F2473B1C700023650 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		5B7E6B182473B1EC00023650 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		5B7E6B1A2473DA2E00023650 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		5B7E6B1C2474076500023650 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		5BB131042471889A00110DBA /* Flag->Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Flag->Emoji.swift"; sourceTree = "<group>"; };
 		5BB131072471A82100110DBA /* SF-Pro-Rounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Bold.otf"; sourceTree = "<group>"; };
 		5BB131092471B24300110DBA /* SF-Pro-Rounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Semibold.otf"; sourceTree = "<group>"; };
@@ -171,7 +169,6 @@
 				5BE091F12471707F00751057 /* HomeViewController.swift */,
 				5B7E6AF02472D52E00023650 /* CountryDetailView.swift */,
 				5B7E6B1A2473DA2E00023650 /* MapViewController.swift */,
-				5B7E6B1C2474076500023650 /* TabViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -257,7 +254,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B7E6B1D2474076500023650 /* TabViewController.swift in Sources */,
 				5B7E6AF12472D52E00023650 /* CountryDetailView.swift in Sources */,
 				5B7E6B102473B1C700023650 /* IndicatorPoint.swift in Sources */,
 				5B7E6B132473B1C700023650 /* LineChartView.swift in Sources */,

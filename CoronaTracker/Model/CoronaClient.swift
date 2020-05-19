@@ -96,4 +96,5 @@ class CoronaClient {
             print(error?.localizedDescription)
         }
     }
+    
 }
