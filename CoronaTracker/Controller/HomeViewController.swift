@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
-    @IBOutlet var searchbar: UISearchBar!
+  //  @IBOutlet var searchbar: UISearchBar!
     let cellIdentifier = "cell"
     
     var moc : NSManagedObjectContext!
@@ -32,9 +32,9 @@ class HomeViewController: UIViewController {
         
    //     self.navigationItem.searchController = search
 
-        //search.delegate = self
-       // search.searchBar.delegate = self
-                
+        search.delegate = self
+        search.searchBar.delegate = self
+                        
         super.viewDidLoad()
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         moc = appDelegate.persistentContainer.viewContext
@@ -53,6 +53,7 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
        // tableView.tableHeaderView = search.searchBar
+        self.tableView.tableHeaderView = search.searchBar
     }
     
     @IBSegueAction func goToCountryData(_ coder: NSCoder) -> UIViewController? {
