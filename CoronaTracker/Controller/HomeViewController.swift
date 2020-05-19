@@ -29,7 +29,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         
-      //  self.navigationItem.searchController = search
+        self.navigationItem.searchController = search
 
         search.delegate = self
         search.searchBar.delegate = self
@@ -53,7 +53,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tableView.tableHeaderView = search.searchBar
+       // tableView.tableHeaderView = search.searchBar
 
     }
     

@@ -7,24 +7,28 @@
 //
 
 import UIKit
+import MapKit
+import CoreData
 
 class MapViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBOutlet var mapView: MKMapView!
+    
+    var moc : NSManagedObjectContext!
+    
+    
+    
+    
+    /// Fetched Results controller to fetch data from Database
+    var fetchedResultsController : NSFetchedResultsController<Country>!
+    
+    
+    //MARK: View Lifecycle
+    override func viewDidLoad() {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        moc = appDelegate.persistentContainer.viewContext
+        
+        super.viewDidLoad()
     }
-    */
-
 }
