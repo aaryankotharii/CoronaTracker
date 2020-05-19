@@ -10,6 +10,8 @@ import SwiftUI
 
 struct CountryDetailView: View {
     @ObservedObject var country = CurrentCountryData()
+    
+   // var countryTotalData = CountryStruct()
         
     var hello : String = "India"
     var slug : String = "india"
@@ -33,8 +35,17 @@ struct CountryDetailView: View {
     }
 }
 
+struct CountryCases : View {
+    @State var hello = "India"
+    var body: some View {
+        VStack{
+            Text(hello)
+        }
+    }
+}
+
 struct CountryDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        CountryDetailView()
+        CountryCases()
     }
 }

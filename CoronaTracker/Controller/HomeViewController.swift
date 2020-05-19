@@ -61,8 +61,6 @@ class HomeViewController: UIViewController {
         return UIHostingController(coder: coder, rootView: rootView)
     }
     
-
-    
     
     func handleDownload(summary:Summary? ,error:Error?){
         if let summary = summary {
@@ -101,12 +99,34 @@ func addCountry(_ country: Countries){
     countryToSave.recoveries = Int32(country.TotalRecovered)
     countryToSave.countrycode = country.CountryCode
     countryToSave.slug = country.Slug
+    countryToSave.date = Date()
+    countryToSave.newtotal = Int32(country.NewConfirmed)
+    countryToSave.newdeaths = Int32(country.NewDeaths)
+    countryToSave.newrecoveries = Int32(country.NewRecovered)
     do{
         try moc.save()
     } catch {
         print(error.localizedDescription)
     }
 }
+    
+    func objectToStruct(_ country : Country)->Countries{
+        let slug = country.slug!
+        let newtotal = Int(country.newtotal)
+        let newdeaths = Int(country.newdeaths)
+        let newrecoveries = Int(country.newrecoveries)
+        
+        let name = country.name
+        let deaths = Int(country.deaths)
+        let total = Int(country.total)
+        let recoveries = Int(country.recoveries)
+        let countrycode = country.countrycode
+        let date = country.date
+        
+        let countryStruct = Countries(Country: name!, CountryCode: countrycode!, Slug: slug, NewConfirmed: newtotal, TotalConfirmed: total, NewDeaths: newdeaths, TotalDeaths: deaths, NewRecovered: newrecoveries, TotalRecovered: recoveries, Date: "\(String(describing: date))")
+        
+        return countryStruct
+    }
 
 func updateCountry(_ country: Countries){
     let CountryToUpdate = fetchCountry(country.Country)
@@ -153,6 +173,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         cell.deaths = Int(country.deaths)
         cell.recovered = Int(country.recoveries)
         
+        cell.name = name ?? ""
+        
         cell.setupLabels()
         
         return cell
@@ -161,8 +183,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! HomeTableViewCell
-        let country = fetchCountry(cell.countryNameLabel.text ?? "india")
-        self.rootView = CountryDetailView(hello: cell.countryNameLabel.text ?? "no",slug: country!.slug)
+        let country = fetchCountry(cell.name ?? "india")
+        
+        let str = objectToStruct(country!)
+        
+        self.rootView = CountryDetailView(hello: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
+
         performSegue(withIdentifier: "countryData", sender: nil)
     }
     
@@ -186,7 +212,6 @@ extension HomeViewController : NSFetchedResultsControllerDelegate {
         do{
             try fetchedResultsController.performFetch()
             tableView.reloadData()
-            print(fetchedResultsController.fetchedObjects)
         } catch{
             fatalError(error.localizedDescription)
         }

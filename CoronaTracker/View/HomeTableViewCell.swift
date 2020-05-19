@@ -52,6 +52,8 @@ class HomeTableViewCell: UITableViewCell {
     var active : Int{
         return total - recovered - deaths
     }
+    
+    var name : String!
 
     
     
