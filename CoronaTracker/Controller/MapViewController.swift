@@ -16,9 +16,6 @@ class MapViewController: UIViewController {
     
     var moc : NSManagedObjectContext!
     
-    
-    
-    
     /// Fetched Results controller to fetch data from Database
     var fetchedResultsController : NSFetchedResultsController<Country>!
     
