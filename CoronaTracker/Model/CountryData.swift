@@ -15,6 +15,8 @@ final class CurrentCountryData: ObservableObject {
     @Published var active : [Double]?
     @Published var dead : [Double]?
     @Published var Recovered : [Double]?
+    @Published var confirmed : [Double]?
+    
     
     @Published var dailyNew : [Double]?
 
@@ -43,6 +45,7 @@ extension CurrentCountryData{
             self.active = activeArray
             self.dead = deathArray
             self.Recovered = recoveredArray
+            self.confirmed = confirmedArray
 
             var arrayToReturn = confirmedArray
                 if arrayToReturn.count >= 0{
@@ -52,7 +55,6 @@ extension CurrentCountryData{
                   }
               }
             
-            print("result",CountryCaseCount(active: activeArray, deaths: deathArray, recovered: recoveredArray))
         }
     }
     
@@ -62,7 +64,6 @@ extension CurrentCountryData{
             if arrayToReturn!.count >= 0{
             for i in stride(from: (arrayToReturn!.count-1), to: 1, by: -1) {
                       arrayToReturn![i] = arrayToReturn![i] - arrayToReturn![i-1]
-                      print(arrayToReturn![i] - arrayToReturn![i-1])
                 return arrayToReturn ?? []
               }
           }

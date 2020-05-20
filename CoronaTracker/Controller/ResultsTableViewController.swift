@@ -10,19 +10,15 @@ import UIKit
 
 class ResultsTableViewController: UITableViewController {
 
-    let tableViewCellIdentifier = "cell"
+    let tableViewCellIdentifier = "cell2"
     
 
         
         var filteredProducts = [Country]()
-        
-        @IBOutlet weak var resultsLabel: UILabel!
-        
+                
         override func viewDidLoad() {
             super.viewDidLoad()
-
-            let nib = UINib(nibName: "TableCell", bundle: nil)
-            tableView.register(nib, forCellReuseIdentifier: tableViewCellIdentifier)
+            print(filteredProducts,"FFFFFFFFF")
         }
         
         // MARK: - UITableViewDataSource

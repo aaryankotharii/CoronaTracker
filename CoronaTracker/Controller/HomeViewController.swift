@@ -36,23 +36,25 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         
-//          resultsTableController =
-//            self.storyboard?.instantiateViewController(withIdentifier: "ResultsTableController") as? ResultsTableViewController
-//        // This view controller is interested in table view row selections.
-//        resultsTableController.tableView.delegate = self
-//
-//        searchController = UISearchController(searchResultsController: resultsTableController)
-//        searchController.delegate = self
-//        searchController.searchResultsUpdater = self
-//        searchController.searchBar.autocapitalizationType = .none
-//        searchController.dimsBackgroundDuringPresentation = false
+          resultsTableController =
+            self.storyboard?.instantiateViewController(withIdentifier: "ResultsTableController") as? ResultsTableViewController
+        // This view controller is interested in table view row selections.
+        resultsTableController.tableView.delegate = self
+
+        searchController = UISearchController(searchResultsController: resultsTableController)
+        searchController.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.autocapitalizationType = .none
+        
+        searchController.searchBar.delegate = self
+        //searchController.dimsBackgroundDuringPresentation = false
          
          //search = UISearchController(searchResultsController: searchResultsController)
         
        // self.navigationItem.searchController = search
 
-        search.delegate = self
-        search.searchBar.delegate = self
+       // search.delegate = self
+        //search.searchBar.delegate = self
         
        // search.obscuresBackgroundDuringPresentation = false
                         
@@ -62,18 +64,20 @@ class HomeViewController: UIViewController {
         
         let sort = NSSortDescriptor(key: "name", ascending: true)        
         setupFetchedResultsController(sort: sort)    /// Setup fetchedResultsController
-        //print(fetchedResultsController.fetchedObjects)
         if fetchedResultsController.fetchedObjects?.count == 0{
 
         CoronaClient.getSummary(completion: handleDownload(summary:error:))
         } else {
             CoronaClient.getSummary(completion: handleUpdate(summary:error:))
         }
+        resultsTableController.filteredProducts  = fetchedResultsController.fetchedObjects!
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.tableView.tableHeaderView = search.searchBar
+        self.navigationItem.searchController = searchController
+       // self.tableView.tableHeaderView = searchController.searchBar
     }
     
     @IBSegueAction func goToCountryData(_ coder: NSCoder) -> UIViewController? {
@@ -281,40 +285,50 @@ extension HomeViewController : NSFetchedResultsControllerDelegate {
 }
 
 extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // Add your search logic here
-        var predicate: NSPredicate? = nil
-
-        fetchedResultsController = nil
-        if searchBar.text?.count != 0 {
-            predicate = NSPredicate(format: "name contains[c] %@", searchBar.text!)
-            let sort = NSSortDescriptor(key: "name", ascending: true)
-            setupFetchedResultsController(sort: sort, predicate: predicate)
-            tableView.reloadData()
-        }
-
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        let sort = NSSortDescriptor(key: "name", ascending: true)
-        setupFetchedResultsController(sort: sort)
-        tableView.reloadData()
-    }
-    
     func updateSearchResults(for searchController: UISearchController) {
-        // Update the filtered array based on the search text.
-        let searchResults = fetchedResultsController.fetchedObjects
+        updateSearchResults(for: searchController.searchBar)
+    }
+    
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        // Add your search logic here
+//        var predicate: NSPredicate? = nil
+//
+//        fetchedResultsController = nil
+//        if searchBar.text?.count != 0 {
+//            predicate = NSPredicate(format: "name contains[c] %@", searchBar.text!)
+//            let sort = NSSortDescriptor(key: "name", ascending: true)
+//            setupFetchedResultsController(sort: sort, predicate: predicate)
+//            tableView.reloadData()
+//        }
+//
+//    }
+//
+//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+//        let sort = NSSortDescriptor(key: "name", ascending: true)
+//        setupFetchedResultsController(sort: sort)
+//        tableView.reloadData()
+//    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+        updateSearchResults(for: searchBar)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+      //  searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        updateSearchResults(for: searchBar)
+    }
+    
+    func updateSearchResults(for searchbar: UISearchBar) {
+        if let text = searchbar.text{
+            if text.count > 0 {
 
-        // Strip out all the leading and trailing spaces.
-        let whitespaceCharacterSet = CharacterSet.whitespaces
-        let strippedString =
-            searchController.searchBar.text!.trimmingCharacters(in: whitespaceCharacterSet)
-        let searchItems = strippedString.components(separatedBy: " ") as [String]
-
-        // Build all the "AND" expressions for each value in searchString.
         let fetchRequest : NSFetchRequest<Country> = Country.fetchRequest()
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-             fetchRequest.predicate = NSPredicate(format: "name contains[c] %@", strippedString)
+             fetchRequest.predicate = NSPredicate(format: "name contains[c] %@", text)
             
             fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
             fetchedResultsController.delegate = self
@@ -324,20 +338,20 @@ extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate, U
                 fatalError(error.localizedDescription)
             }
         let filteredResults = fetchedResultsController.fetchedObjects
-
-        // Apply the filtered results to the search results table.
+        print(filteredResults)
         if let resultsController = searchController.searchResultsController as? ResultsTableViewController {
             resultsController.filteredProducts = filteredResults!
             resultsController.tableView.reloadData()
 
-            resultsController.resultsLabel.text = resultsController.filteredProducts.isEmpty ?
-                NSLocalizedString("NoItemsFoundTitle", comment: "") :
-                String(format: NSLocalizedString("Items found: %ld", comment: ""),
-                       resultsController.filteredProducts.count)
+            //resultsController.resultsLabel.text = resultsController.filteredProducts.isEmpty ?
+              //  NSLocalizedString("NoItemsFoundTitle", comment: "") :
+                //String(format: NSLocalizedString("Items found: %ld", comment: ""),
+                  //resultsController.filteredProducts.count)
         }
     }
+        }
 
-
+    }
 }
 //func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
 //    let topIndex = IndexPath(row: 0, section: 0)
