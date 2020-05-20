@@ -35,13 +35,16 @@ extension CurrentCountryData{
 
                 let recovered = result.map { $0.Recovered }
             let recoveredArray = recovered.map{Double($0)}
+            
+            let confirmed = result.map { $0.Confirmed }
+            let confirmedArray = confirmed.map{ Double($0) }
 
-                self.current = CountryCaseCount(active: activeArray, deaths: deathArray, recovered: recoveredArray)
+            self.current = CountryCaseCount(active: activeArray, deaths: deathArray, recovered: recoveredArray)
             self.active = activeArray
             self.dead = deathArray
             self.Recovered = recoveredArray
-            
-            var arrayToReturn = activeArray
+
+            var arrayToReturn = confirmedArray
                 if arrayToReturn.count >= 0{
                     for i in stride(from: (arrayToReturn.count-1), to: 1, by: -1) {
                         arrayToReturn[i] = arrayToReturn[i] - arrayToReturn[i-1]

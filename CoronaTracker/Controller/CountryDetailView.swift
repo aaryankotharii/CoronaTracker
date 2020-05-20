@@ -19,23 +19,28 @@ struct CountryDetailView: View {
     var slug : String = "india"
             
     var body: some View {
+        
+        NavigationView {
+
         VStack{
-            CountryCases(country: worldData, name: hello)
-            LineView(data: country.dailyNew ?? [], title: "Line chart", legend: "Full screen").padding()
+            //CountryCases(country: worldData, name: hello)
             
-//            LineChartView(data: country.active ?? [], title: hello)
-//
+            HStack{
+            LineChartView(data: country.active ?? [], title: "")
+
             MultiLineChartView(data: [(country.current?.active ?? [], GradientColors.green), (country.current?.deaths ?? [], GradientColors.purple), (country.current?.recovered ?? [], GradientColors.orngPink)], title: "Title",legend: "Full screen")
-            Button(action: fetch){
-                Text("hi")
             }
+            
+            LineView(data: country.dailyNew ?? [], title: "", legend: "Daily New Cases").padding()
         }.onAppear(perform: fetch)
+        }.navigationBarTitle(Text(hello), displayMode: .large).minimumScaleFactor(0.5)
     }
     
     private  func fetch(){
         print("fetching")
         self.country.fetch(slug)
-    }
+        }
+
 }
 
 struct CountryCases: View {
@@ -71,13 +76,13 @@ struct CountryCases: View {
                 Text("\(country.TotalDeaths)")
                 Text("\(country.TotalRecovered)")
                 
-            }
+                }
             }
         }
         .padding(30)
         .background(Color.init(#colorLiteral(red: 0.8582246933, green: 1, blue: 0.9281178106, alpha: 1)))
         .cornerRadius(30)
-}
+    }
 }
 
 

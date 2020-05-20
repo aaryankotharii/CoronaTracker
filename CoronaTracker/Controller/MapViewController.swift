@@ -92,7 +92,6 @@ class MapViewController: UIViewController {
                     let coordinate = point.coordinate
                     let radius = calculateRadius(Int(point.total))
                     addOverlay(radius: CLLocationDistance(radius), coord: coordinate)
-                   //AddAnnotationToMap(coordinate)
                 }
             }
     }
