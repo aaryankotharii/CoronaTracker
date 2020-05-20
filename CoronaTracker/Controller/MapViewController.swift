@@ -32,8 +32,13 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         mapView.delegate = self
-        addOverlay(radius: 400000, coord: CLLocationCoordinate2D(latitude: 20, longitude: 77))
-
+    }
+    
+    
+    @IBAction func tappedOnMap(_ sender: UITapGestureRecognizer) {
+        let tapLocation = sender.location(in: mapView)
+            let coordinate = self.mapView.convert(tapLocation, toCoordinateFrom: self.mapView)
+        print(coordinate)
     }
     
     func addOverlay(radius:CLLocationDistance,coord:CLLocationCoordinate2D){
@@ -66,8 +71,9 @@ class MapViewController: UIViewController {
     }
     
     func calculateRadius(_ numberOfCases : Int)->Int{
-        
         switch numberOfCases {
+        case _ where numberOfCases < 1000:
+                   return 30000
         case _ where numberOfCases < 20000:
             return 80000
         case _ where numberOfCases > 1500000:

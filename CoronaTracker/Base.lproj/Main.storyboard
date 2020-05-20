@@ -361,8 +361,10 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mAE-yb-5pe">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="delegate" destination="Xir-Ac-UEq" id="73D-bw-E3I"/>
+                                    <outletCollection property="gestureRecognizers" destination="HXV-Eq-RhX" appends="YES" id="KqQ-kC-LYe"/>
                                 </connections>
                             </mapView>
                         </subviews>
@@ -381,6 +383,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O04-PQ-d7r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="HXV-Eq-RhX">
+                    <connections>
+                        <action selector="tappedOnMap:" destination="Xir-Ac-UEq" id="Yh3-DE-rag"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="123" y="843"/>
         </scene>
