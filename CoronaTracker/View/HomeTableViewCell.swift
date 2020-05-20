@@ -85,15 +85,14 @@ class HomeTableViewCell: UITableViewCell {
               recovered = Int(country.recoveries)
               
         self.name = name ?? ""
-    }
-    
-    func setupLabels(){
+        
         totalLabel.text = "\(total)"
           recoveredLabel.text = "\(recovered)"
           deathsLabel.text = "\(deaths)"
           activeLabel.text = "\(active)"
     }
-
+    
+ 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         let i = calculatePercentages()

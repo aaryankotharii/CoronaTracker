@@ -51,15 +51,6 @@ class MapViewController: UIViewController {
     
     //MARK:-  ----------    ADD PIN FUNCTIONS   ----------
     
-    //MARK: Add annotation to mapView
-    func AddAnnotationToMap(_ fromCoordinate: CLLocationCoordinate2D){
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = fromCoordinate
-        mapView.addAnnotation(annotation)
-    }
-    
-
-    
     
     //MARK: get pin from annotation
     func fetchPin(_ coordinate: CLLocationCoordinate2D) -> Country?{
@@ -101,8 +92,8 @@ extension MapViewController : MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay.isKind(of: MKCircle.self){
         let circleRenderer = MKCircleRenderer(overlay: overlay)
-            circleRenderer.fillColor = UIColor.blue.withAlphaComponent(0.1)
-            circleRenderer.strokeColor = UIColor.blue
+            circleRenderer.fillColor = #colorLiteral(red: 0.8, green: 0.4078431373, blue: 0.4901960784, alpha: 1).withAlphaComponent(0.35)
+            circleRenderer.strokeColor = #colorLiteral(red: 0.8, green: 0.4078431373, blue: 0.4901960784, alpha: 1)
         circleRenderer.lineWidth = 1
         return circleRenderer
     }
@@ -121,7 +112,7 @@ extension MapViewController : NSFetchedResultsControllerDelegate {
         fetchedResultsController.delegate = self
         do{
             try fetchedResultsController.performFetch()
-        } catch{
+        }catch{
             fatalError(error.localizedDescription)
         }
     }
@@ -134,7 +125,8 @@ extension MapViewController : NSFetchedResultsControllerDelegate {
         
         switch type {
         case .insert:
-            AddAnnotationToMap(point.coordinate)
+            print("insert")
+            //AddAnnotationToMap(point.coordinate)
         case .delete:
             print("Pin Delete successful")
         default:

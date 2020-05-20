@@ -183,7 +183,7 @@ func fetchCountry(_ name : String)-> Country?{
     }
     return nil
 }
-
+    
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
@@ -198,30 +198,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         
         cell.country = country
         
-        
         cell.setupCell()
-//        let name = country.name
-//
-//        let emoji = convertToEmoji(str: country.countrycode ?? "") //TODO add default code
-//
-//        let date = country.date ?? Date()
-//
-//        cell.timeLabel.text = date.homeCellDate
-//
-//
-//        cell.countryNameLabel.text = "\(emoji) \(name ?? "")"
-//
-//
-//        cell.total = Int(country.total)
-//        cell.deaths = Int(country.deaths)
-//        cell.recovered = Int(country.recoveries)
-//
-//        cell.name = name ?? ""
-        
-        cell.setupLabels()
         
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
