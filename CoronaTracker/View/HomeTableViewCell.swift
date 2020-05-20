@@ -22,6 +22,8 @@ class HomeTableViewCell: UITableViewCell {
     
     @IBOutlet var timeLabel: UILabel!
     
+    var country : Country!
+    
     
     var height : Double {
         return Double(graphView.frame.height)
@@ -63,6 +65,26 @@ class HomeTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    func setupCell(){
+        let name = country.name
+              
+        let emoji = convertToEmoji(str: country.countrycode ?? "") //TODO add default code
+              
+              let date = country.date ?? Date()
+              
+              timeLabel.text = date.homeCellDate
+              
+              
+              countryNameLabel.text = "\(emoji) \(name ?? "")"
+              
+              
+              total = Int(country.total)
+              deaths = Int(country.deaths)
+              recovered = Int(country.recoveries)
+              
+        self.name = name ?? ""
     }
     
     func setupLabels(){

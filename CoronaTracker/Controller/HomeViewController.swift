@@ -196,23 +196,27 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         
         let country = fetchedResultsController.object(at: indexPath)
         
-        let name = country.name
-        
-        let emoji = convertToEmoji(str: country.countrycode ?? "") //TODO add default code
-        
-        let date = country.date ?? Date()
-        
-        cell.timeLabel.text = date.homeCellDate
+        cell.country = country
         
         
-        cell.countryNameLabel.text = "\(emoji) \(name ?? "")"
-        
-        
-        cell.total = Int(country.total)
-        cell.deaths = Int(country.deaths)
-        cell.recovered = Int(country.recoveries)
-        
-        cell.name = name ?? ""
+        cell.setupCell()
+//        let name = country.name
+//
+//        let emoji = convertToEmoji(str: country.countrycode ?? "") //TODO add default code
+//
+//        let date = country.date ?? Date()
+//
+//        cell.timeLabel.text = date.homeCellDate
+//
+//
+//        cell.countryNameLabel.text = "\(emoji) \(name ?? "")"
+//
+//
+//        cell.total = Int(country.total)
+//        cell.deaths = Int(country.deaths)
+//        cell.recovered = Int(country.recoveries)
+//
+//        cell.name = name ?? ""
         
         cell.setupLabels()
         
@@ -223,9 +227,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)    /// Deselect Row
         
-                
-
-
         
         // Check to see which table view cell was selected.
         if tableView === self.tableView {
@@ -243,15 +244,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         performSegue(withIdentifier: "countryData", sender: nil)
-
-        
-        // Set up the detail view controller to push.
-      //  let detailViewController = DetailViewController.detailViewControllerForProduct(selectedProduct)
-      //  navigationController?.pushViewController(detailViewController, animated: true)
-
-        tableView.deselectRow(at: indexPath, animated: false)
-
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -309,40 +301,7 @@ extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate, U
     func updateSearchResults(for searchController: UISearchController) {
         updateSearchResults(for: searchController.searchBar)
     }
-    
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        // Add your search logic here
-//        var predicate: NSPredicate? = nil
-//
-//        fetchedResultsController = nil
-//        if searchBar.text?.count != 0 {
-//            predicate = NSPredicate(format: "name contains[c] %@", searchBar.text!)
-//            let sort = NSSortDescriptor(key: "name", ascending: true)
-//            setupFetchedResultsController(sort: sort, predicate: predicate)
-//            tableView.reloadData()
-//        }
-//
-//    }
-//
-//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//        let sort = NSSortDescriptor(key: "name", ascending: true)
-//        setupFetchedResultsController(sort: sort)
-//        tableView.reloadData()
-//    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-        updateSearchResults(for: searchBar)
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-      //  searchBar.resignFirstResponder()
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        updateSearchResults(for: searchBar)
-    }
-    
+
     func updateSearchResults(for searchbar: UISearchBar) {
         if let text = searchbar.text{
             if text.count > 0 {
@@ -359,15 +318,13 @@ extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate, U
                 fatalError(error.localizedDescription)
             }
         let filteredResults = fetchedResultsController.fetchedObjects
-        print(filteredResults)
         if let resultsController = searchController.searchResultsController as? ResultsTableViewController {
             resultsController.filteredProducts = filteredResults!
             resultsController.tableView.reloadData()
 
-            //resultsController.resultsLabel.text = resultsController.filteredProducts.isEmpty ?
-              //  NSLocalizedString("NoItemsFoundTitle", comment: "") :
-                //String(format: NSLocalizedString("Items found: %ld", comment: ""),
-                  //resultsController.filteredProducts.count)
+            resultsController.filteredProducts.isEmpty ? print("EMpty") : print("NOT EMPTY")
+            //TODO add empty label
+
         }
     }
         }
