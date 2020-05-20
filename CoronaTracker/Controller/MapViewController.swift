@@ -73,7 +73,7 @@ class MapViewController: UIViewController {
         case _ where numberOfCases > 1500000:
             return 1200000
         case  _ where numberOfCases > 150000:
-            numberOfCases * 2
+           return numberOfCases * 2
         default:
             return numberOfCases*4
         }
