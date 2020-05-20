@@ -10,6 +10,7 @@
 		5B4EA29724746B3700811D4C /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4EA29624746B3700811D4C /* SwiftUIView.swift */; };
 		5B4EA2992474DF7100811D4C /* SF-Pro-Rounded-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5B4EA2982474DF7100811D4C /* SF-Pro-Rounded-Medium.otf */; };
 		5B4EA29C2474E3DB00811D4C /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4EA29B2474E3DB00811D4C /* Date+Formatter.swift */; };
+		5B4EA29E2474ECC500811D4C /* CLLocation+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4EA29D2474ECC500811D4C /* CLLocation+Equatable.swift */; };
 		5B7E6AF12472D52E00023650 /* CountryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E6AF02472D52E00023650 /* CountryDetailView.swift */; };
 		5B7E6B062473062500023650 /* CountryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E6B052473062500023650 /* CountryData.swift */; };
 		5B7E6B102473B1C700023650 /* IndicatorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E6B082473B1C700023650 /* IndicatorPoint.swift */; };
@@ -45,6 +46,7 @@
 		5B4EA29624746B3700811D4C /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		5B4EA2982474DF7100811D4C /* SF-Pro-Rounded-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Medium.otf"; sourceTree = "<group>"; };
 		5B4EA29B2474E3DB00811D4C /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
+		5B4EA29D2474ECC500811D4C /* CLLocation+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocation+Equatable.swift"; sourceTree = "<group>"; };
 		5B7E6AF02472D52E00023650 /* CountryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailView.swift; sourceTree = "<group>"; };
 		5B7E6B052473062500023650 /* CountryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryData.swift; sourceTree = "<group>"; };
 		5B7E6B082473B1C700023650 /* IndicatorPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorPoint.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		5BCCA7E82471606100EE6C2B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5B4EA29D2474ECC500811D4C /* CLLocation+Equatable.swift */,
 				5BB131042471889A00110DBA /* Flag->Emoji.swift */,
 				5BE302C524745EB300FDF1A7 /* Country+Location+Constant.swift */,
 				5B4EA29B2474E3DB00811D4C /* Date+Formatter.swift */,
@@ -271,6 +274,7 @@
 				5B7E6B102473B1C700023650 /* IndicatorPoint.swift in Sources */,
 				5B7E6B132473B1C700023650 /* LineChartView.swift in Sources */,
 				5BCCA7D22471168300EE6C2B /* CoronaTracker.xcdatamodeld in Sources */,
+				5B4EA29E2474ECC500811D4C /* CLLocation+Equatable.swift in Sources */,
 				5BCCA7CC2471168300EE6C2B /* ViewController.swift in Sources */,
 				5B7E6B062473062500023650 /* CountryData.swift in Sources */,
 				5B7E6B122473B1C700023650 /* Legend.swift in Sources */,

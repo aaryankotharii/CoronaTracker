@@ -52,7 +52,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-       // tableView.tableHeaderView = search.searchBar
         self.tableView.tableHeaderView = search.searchBar
     }
     
