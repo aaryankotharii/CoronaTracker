@@ -20,6 +20,7 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet var deathsLabel: UILabel!
     @IBOutlet var activeLabel: UILabel!
     
+    @IBOutlet var timeLabel: UILabel!
     
     
     var height : Double {

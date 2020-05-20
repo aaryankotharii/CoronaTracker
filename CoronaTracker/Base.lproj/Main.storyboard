@@ -10,6 +10,9 @@
         <array key="SF-Pro-Rounded-Bold.otf">
             <string>SFProRounded-Bold</string>
         </array>
+        <array key="SF-Pro-Rounded-Medium.otf">
+            <string>SFProRounded-Medium</string>
+        </array>
         <array key="SF-Pro-Rounded-Semibold.otf">
             <string>SFProRounded-Semibold</string>
         </array>
@@ -61,7 +64,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ijC-2i-ALS">
-                                                    <rect key="frame" x="314" y="55" width="80" height="90"/>
+                                                    <rect key="frame" x="318.5" y="60" width="75.5" height="85"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="ijC-2i-ALS" secondAttribute="height" multiplier="8:9" id="tGB-o1-21q"/>
@@ -206,18 +209,26 @@
                                                         <constraint firstItem="iUf-xH-5YH" firstAttribute="height" secondItem="brY-ck-aPp" secondAttribute="height" multiplier="0.5" id="skF-nP-csV"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apr. 05 1:34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qe9-LV-dT6">
+                                                    <rect key="frame" x="337" y="27" width="69" height="16"/>
+                                                    <fontDescription key="fontDescription" name="SFProRounded-Medium" family="SF Pro Rounded" pointSize="13"/>
+                                                    <color key="textColor" red="0.73725490196078436" green="0.73725490196078436" blue="0.75294117647058822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="ijC-2i-ALS" firstAttribute="height" secondItem="qgI-Cc-zRK" secondAttribute="height" multiplier="0.529412" id="61j-eu-YVQ"/>
+                                                <constraint firstItem="ijC-2i-ALS" firstAttribute="height" secondItem="qgI-Cc-zRK" secondAttribute="height" multiplier="0.5" id="61j-eu-YVQ"/>
                                                 <constraint firstAttribute="trailing" secondItem="ijC-2i-ALS" secondAttribute="trailing" constant="20" id="BfD-R2-RT2"/>
                                                 <constraint firstItem="brY-ck-aPp" firstAttribute="height" secondItem="qgI-Cc-zRK" secondAttribute="height" multiplier="0.470588" id="HRZ-C7-jEx"/>
                                                 <constraint firstAttribute="bottom" secondItem="brY-ck-aPp" secondAttribute="bottom" constant="20" id="IfA-U9-8uG"/>
                                                 <constraint firstItem="g5s-WN-wdi" firstAttribute="leading" secondItem="qgI-Cc-zRK" secondAttribute="leading" constant="35" id="Kvv-UE-A6y"/>
                                                 <constraint firstAttribute="bottom" secondItem="ijC-2i-ALS" secondAttribute="bottom" constant="25" id="Mix-12-Sl8"/>
                                                 <constraint firstItem="U5k-Kc-IH8" firstAttribute="leading" secondItem="qgI-Cc-zRK" secondAttribute="leading" constant="20" id="W2H-pn-cFu"/>
+                                                <constraint firstItem="Qe9-LV-dT6" firstAttribute="centerY" secondItem="U5k-Kc-IH8" secondAttribute="centerY" id="WCB-zb-On0"/>
                                                 <constraint firstItem="ijC-2i-ALS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="U5k-Kc-IH8" secondAttribute="trailing" constant="40" id="WpQ-K4-LdD"/>
                                                 <constraint firstItem="brY-ck-aPp" firstAttribute="leading" secondItem="qgI-Cc-zRK" secondAttribute="leading" priority="400" constant="20" id="cwg-cg-aIC"/>
                                                 <constraint firstItem="U5k-Kc-IH8" firstAttribute="top" secondItem="qgI-Cc-zRK" secondAttribute="top" constant="20" id="fd3-Ub-YHY"/>
+                                                <constraint firstAttribute="trailing" secondItem="Qe9-LV-dT6" secondAttribute="trailing" constant="8" id="neo-3y-Wce"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -226,6 +237,7 @@
                                             <outlet property="deathsLabel" destination="WEf-jW-TGN" id="7pu-0p-o82"/>
                                             <outlet property="graphView" destination="ijC-2i-ALS" id="0dA-YO-WUB"/>
                                             <outlet property="recoveredLabel" destination="8To-cV-HT5" id="4YR-jq-Hmh"/>
+                                            <outlet property="timeLabel" destination="Qe9-LV-dT6" id="23h-Q8-qOJ"/>
                                             <outlet property="totalLabel" destination="OTR-dB-hcR" id="OJ3-gG-znF"/>
                                         </connections>
                                     </tableViewCell>

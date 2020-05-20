@@ -84,6 +84,8 @@ class HomeViewController: UIViewController {
         print(error!.localizedDescription,"errr",error.debugDescription)
     }
         }
+    
+
 
              
 
@@ -99,6 +101,11 @@ func addCountry(_ country: Countries){
     countryToSave.newtotal = Int32(country.NewConfirmed)
     countryToSave.newdeaths = Int32(country.NewDeaths)
     countryToSave.newrecoveries = Int32(country.NewRecovered)
+    
+    let coord = fetchCoord(country.CountryCode)
+    countryToSave.lat = coord.first ?? 0
+    countryToSave.long = coord.last ?? 0
+    
     do{
         try moc.save()
     } catch {
@@ -122,6 +129,12 @@ func addCountry(_ country: Countries){
         let countryStruct = Countries(Country: name!, CountryCode: countrycode!, Slug: slug, NewConfirmed: newtotal, TotalConfirmed: total, NewDeaths: newdeaths, TotalDeaths: deaths, NewRecovered: newrecoveries, TotalRecovered: recoveries, Date: "\(String(describing: date))")
         
         return countryStruct
+    }
+    
+    func fetchCoord(_ code : String) -> [Double]{
+        let countryCode = code.lowercased()
+        let coord = countryCoord.filter { $0.key == countryCode}
+        return coord.first?.value ?? [0.0]
     }
 
 func updateCountry(_ country: Countries){
@@ -163,7 +176,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         
         let emoji = convertToEmoji(str: country.countrycode ?? "") //TODO add default code
         
+        let date = country.date ?? Date()
+        
+        cell.timeLabel.text = date.homeCellDate
+        
+        
         cell.countryNameLabel.text = "\(emoji) \(name ?? "")"
+        
         
         cell.total = Int(country.total)
         cell.deaths = Int(country.deaths)
@@ -178,6 +197,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)    /// Deselect Row
+        
         let cell = tableView.cellForRow(at: indexPath) as! HomeTableViewCell
         let country = fetchCountry(cell.name ?? "india")
         
