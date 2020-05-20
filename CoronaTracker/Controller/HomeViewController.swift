@@ -223,14 +223,35 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)    /// Deselect Row
         
-        let cell = tableView.cellForRow(at: indexPath) as! HomeTableViewCell
-        let country = fetchCountry(cell.name ?? "india")
-        
-        let worldData = objectToStruct(country!)
-        
-        self.rootView = CountryDetailView(worldData: worldData, hello: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
+                
 
+
+        
+        // Check to see which table view cell was selected.
+        if tableView === self.tableView {
+            let cell = tableView.cellForRow(at: indexPath) as! HomeTableViewCell
+            let country = fetchCountry(cell.name ?? "india")
+            let worldData = objectToStruct(country!)
+            
+            self.rootView = CountryDetailView(worldData: worldData, hello: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
+        } else {
+            let cell = resultsTableController.tableView.cellForRow(at: indexPath) as! HomeTableViewCell
+            let country = fetchCountry(cell.name ?? "india")
+            let worldData = objectToStruct(country!)
+            
+            self.rootView = CountryDetailView(worldData: worldData, hello: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
+        }
+        
         performSegue(withIdentifier: "countryData", sender: nil)
+
+        
+        // Set up the detail view controller to push.
+      //  let detailViewController = DetailViewController.detailViewControllerForProduct(selectedProduct)
+      //  navigationController?.pushViewController(detailViewController, animated: true)
+
+        tableView.deselectRow(at: indexPath, animated: false)
+
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
