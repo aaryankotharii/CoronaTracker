@@ -149,6 +149,7 @@ class HomeViewController: UIViewController {
                 for country in summary.Countries{
                     addCountry(country)
             }
+            addGlobal(summary.Global)
         } else {
         return
     
@@ -196,7 +197,13 @@ func addCountry(_ country: Countries){
     }
 }
     func addGlobal(_ global : GlobalData){
-        let global = Global(context: moc)
+        let globalToSave = Global(context: moc)
+        globalToSave.newconfirmed = Int32(global.NewConfirmed)
+        globalToSave.newdeaths = Int32(global.NewDeaths)
+        globalToSave.newrecovered = Int32(global.NewRecovered)
+        globalToSave.totaldeaths = Int32(global.TotalDeaths)
+        globalToSave.totalconfirmed = Int32(global.TotalConfirmed)
+        globalToSave.totalrecovered = Int32(global.TotalRecovered)
     }
     
     func objectToStruct(_ country : Country)->Countries{
