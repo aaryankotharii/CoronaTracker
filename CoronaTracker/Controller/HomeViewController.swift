@@ -74,6 +74,9 @@ class HomeViewController: UIViewController {
         return UIHostingController(coder: coder, rootView: rootView)
     }
     
+    @IBAction func reloadClicked(_ sender: Any) {
+        CoronaClient.getSummary(completion: handleUpdate(summary:error:))
+    }
     
     func handleDownload(summary:Summary? ,error:Error?){
         if let summary = summary {
