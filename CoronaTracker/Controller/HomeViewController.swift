@@ -100,13 +100,13 @@ class HomeViewController: UIViewController {
             case .death:
                 return "Deaths"
             case .name(state: let state):
-                return state ? "Name (A - Z)" : "Name (Z - A)"
+                return state ? "Name (Z - A)" : "Name (A - Z)"
             case .recovered:
                 return "Recovered "
             case .total:
                 return  "Total"
             case .state(let state):
-                return state ? "Highest First" : "Lowest First"
+                return state ? "Lowest First" : "Highest First"
             }
         }
     }
