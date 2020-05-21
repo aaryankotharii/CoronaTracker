@@ -64,6 +64,10 @@ class CoronaClient {
                     completion(nil, error)
             }
         }
+        let observation = task.progress.observe(\.fractionCompleted) { progress, _ in
+          print(progress.fractionCompleted)
+        }
+        
         task.resume()
     }
     

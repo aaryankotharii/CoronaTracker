@@ -30,6 +30,8 @@ class HomeViewController: UIViewController {
     /// Search results table view.
     private var resultsTableController: ResultsTableViewController!
     
+    var sort =  NSSortDescriptor(key: "name", ascending: true)
+    
     var search = UISearchController(searchResultsController: nil)
     
     var rootView = CountryDetailView(hello: "lol")
@@ -88,43 +90,46 @@ class HomeViewController: UIViewController {
     
     enum SortType{
         case name(state : Bool)
-        case death(state : Bool)
-        case recovered(state : Bool)
-        case total(state : Bool)
+        case death
+        case recovered
+        case total
+        case state(state : Bool)
         
         var stringValue : String {
             switch self {
-            case .death(let state):
-                return state ? "Deaths (lowest first)" : "Deaths (highest first)"
+            case .death:
+                return "Deaths"
             case .name(state: let state):
-                return state ? "Name (A - Z)" : "Deaths (Z - A)"
-            case .recovered(state: let state):
-                return state ? "Recovered (lowest first)" : "Deaths (highest first)"
-            case .total(state: let state):
-                return state ? "Total (lowest first)" : "Deaths (highest first)"
+                return state ? "Name (A - Z)" : "Name (Z - A)"
+            case .recovered:
+                return "Recovered "
+            case .total:
+                return  "Total"
+            case .state(let state):
+                return state ? "Highest First" : "Lowest First"
             }
         }
     }
     
     func presentAlert(_ state : Bool){
-        let alert = UIAlertController(title: "Sort", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Sort", message: SortType.state(state: state).stringValue, preferredStyle: .actionSheet)
         let nameSort = UIAlertAction(title: SortType.name(state: state).stringValue, style: .default) { (action) in
-             let sort = NSSortDescriptor(key: "name", ascending: state)
-            self.setupFetchedResultsController(sort: sort)
+            self.sort = NSSortDescriptor(key: "name", ascending: state)
+            self.setupFetchedResultsController(sort: self.sort)
         }
-        let totalSort = UIAlertAction(title: SortType.total(state: state).stringValue, style: .default) { (action) in
-                 let sort = NSSortDescriptor(key: "total", ascending: state)
-            self.setupFetchedResultsController(sort: sort)
+        let totalSort = UIAlertAction(title: SortType.total.stringValue, style: .default) { (action) in
+            self.sort = NSSortDescriptor(key: "total", ascending: state)
+            self.setupFetchedResultsController(sort: self.sort)
             }
             
-        let deathSort = UIAlertAction(title: SortType.death(state: state).stringValue, style: .default) { (action) in
-                 let sort = NSSortDescriptor(key: "deaths", ascending: state)
-            self.setupFetchedResultsController(sort: sort)
+        let deathSort = UIAlertAction(title: SortType.death.stringValue, style: .default) { (action) in
+            self.sort = NSSortDescriptor(key: "deaths", ascending: state)
+            self.setupFetchedResultsController(sort: self.sort)
             }
             
-        let recovered = UIAlertAction(title: SortType.recovered(state: state).stringValue, style: .default) { (action) in
-                 let sort = NSSortDescriptor(key: "recoveries", ascending: state)
-            self.setupFetchedResultsController(sort: sort)
+        let recovered = UIAlertAction(title: SortType.recovered.stringValue, style: .default) { (action) in
+            self.sort = NSSortDescriptor(key: "recoveries", ascending: state)
+            self.setupFetchedResultsController(sort: self.sort)
             }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
         }
@@ -334,9 +339,7 @@ extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate, U
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         print("cancel")
-        
-              let sort = NSSortDescriptor(key: "name", ascending: true)
-              setupFetchedResultsController(sort: sort)    /// Setup fetchedResultsController
+        setupFetchedResultsController(sort: sort)    /// Setup fetchedResultsController
     }
 
     func updateSearchResults(for searchbar: UISearchBar) {

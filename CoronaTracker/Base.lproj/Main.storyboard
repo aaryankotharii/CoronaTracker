@@ -231,6 +231,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="Qe9-LV-dT6" secondAttribute="trailing" constant="8" id="neo-3y-Wce"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <connections>
                                             <outlet property="activeLabel" destination="ZYt-ei-MQ9" id="5Bf-sJ-HBV"/>
                                             <outlet property="countryNameLabel" destination="U5k-Kc-IH8" id="2Tu-ce-f26"/>
@@ -289,7 +290,7 @@
                             </barButtonItem>
                             <barButtonItem style="plain" id="zu7-dp-Tnp">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KXh-Ad-w6o">
-                                    <rect key="frame" x="334" y="11" width="30" height="22"/>
+                                    <rect key="frame" x="296" y="11" width="30" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="arrowtriangle.down.square" catalog="system"/>
                                     <connections>
