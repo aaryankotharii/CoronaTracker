@@ -10,11 +10,11 @@ import Foundation
 
 
 struct Summary : Codable{
-    var Global : Global
+    var Global : GlobalData
     var Countries : [Countries]
 }
 
-struct Global: Codable {
+struct GlobalData: Codable {
     var NewConfirmed : Int
     var  TotalConfirmed: Int
     var NewDeaths : Int

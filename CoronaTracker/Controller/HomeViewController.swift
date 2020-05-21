@@ -195,6 +195,9 @@ func addCountry(_ country: Countries){
         print(error.localizedDescription)
     }
 }
+    func addGlobal(_ global : GlobalData){
+        let global = Global(context: moc)
+    }
     
     func objectToStruct(_ country : Country)->Countries{
         let slug = country.slug!
