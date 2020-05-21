@@ -69,7 +69,8 @@ class MapViewController: UIViewController {
     }
     
     func setupDataView(_ country : Country){
-        countryNameLabel.text = country.name
+        let emoji = convertToEmoji(str: country.countrycode ?? "IN")
+        countryNameLabel.text = emoji + " " + country.name!
         newCasesLabel.text = "\(country.newtotal)"
         newRecoveredLabel.text = "\(country.newrecoveries)"
         newDeathsLabel.text = "\(country.newdeaths)"
@@ -81,6 +82,7 @@ class MapViewController: UIViewController {
     }
     
     
+    //TODO new active total active
     //TODO kCLErrorDomain 2
     
     @IBAction func tappedOnMap(_ sender: UITapGestureRecognizer) {
@@ -92,7 +94,7 @@ class MapViewController: UIViewController {
             if let code = code {
                 let country = self.fetchCountryObject(code)
                 self.setupDataView(country!)
-                self.dataView.isHidden  = false
+                self.presentDataView()
                 self.mapView.isUserInteractionEnabled = false
             }
         }
@@ -101,6 +103,18 @@ class MapViewController: UIViewController {
     @IBAction func tappedOnDataView(_ sender: UITapGestureRecognizer) {
         dataView.isHidden = true
         self.mapView.isUserInteractionEnabled = true
+    }
+    
+    func presentDataView(){
+        self.dataView.isHidden  = false
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+        animation.fromValue = 0
+        animation.toValue = 1
+        animation.duration = 0.4
+        animation.timingFunction=CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeOut)
+        animation.autoreverses = false
+        animation.repeatCount = 1
+        dataView.layer.add(animation, forKey:"abcd")
     }
     
     

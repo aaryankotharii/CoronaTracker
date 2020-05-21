@@ -47,16 +47,6 @@ class HomeViewController: UIViewController {
         searchController.searchBar.autocapitalizationType = .none
         
         searchController.searchBar.delegate = self
-        //searchController.dimsBackgroundDuringPresentation = false
-         
-         //search = UISearchController(searchResultsController: searchResultsController)
-        
-       // self.navigationItem.searchController = search
-
-       // search.delegate = self
-        //search.searchBar.delegate = self
-        
-       // search.obscuresBackgroundDuringPresentation = false
                         
         super.viewDidLoad()
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
@@ -234,12 +224,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
 extension HomeViewController : NSFetchedResultsControllerDelegate {
     
     //MARK:- Set FetchedResultsViewController
-    func setupFetchedResultsController(sort : NSSortDescriptor,predicate:NSPredicate? = nil) {
+    func setupFetchedResultsController(sort : NSSortDescriptor) {
         let fetchRequest : NSFetchRequest<Country> = Country.fetchRequest()
         fetchRequest.sortDescriptors = [sort]
-        if let predicate = predicate {
-         fetchRequest.predicate = predicate
-        }
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
         do{
@@ -279,6 +266,13 @@ extension HomeViewController : NSFetchedResultsControllerDelegate {
 extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         updateSearchResults(for: searchController.searchBar)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("cancel")
+        
+              let sort = NSSortDescriptor(key: "name", ascending: true)
+              setupFetchedResultsController(sort: sort)    /// Setup fetchedResultsController
     }
 
     func updateSearchResults(for searchbar: UISearchBar) {
