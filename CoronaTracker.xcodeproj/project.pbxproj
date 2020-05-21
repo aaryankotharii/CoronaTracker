@@ -25,6 +25,10 @@
 		5B7E6B1B2473DA2E00023650 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E6B1A2473DA2E00023650 /* MapViewController.swift */; };
 		5BB0FA7724757BC10043A94D /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0FA7624757BC10043A94D /* ResultsTableViewController.swift */; };
 		5BB0FA792476BC640043A94D /* GlobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0FA782476BC640043A94D /* GlobeView.swift */; };
+		5BB0FA7F2476C3A70043A94D /* BarChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0FA7B2476C3A70043A94D /* BarChartCell.swift */; };
+		5BB0FA802476C3A70043A94D /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0FA7C2476C3A70043A94D /* BarChartView.swift */; };
+		5BB0FA812476C3A70043A94D /* LabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0FA7D2476C3A70043A94D /* LabelView.swift */; };
+		5BB0FA822476C3A70043A94D /* BarChartRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0FA7E2476C3A70043A94D /* BarChartRow.swift */; };
 		5BB131052471889A00110DBA /* Flag->Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB131042471889A00110DBA /* Flag->Emoji.swift */; };
 		5BB131082471A82100110DBA /* SF-Pro-Rounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB131072471A82100110DBA /* SF-Pro-Rounded-Bold.otf */; };
 		5BB1310A2471B24300110DBA /* SF-Pro-Rounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB131092471B24300110DBA /* SF-Pro-Rounded-Semibold.otf */; };
@@ -63,6 +67,10 @@
 		5B7E6B1A2473DA2E00023650 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5BB0FA7624757BC10043A94D /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
 		5BB0FA782476BC640043A94D /* GlobeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobeView.swift; sourceTree = "<group>"; };
+		5BB0FA7B2476C3A70043A94D /* BarChartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartCell.swift; sourceTree = "<group>"; };
+		5BB0FA7C2476C3A70043A94D /* BarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
+		5BB0FA7D2476C3A70043A94D /* LabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelView.swift; sourceTree = "<group>"; };
+		5BB0FA7E2476C3A70043A94D /* BarChartRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartRow.swift; sourceTree = "<group>"; };
 		5BB131042471889A00110DBA /* Flag->Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Flag->Emoji.swift"; sourceTree = "<group>"; };
 		5BB131072471A82100110DBA /* SF-Pro-Rounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Bold.otf"; sourceTree = "<group>"; };
 		5BB131092471B24300110DBA /* SF-Pro-Rounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Semibold.otf"; sourceTree = "<group>"; };
@@ -109,6 +117,17 @@
 				5B7E6B0F2473B1C700023650 /* Line.swift */,
 			);
 			path = LineChart;
+			sourceTree = "<group>";
+		};
+		5BB0FA7A2476C3980043A94D /* BarChart */ = {
+			isa = PBXGroup;
+			children = (
+				5BB0FA7B2476C3A70043A94D /* BarChartCell.swift */,
+				5BB0FA7E2476C3A70043A94D /* BarChartRow.swift */,
+				5BB0FA7C2476C3A70043A94D /* BarChartView.swift */,
+				5BB0FA7D2476C3A70043A94D /* LabelView.swift */,
+			);
+			path = BarChart;
 			sourceTree = "<group>";
 		};
 		5BB131062471A81500110DBA /* Fonts */ = {
@@ -181,6 +200,7 @@
 		5BCCA7E0247138A500EE6C2B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5BB0FA7A2476C3980043A94D /* BarChart */,
 				5B7E6B072473B1C700023650 /* LineChart */,
 				5BE091F12471707F00751057 /* HomeViewController.swift */,
 				5B7E6AF02472D52E00023650 /* CountryDetailView.swift */,
@@ -277,10 +297,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B7E6AF12472D52E00023650 /* CountryDetailView.swift in Sources */,
+				5BB0FA822476C3A70043A94D /* BarChartRow.swift in Sources */,
 				5B7E6B102473B1C700023650 /* IndicatorPoint.swift in Sources */,
 				5B7E6B132473B1C700023650 /* LineChartView.swift in Sources */,
 				5BCCA7D22471168300EE6C2B /* CoronaTracker.xcdatamodeld in Sources */,
 				5B4EA29E2474ECC500811D4C /* CLLocation+Equatable.swift in Sources */,
+				5BB0FA812476C3A70043A94D /* LabelView.swift in Sources */,
+				5BB0FA802476C3A70043A94D /* BarChartView.swift in Sources */,
 				5BCCA7CC2471168300EE6C2B /* ViewController.swift in Sources */,
 				5B7E6B062473062500023650 /* CountryData.swift in Sources */,
 				5B7E6B122473B1C700023650 /* Legend.swift in Sources */,
@@ -292,6 +315,7 @@
 				5BCCA7C82471168300EE6C2B /* AppDelegate.swift in Sources */,
 				5BB131052471889A00110DBA /* Flag->Emoji.swift in Sources */,
 				5BE091F22471707F00751057 /* HomeViewController.swift in Sources */,
+				5BB0FA7F2476C3A70043A94D /* BarChartCell.swift in Sources */,
 				5BB1310C2471C63000110DBA /* DataController.swift in Sources */,
 				5BE302C624745EB300FDF1A7 /* Country+Location+Constant.swift in Sources */,
 				5BCCA7E2247138D800EE6C2B /* CoronaClient.swift in Sources */,
