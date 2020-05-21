@@ -78,6 +78,67 @@ class HomeViewController: UIViewController {
         CoronaClient.getSummary(completion: handleUpdate(summary:error:))
     }
     
+    @IBAction func sortClicked(_ sender: UIButton) {
+        if sender.tag == 0{
+            presentAlert(false)
+        } else {
+            presentAlert(true)
+        }
+    }
+    
+    enum SortType{
+        case name(state : Bool)
+        case death(state : Bool)
+        case recovered(state : Bool)
+        case total(state : Bool)
+        
+        var stringValue : String {
+            switch self {
+            case .death(let state):
+                return state ? "Deaths (lowest first)" : "Deaths (highest first)"
+            case .name(state: let state):
+                return state ? "Name (A - Z)" : "Deaths (Z - A)"
+            case .recovered(state: let state):
+                return state ? "Recovered (lowest first)" : "Deaths (highest first)"
+            case .total(state: let state):
+                return state ? "Total (lowest first)" : "Deaths (highest first)"
+            }
+        }
+    }
+    
+    func presentAlert(_ state : Bool){
+        let alert = UIAlertController(title: "Sort", message: nil, preferredStyle: .actionSheet)
+        let nameSort = UIAlertAction(title: SortType.name(state: state).stringValue, style: .default) { (action) in
+             let sort = NSSortDescriptor(key: "name", ascending: state)
+            self.setupFetchedResultsController(sort: sort)
+        }
+        let totalSort = UIAlertAction(title: SortType.total(state: state).stringValue, style: .default) { (action) in
+                 let sort = NSSortDescriptor(key: "total", ascending: state)
+            self.setupFetchedResultsController(sort: sort)
+            }
+            
+        let deathSort = UIAlertAction(title: SortType.death(state: state).stringValue, style: .default) { (action) in
+                 let sort = NSSortDescriptor(key: "deaths", ascending: state)
+            self.setupFetchedResultsController(sort: sort)
+            }
+            
+        let recovered = UIAlertAction(title: SortType.recovered(state: state).stringValue, style: .default) { (action) in
+                 let sort = NSSortDescriptor(key: "recoveries", ascending: state)
+            self.setupFetchedResultsController(sort: sort)
+            }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+        }
+        
+        alert.addAction(nameSort)
+        alert.addAction(totalSort)
+        alert.addAction(deathSort)
+        alert.addAction(recovered)
+        alert.addAction(cancel)
+        
+        self.present(alert, animated :true)
+    }
+    
+    
     func handleDownload(summary:Summary? ,error:Error?){
         if let summary = summary {
                 for country in summary.Countries{

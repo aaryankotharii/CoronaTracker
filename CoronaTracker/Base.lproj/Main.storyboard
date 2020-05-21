@@ -278,10 +278,23 @@
                                 </button>
                             </barButtonItem>
                             <barButtonItem style="plain" id="0B5-uH-Hcr">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Sqr-Up-WIb">
+                                <button key="customView" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Sqr-Up-WIb">
+                                    <rect key="frame" x="334" y="11" width="30" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="arrowtriangle.up.square" catalog="system"/>
+                                    <connections>
+                                        <action selector="sortClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uqJ-1X-47e"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                            <barButtonItem style="plain" id="zu7-dp-Tnp">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KXh-Ad-w6o">
                                     <rect key="frame" x="334" y="11" width="30" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="arrowtriangle.down.square" catalog="system"/>
+                                    <connections>
+                                        <action selector="sortClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M8e-di-ZL3"/>
+                                    </connections>
                                 </button>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -1367,6 +1380,7 @@
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="arrow.counterclockwise.icloud" catalog="system" width="128" height="88"/>
         <image name="arrowtriangle.down.square" catalog="system" width="128" height="114"/>
+        <image name="arrowtriangle.up.square" catalog="system" width="128" height="114"/>
         <image name="bolt" width="13" height="22"/>
         <image name="coffin" width="18" height="27"/>
         <image name="cross" width="23" height="23"/>
