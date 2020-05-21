@@ -10,9 +10,29 @@ import UIKit
 import MapKit
 import CoreData
 
+
+
 class MapViewController: UIViewController {
     
     @IBOutlet var mapView: MKMapView!
+    
+    
+    
+    @IBOutlet var dataView: UIView!
+    
+    
+    
+    @IBOutlet var countryNameLabel: UILabel!
+    @IBOutlet var newCasesLabel: UILabel!
+    @IBOutlet var newRecoveredLabel: UILabel!
+    @IBOutlet var newDeathsLabel: UILabel!
+    @IBOutlet var newActiveLabel: UILabel!
+    @IBOutlet var totalCasesLabel: UILabel!
+    @IBOutlet var totalRecoveredLabel: UILabel!
+    @IBOutlet var totalDeathsLabel: UILabel!
+    @IBOutlet var totalActiveLabel: UILabel!
+    
+    
     
     var moc : NSManagedObjectContext!
     
@@ -32,22 +52,91 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         mapView.delegate = self
+
+        dataView.isHidden = true
+        setupDetailViewUI()
     }
     
+    func setupDetailViewUI(){
+        dataView.alpha = 0.86
+        dataView.layer.applySketchShadow(color: #colorLiteral(red: 0.7215686275, green: 0.8784313725, blue: 0.9490196078, alpha: 1), alpha: 1.0, x: 0, y: 0, blur: 10, spread: 10)
+        dataView.layer.cornerRadius = 22
+        dataView.layer.shadowColor = #colorLiteral(red: 0.7215686275, green: 0.8784313725, blue: 0.9490196078, alpha: 1).cgColor
+        dataView.layer.shadowOpacity = 1.0
+        dataView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        dataView.layer.shadowRadius = 5
+        dataView.layer.shadowPath  = UIBezierPath(roundedRect: dataView.bounds, cornerRadius: 22).cgPath
+    }
+    
+    func setupDataView(_ country : Country){
+        countryNameLabel.text = country.name
+        newCasesLabel.text = "\(country.newtotal)"
+        newRecoveredLabel.text = "\(country.newrecoveries)"
+        newDeathsLabel.text = "\(country.newdeaths)"
+        newActiveLabel.text = "active new"
+        totalCasesLabel.text = "\(country.total)"
+        totalRecoveredLabel.text = "\(country.recoveries)"
+        totalDeathsLabel.text = "\(country.deaths)"
+        totalActiveLabel.text = "total active"
+    }
+    
+    
+    //TODO kCLErrorDomain 2
     
     @IBAction func tappedOnMap(_ sender: UITapGestureRecognizer) {
         let tapLocation = sender.location(in: mapView)
-            let coordinate = self.mapView.convert(tapLocation, toCoordinateFrom: self.mapView)
+        let coordinate = self.mapView.convert(tapLocation, toCoordinateFrom: self.mapView)
         print(coordinate)
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        fetchChountry(location) { code in
+            if let code = code {
+                let country = self.fetchCountryObject(code)
+                self.setupDataView(country!)
+                self.dataView.isHidden  = false
+                self.mapView.isUserInteractionEnabled = false
+            }
+        }
+    }
+    
+    @IBAction func tappedOnDataView(_ sender: UITapGestureRecognizer) {
+        dataView.isHidden = true
+        self.mapView.isUserInteractionEnabled = true
+    }
+    
+    
+    
+    func fetchCountryObject(_ code : String)-> Country?{
+        if let countries = fetchedResultsController.fetchedObjects{
+            let country = countries.filter{ $0.countrycode == code}
+            return country.first!
+        }
+        return nil
+    }
+    
+    
+    func fetchChountry(_ coordinate : CLLocation, completion: @escaping (String?)->()){
+        CLGeocoder().reverseGeocodeLocation(coordinate) { (placemarks, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil)
+                return
+            }
+            if let placemarks = placemarks{
+                let placemark = placemarks.first
+                if let country = placemark?.isoCountryCode{
+                    completion(country)
+                }
+            }
+        }
     }
     
     func addOverlay(radius:CLLocationDistance,coord:CLLocationCoordinate2D){
-                let center = coord
+        let center = coord
         let circle = MKCircle(center: center, radius: radius)
-                mapView.addOverlay(circle)
-            }
+        mapView.addOverlay(circle)
+    }
     
-
+    
     
     //MARK:-  ----------    ADD PIN FUNCTIONS   ----------
     
@@ -64,13 +153,13 @@ class MapViewController: UIViewController {
     func calculateRadius(_ numberOfCases : Int)->Int{
         switch numberOfCases {
         case _ where numberOfCases < 1000:
-                   return 30000
+            return 30000
         case _ where numberOfCases < 20000:
             return 80000
         case _ where numberOfCases > 1500000:
             return 1200000
         case  _ where numberOfCases > 150000:
-           return numberOfCases * 2
+            return numberOfCases * 2
         default:
             return numberOfCases*4
         }
@@ -78,25 +167,25 @@ class MapViewController: UIViewController {
     
     // ADD Annotations from coredata pins
     func loadMap(){
-            if let points = fetchedResultsController.fetchedObjects{
-                for point in points {
-                    let coordinate = point.coordinate
-                    let radius = calculateRadius(Int(point.total))
-                    addOverlay(radius: CLLocationDistance(radius), coord: coordinate)
-                }
+        if let points = fetchedResultsController.fetchedObjects{
+            for point in points {
+                let coordinate = point.coordinate
+                let radius = calculateRadius(Int(point.total))
+                addOverlay(radius: CLLocationDistance(radius), coord: coordinate)
             }
+        }
     }
 }
 
 extension MapViewController : MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay.isKind(of: MKCircle.self){
-        let circleRenderer = MKCircleRenderer(overlay: overlay)
+            let circleRenderer = MKCircleRenderer(overlay: overlay)
             circleRenderer.fillColor = #colorLiteral(red: 0.8, green: 0.4078431373, blue: 0.4901960784, alpha: 1).withAlphaComponent(0.35)
             circleRenderer.strokeColor = #colorLiteral(red: 0.8, green: 0.4078431373, blue: 0.4901960784, alpha: 1)
-        circleRenderer.lineWidth = 1
-        return circleRenderer
-    }
+            circleRenderer.lineWidth = 1
+            return circleRenderer
+        }
         return MKOverlayRenderer(overlay: overlay)
     }
 }
@@ -126,7 +215,7 @@ extension MapViewController : NSFetchedResultsControllerDelegate {
         switch type {
         case .insert:
             print("insert")
-            //AddAnnotationToMap(point.coordinate)
+        //AddAnnotationToMap(point.coordinate)
         case .delete:
             print("Pin Delete successful")
         default:
@@ -144,3 +233,15 @@ extension Country: MKAnnotation {
     }
 }
 
+extension CALayer {
+    func applySketchShadow(
+        color: UIColor = .black,
+        alpha: Float = 0.5,
+        x: CGFloat = 0,
+        y: CGFloat = 2,
+        blur: CGFloat = 4,
+        spread: CGFloat = 0)
+    {
+        
+    }
+}
