@@ -42,13 +42,13 @@ class MapViewController: UIViewController {
         /// Core Data Setup
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         moc = appDelegate.persistentContainer.viewContext
-        
-        
         setupFetchedResultsController()
+        
+        /// Map Setup
+        mapView.delegate = self
         loadMap()
         
-        mapView.delegate = self
-
+        /// DataView Setup
         dataView.isHidden = true
         setupDetailViewUI()
     }
@@ -125,8 +125,10 @@ class MapViewController: UIViewController {
     func fetchChountry(_ coordinate : CLLocation, completion: @escaping (String?)->()){
         CLGeocoder().reverseGeocodeLocation(coordinate) { (placemarks, error) in
             if let error = error{
+                if error.localizedDescription == "The operation couldn’t be completed. (kCLErrorDomain error 2.)" {
+                    self.networkErrorAlert(title: "Internet required to show country data")
+                }
                 completion(nil)
-                //print(error.kcE)
                 return
             }
             if let placemarks = placemarks{

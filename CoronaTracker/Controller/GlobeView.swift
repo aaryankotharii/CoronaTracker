@@ -176,10 +176,11 @@ struct countrycase: Hashable {
     var cases : Int
 }
 
-
-
-
-
+struct GlobeView_Previews: PreviewProvider {
+    static var previews: some View {
+        GlobeView(country: Country(), cases: [])
+    }
+}
 
 extension Int32 {
     var stringValue : String{

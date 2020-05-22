@@ -36,7 +36,7 @@ class HomeViewController: UIViewController {
     var countryRootView = CountryDetailView()
     
     let cellIdentifier = "cell"
-    let heightForCell = 170
+    let heightForCell : CGFloat = 170
     
     //MARK:- ACTIVITY INDICATOR
     lazy var refreshControl: UIRefreshControl = {
@@ -134,6 +134,9 @@ class HomeViewController: UIViewController {
             }
             addGlobal(summary.Global)
         } else {
+            if error!.localizedDescription == "The Internet connection appears to be offline."{
+                self.networkErrorAlert(title: "Internet required to download data")
+            }
             return
                 print(error!.localizedDescription,"errr",error.debugDescription)
         }
@@ -148,6 +151,9 @@ class HomeViewController: UIViewController {
             }
             if refreshControl.isRefreshing { refreshControl.endRefreshing() }   /// STOP REFRESH IF ACTIVE
         } else {
+            if error!.localizedDescription == "The Internet connection appears to be offline."{
+                self.networkErrorAlert(title: "Internet required to update data")
+            }
             print(error!.localizedDescription,"errr",error.debugDescription)
             return
         }
