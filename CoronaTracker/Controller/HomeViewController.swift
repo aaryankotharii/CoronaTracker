@@ -288,13 +288,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
             let country = fetchCountry(cell.name ?? "india")
             let worldData = objectToStruct(country!)
             
-            self.countryRootView = CountryDetailView(worldData: worldData, hello: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
+            self.countryRootView = CountryDetailView(worldData: worldData, countryName: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
         } else {
             let cell = resultsTableController.tableView.cellForRow(at: indexPath) as! HomeTableViewCell
             let country = fetchCountry(cell.name ?? "india")
             let worldData = objectToStruct(country!)
             
-            self.countryRootView = CountryDetailView(worldData: worldData, hello: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
+            self.countryRootView = CountryDetailView(worldData: worldData, countryName: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
         }
         
         DispatchQueue.main.async {

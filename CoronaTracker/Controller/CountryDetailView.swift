@@ -11,8 +11,7 @@ import SwiftUI
 struct CountryDetailView: View {
     @ObservedObject var country = CurrentCountryData()
     var worldData : Countries!
-   // var countryTotalData = CountryStruct()
-    var hello : String = "India"
+    var countryName : String = "India"
     var slug : String = "india"
     
     var state = ["Confirmed","Recovered","Deaths","Active"]
@@ -25,9 +24,9 @@ struct CountryDetailView: View {
         VStack{
             VStack{
                 Picker(selection: $index, label: Text("What is your favorite color?")) {
-                    Image("virus").resizable().tag(0)
-                    Image("cross").resizable().tag(1)
-                    Image("coffin").resizable().tag(2)
+                    Image("virus-1").resizable().tag(0)
+                    Image("cross-1").resizable().tag(1)
+                    Image("coffin-1").resizable().tag(2)
                     Image("bolt").resizable().tag(3)
                 }.pickerStyle(SegmentedPickerStyle())
                     .padding()
@@ -36,16 +35,15 @@ struct CountryDetailView: View {
             }
             }
             
-            LineView(data: country.dailyNew ?? [], title: "", legend: "Daily New Cases").padding()
+            LineView(data: country.dailyNew ?? [], title: "Daily New Cases", legend: "Daily New Cases").padding()
         }.onAppear(perform: fetch)
-        }.navigationBarTitle(Text(hello), displayMode: .large).minimumScaleFactor(0.5)
+        }.navigationBarTitle(Text(countryName), displayMode: .large).minimumScaleFactor(0.5)
     }
     
     private  func fetch(){
         print("fetching")
         self.country.fetch(slug)
         }
-
 }
 
 struct CountryCases: View {
