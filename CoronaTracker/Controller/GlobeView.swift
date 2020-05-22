@@ -105,7 +105,12 @@ struct GlobeView: View {
         var count : String
         var body : some View{
                 VStack(alignment:.center){
-                    Image(cases[image]).frame(width: 100, height: 100, alignment: .center).aspectRatio(contentMode: .fit)
+                    VStack{
+                    Image(cases[image])
+                        .resizable()
+                        .frame(width: 50, height: 50, alignment: .center)
+                        .aspectRatio(contentMode: .fit)
+                    }.frame(width: 100, height: 100, alignment: .center)
                     Text(title).font(.system(size: 15, weight: .bold, design: .rounded))
                 Text(count)
                 }.aspectRatio(1.0, contentMode: .fit)
