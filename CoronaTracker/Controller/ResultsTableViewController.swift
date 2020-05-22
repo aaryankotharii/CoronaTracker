@@ -8,6 +8,8 @@
 
 import UIKit
 
+//MARK:- RESULTS TABLE VIEW ( USED UNDER SEARCH CONTROLLER )
+
 class ResultsTableViewController: UITableViewController {
     
     let tableViewCellIdentifier = "cell2"
@@ -28,7 +30,7 @@ class ResultsTableViewController: UITableViewController {
         cell.country = country
         
         cell.setupCell()
-        
+    
         return cell
         
     }

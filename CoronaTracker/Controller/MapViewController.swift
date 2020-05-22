@@ -76,9 +76,7 @@ class MapViewController: UIViewController {
         let totalActive = country.total - country.recoveries - country.deaths
         totalActiveLabel.text = "\(totalActive)"
     }
-    
-    //TODO kCLErrorDomain 2
-    
+        
     @IBAction func tappedOnMap(_ sender: UITapGestureRecognizer) {
         let tapLocation = sender.location(in: mapView)
         let coordinate = self.mapView.convert(tapLocation, toCoordinateFrom: self.mapView)
@@ -112,7 +110,6 @@ class MapViewController: UIViewController {
     }
     
     
-    
     func fetchCountryObject(_ code : String)-> Country?{
         if let countries = fetchedResultsController.fetchedObjects{
             let country = countries.filter{ $0.countrycode == code}
@@ -140,16 +137,12 @@ class MapViewController: UIViewController {
         }
     }
     
+    /// ADD overlay to map
     func addOverlay(radius:CLLocationDistance,coord:CLLocationCoordinate2D){
         let center = coord
         let circle = MKCircle(center: center, radius: radius)
         mapView.addOverlay(circle)
     }
-    
-    
-    
-    //MARK:-  ----------    ADD PIN FUNCTIONS   ----------
-    
     
     //MARK: get pin from annotation
     func fetchPin(_ coordinate: CLLocationCoordinate2D) -> Country?{
@@ -160,6 +153,7 @@ class MapViewController: UIViewController {
         return nil
     }
     
+    /// Calculates appropriate radius of circular overlays
     func calculateRadius(_ numberOfCases : Int)->Int{
         switch numberOfCases {
         case _ where numberOfCases < 1000:
@@ -187,6 +181,8 @@ class MapViewController: UIViewController {
     }
 }
 
+
+//MARK:- MapView Delegate  Methods
 extension MapViewController : MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay.isKind(of: MKCircle.self){
@@ -213,23 +209,6 @@ extension MapViewController : NSFetchedResultsControllerDelegate {
             try fetchedResultsController.performFetch()
         }catch{
             fatalError(error.localizedDescription)
-        }
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        
-        guard let point = anObject as? Country else {
-            preconditionFailure("All changes observed in the map view controller should be for Point instances")
-        }
-        
-        switch type {
-        case .insert:
-            print("insert")
-        //AddAnnotationToMap(point.coordinate)
-        case .delete:
-            print("Pin Delete successful")
-        default:
-            break
         }
     }
 }

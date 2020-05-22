@@ -123,7 +123,7 @@ class HomeViewController: UIViewController {
         resultsTableController.filteredProducts  = fetchedResultsController.fetchedObjects!
         tableView.addSubview(refreshControl)
     }
-
+    
     
     func handleDownload(summary:Summary? ,error:Error?){
         countrycases.removeAll()
@@ -136,9 +136,10 @@ class HomeViewController: UIViewController {
         } else {
             if error!.localizedDescription == "The Internet connection appears to be offline."{
                 self.networkErrorAlert(title: "Internet required to download data")
+                if refreshControl.isRefreshing { refreshControl.endRefreshing() }
             }
             return
-                print(error!.localizedDescription,"errr",error.debugDescription)
+                print(error!.localizedDescription,"error",error.debugDescription)
         }
     }
     
@@ -153,8 +154,9 @@ class HomeViewController: UIViewController {
         } else {
             if error!.localizedDescription == "The Internet connection appears to be offline."{
                 self.networkErrorAlert(title: "Internet required to update data")
+                if refreshControl.isRefreshing { refreshControl.endRefreshing() }
             }
-            print(error!.localizedDescription,"errr",error.debugDescription)
+            print(error!.localizedDescription,"error",error.debugDescription)
             return
         }
     }

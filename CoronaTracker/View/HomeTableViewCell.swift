@@ -70,7 +70,7 @@ class HomeTableViewCell: UITableViewCell {
     func setupCell(){
         let name = country.name
               
-        let emoji = convertToEmoji(str: country.countrycode ?? "") //TODO add default code
+        let emoji = convertToEmoji(str: country.countrycode ?? "us") 
               
               let date = country.date ?? Date()
               

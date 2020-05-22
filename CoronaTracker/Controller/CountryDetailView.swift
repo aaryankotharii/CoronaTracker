@@ -18,20 +18,17 @@ struct CountryDetailView: View {
     var state = ["Confirmed","Recovered","Deaths","Active"]
     
     @State var index = 0
-    
-    
             
     var body: some View {
         
         NavigationView {
-Spacer()
         VStack{
             VStack{
                 Picker(selection: $index, label: Text("What is your favorite color?")) {
-                   Image("virus").tag(0)
-                    Image("cross").tag(1)
-                    Image("coffin").tag(2)
-                    Image("bolt").tag(3)
+                    Image("virus").resizable().tag(0)
+                    Image("cross").resizable().tag(1)
+                    Image("coffin").resizable().tag(2)
+                    Image("bolt").resizable().tag(3)
                 }.pickerStyle(SegmentedPickerStyle())
                     .padding()
             HStack{
@@ -40,7 +37,6 @@ Spacer()
             }
             
             LineView(data: country.dailyNew ?? [], title: "", legend: "Daily New Cases").padding()
-            Spacer()
         }.onAppear(perform: fetch)
         }.navigationBarTitle(Text(hello), displayMode: .large).minimumScaleFactor(0.5)
     }
