@@ -81,7 +81,8 @@ class HomeViewController: UIViewController {
     }
     
     @IBSegueAction func goToGlobalData(_ coder: NSCoder) -> UIViewController? {
-        let globalRootView = GlobeView(cases: countrycases)
+        let country = fetchCountry("Algeria")
+        let globalRootView = GlobeView(country: country!, cases: [])
         return UIHostingController(coder: coder, rootView: globalRootView .environment(\.managedObjectContext, self.moc))
     }
     @IBAction func reloadClicked(_ sender: Any) {
