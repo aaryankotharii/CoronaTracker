@@ -74,11 +74,12 @@ class MapViewController: UIViewController {
         newCasesLabel.text = "\(country.newtotal)"
         newRecoveredLabel.text = "\(country.newrecoveries)"
         newDeathsLabel.text = "\(country.newdeaths)"
-        newActiveLabel.text = "active new"
+        newActiveLabel.text = "-"
         totalCasesLabel.text = "\(country.total)"
         totalRecoveredLabel.text = "\(country.recoveries)"
         totalDeathsLabel.text = "\(country.deaths)"
-        totalActiveLabel.text = "total active"
+        let totalActive = country.total - country.recoveries - country.deaths
+        totalActiveLabel.text = "\(totalActive)"
     }
     
     

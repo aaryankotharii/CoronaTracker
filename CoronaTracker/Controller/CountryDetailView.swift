@@ -17,21 +17,36 @@ struct CountryDetailView: View {
         
     var hello : String = "India"
     var slug : String = "india"
+    
+    var state = ["Confirmed","Recovered","Deaths","Active"]
+    
+    @State var index = 0
+    
+    
             
     var body: some View {
         
         NavigationView {
-
+Spacer()
         VStack{
             //CountryCases(country: worldData, name: hello)
-            
+            VStack{
+                Picker(selection: $index, label: Text("What is your favorite color?")) {
+                   Image("virus").tag(0)
+                    Image("cross").tag(1)
+                    Image("coffin").tag(2)
+                    Image("bolt").tag(3)
+                }.pickerStyle(SegmentedPickerStyle())
+                    .padding()
             HStack{
-            LineChartView(data: country.confirmed ?? [], title: "")
-
+                    LineChartView(data: country.allData?[index] ?? [], title: state[index])
+                
             MultiLineChartView(data: [(country.current?.active ?? [], GradientColors.green), (country.current?.deaths ?? [], GradientColors.purple), (country.current?.recovered ?? [], GradientColors.orngPink)], title: "Title",legend: "Full screen")
+            }
             }
             
             LineView(data: country.dailyNew ?? [], title: "", legend: "Daily New Cases").padding()
+            Spacer()
         }.onAppear(perform: fetch)
         }.navigationBarTitle(Text(hello), displayMode: .large).minimumScaleFactor(0.5)
     }

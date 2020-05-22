@@ -19,6 +19,8 @@ final class CurrentCountryData: ObservableObject {
     
     
     @Published var dailyNew : [Double]?
+    
+    @Published var allData : [[Double]]?
 
     
     init(){
@@ -46,6 +48,8 @@ extension CurrentCountryData{
             self.dead = deathArray
             self.Recovered = recoveredArray
             self.confirmed = confirmedArray
+            
+            self.allData = [confirmedArray,recoveredArray,deathArray,activeArray]
 
             var arrayToReturn = confirmedArray
                 if arrayToReturn.count >= 0{

@@ -18,6 +18,7 @@ struct GlobeView: View {
     var body: some View {
             VStack{
                 Text("Global Stats")
+                Text((global.first?.totalconfirmed)!.stringValue)
                 chart(cases: cases)
             }.background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.7294117647, green: 0.8784313725, blue: 0.9098039216, alpha: 1)),Color(#colorLiteral(red: 0.4549019608, green: 0.7647058824, blue: 0.8235294118, alpha: 1))]), startPoint: .top, endPoint: .bottom)).edgesIgnoringSafeArea(.bottom).onAppear {
                 print(self.global)
