@@ -309,6 +309,7 @@
                         <outlet property="globeButton" destination="hIB-HM-Syr" id="Aa9-b2-Kpt"/>
                         <outlet property="tableView" destination="Pob-XS-YcB" id="zWG-wX-RJW"/>
                         <segue destination="c92-Mc-VGc" kind="show" identifier="countryData" destinationCreationSelector="goToCountryData:" id="yRZ-tt-XfE"/>
+                        <segue destination="d0a-41-bph" kind="presentation" identifier="onboarding" id="eQ9-Xm-hBP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -328,13 +329,13 @@
         <!--View Controller-->
         <scene sceneID="NVn-yd-Sty">
             <objects>
-                <viewController id="d0a-41-bph" customClass="ViewController" customModule="CoronaTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="pageSheet" id="d0a-41-bph" customClass="ViewController" customModule="CoronaTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nea-aU-Amn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PhV-wF-s2u">
-                                <rect key="frame" x="33" y="788" width="348" height="58"/>
+                                <rect key="frame" x="33" y="734" width="348" height="58"/>
                                 <color key="backgroundColor" red="0.91615206000000005" green="0.33354511860000002" blue="0.41475248339999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="PhV-wF-s2u" secondAttribute="height" multiplier="6" id="HHz-Sc-YqQ"/>
@@ -344,37 +345,188 @@
                                     <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <color key="titleShadowColor" red="0.99607843139999996" green="0.14901960780000001" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AVt-gx-kve">
-                                <rect key="frame" x="144" y="42" width="117.5" height="41"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AVt-gx-kve">
+                                <rect key="frame" x="93.5" y="50" width="227.5" height="86.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBt-9m-HOw">
-                                        <rect key="frame" x="0.0" y="0.0" width="117.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome To" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zBt-9m-HOw">
+                                        <rect key="frame" x="0.0" y="0.0" width="227.5" height="48"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Corona Tracker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofZ-zD-MrB">
-                                        <rect key="frame" x="0.0" y="20.5" width="117.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Corona Tracker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ofZ-zD-MrB">
+                                        <rect key="frame" x="0.0" y="48" width="227.5" height="38.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                        <color key="textColor" red="0.91764705882352937" green="0.33333333333333331" blue="0.41568627450980389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A Covid-19 Tracker displaying realtime data both countrywise and globally. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oob-MQ-1xj">
+                                <rect key="frame" x="40" y="186.5" width="334" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ser-dD-bqb">
+                                <rect key="frame" x="35" y="267.5" width="344" height="260"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="Dj6-kt-DHB">
+                                        <rect key="frame" x="0.0" y="0.0" width="344" height="260"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="RrD-mC-ZMM">
+                                                <rect key="frame" x="0.0" y="0.0" width="306" height="60"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="globe" translatesAutoresizingMaskIntoConstraints="NO" id="gcH-Ph-ZQ9">
+                                                        <rect key="frame" x="0.0" y="0.0" width="42" height="60"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="42" id="BNO-2U-VNm"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get global statistics of Covid-19." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Me9-CB-Sf2">
+                                                        <rect key="frame" x="57" y="0.0" width="249" height="60"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" id="s3o-8e-yGd">
+                                                <rect key="frame" x="0.0" y="100" width="332" height="60"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="xdz-nR-UfD">
+                                                        <rect key="frame" x="0.0" y="0.0" width="42" height="60"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="42" id="Hec-cE-253"/>
+                                                            <constraint firstAttribute="height" constant="60" id="McC-Ep-jmO"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap any country on the map to get stats." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zng-iV-avr">
+                                                        <rect key="frame" x="57" y="0.0" width="275" height="60"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <viewLayoutGuide key="safeArea" id="o9u-Vg-nPL"/>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" id="0Ar-Q0-dxa">
+                                                <rect key="frame" x="0.0" y="200" width="339" height="60"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list" translatesAutoresizingMaskIntoConstraints="NO" id="ii1-vZ-ixd">
+                                                        <rect key="frame" x="0.0" y="0.0" width="42" height="60"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="KNN-o5-CEW"/>
+                                                            <constraint firstAttribute="width" constant="42" id="Tdg-hw-X9i"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get countrywise stats along with graphical representation." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kHR-Ln-Jbs">
+                                                        <rect key="frame" x="57" y="0.0" width="282" height="60"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <viewLayoutGuide key="safeArea" id="rld-4X-Evm"/>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Dj6-kt-DHB" secondAttribute="trailing" id="O0L-U3-V1P"/>
+                                    <constraint firstItem="Dj6-kt-DHB" firstAttribute="leading" secondItem="Ser-dD-bqb" secondAttribute="leading" id="Zzt-l4-no2"/>
+                                    <constraint firstAttribute="bottom" secondItem="Dj6-kt-DHB" secondAttribute="bottom" id="bsz-03-Iif"/>
+                                    <constraint firstItem="Dj6-kt-DHB" firstAttribute="top" secondItem="Ser-dD-bqb" secondAttribute="top" id="vz7-N2-sF0"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEV-jN-7qQ">
+                                <rect key="frame" x="35" y="562.5" width="344" height="136.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Glossary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ZA-EW-0mT">
+                                        <rect key="frame" x="10" y="10" width="85" height="25.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Pn4-wk-jp4">
+                                        <rect key="frame" x="10" y="45.5" width="234" height="142"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbe-w4-JQ9">
+                                                <rect key="frame" x="0.0" y="0.0" width="234" height="28"/>
+                                                <state key="normal" title="     Confirmed " image="virus">
+                                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0n7-T0-hi8">
+                                                <rect key="frame" x="0.0" y="38" width="234" height="28"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="     Recovered" image="cross">
+                                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vNs-qE-mbh">
+                                                <rect key="frame" x="0.0" y="76" width="234" height="28"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="     Deaths" image="coffin">
+                                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Cuh-y5-A3H">
+                                                <rect key="frame" x="0.0" y="114" width="234" height="28"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="     Active" image="bolt">
+                                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Pn4-wk-jp4" secondAttribute="trailing" constant="100" id="00Q-k1-Fgb"/>
+                                    <constraint firstItem="Pn4-wk-jp4" firstAttribute="top" secondItem="9ZA-EW-0mT" secondAttribute="bottom" constant="10" id="2qM-uM-Kkx"/>
+                                    <constraint firstItem="Pn4-wk-jp4" firstAttribute="leading" secondItem="jEV-jN-7qQ" secondAttribute="leading" constant="10" id="C8Z-S8-4sG"/>
+                                    <constraint firstItem="9ZA-EW-0mT" firstAttribute="leading" secondItem="jEV-jN-7qQ" secondAttribute="leading" constant="10" id="UYU-8I-McW"/>
+                                    <constraint firstItem="9ZA-EW-0mT" firstAttribute="top" secondItem="jEV-jN-7qQ" secondAttribute="top" constant="10" id="gup-MV-l8f"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="oob-MQ-1xj" secondAttribute="trailing" constant="40" id="7PZ-W0-Ehp"/>
+                            <constraint firstItem="AVt-gx-kve" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="crQ-CK-Tpa" secondAttribute="leading" constant="30" id="BBD-iD-q9S"/>
+                            <constraint firstItem="Ser-dD-bqb" firstAttribute="top" secondItem="oob-MQ-1xj" secondAttribute="bottom" constant="45" id="D3T-kl-d1k"/>
+                            <constraint firstItem="crQ-CK-Tpa" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AVt-gx-kve" secondAttribute="trailing" constant="30" id="DCb-k4-HlH"/>
+                            <constraint firstItem="crQ-CK-Tpa" firstAttribute="trailing" secondItem="Ser-dD-bqb" secondAttribute="trailing" constant="35" id="EHi-Dc-JIl"/>
                             <constraint firstItem="crQ-CK-Tpa" firstAttribute="trailing" secondItem="PhV-wF-s2u" secondAttribute="trailing" constant="33" id="MYQ-QY-fJv"/>
+                            <constraint firstItem="oob-MQ-1xj" firstAttribute="centerX" secondItem="nea-aU-Amn" secondAttribute="centerX" id="OcK-cn-reK"/>
+                            <constraint firstItem="crQ-CK-Tpa" firstAttribute="trailing" secondItem="jEV-jN-7qQ" secondAttribute="trailing" constant="35" id="PlU-6r-mSo"/>
+                            <constraint firstItem="AVt-gx-kve" firstAttribute="top" secondItem="nea-aU-Amn" secondAttribute="top" constant="50" id="QlP-a4-5mx"/>
+                            <constraint firstItem="oob-MQ-1xj" firstAttribute="leading" secondItem="crQ-CK-Tpa" secondAttribute="leading" constant="40" id="V1W-Lk-y1R"/>
                             <constraint firstItem="PhV-wF-s2u" firstAttribute="leading" secondItem="crQ-CK-Tpa" secondAttribute="leading" constant="33" id="a9M-5K-YuA"/>
                             <constraint firstAttribute="bottom" secondItem="PhV-wF-s2u" secondAttribute="bottom" constant="50" id="cbp-BT-ar9"/>
+                            <constraint firstItem="jEV-jN-7qQ" firstAttribute="top" secondItem="Ser-dD-bqb" secondAttribute="bottom" constant="35" id="fdI-3l-r8d"/>
+                            <constraint firstItem="jEV-jN-7qQ" firstAttribute="leading" secondItem="crQ-CK-Tpa" secondAttribute="leading" constant="35" id="hih-Gi-Z4Q"/>
+                            <constraint firstItem="AVt-gx-kve" firstAttribute="centerX" secondItem="nea-aU-Amn" secondAttribute="centerX" id="ibX-lx-kdB"/>
+                            <constraint firstItem="PhV-wF-s2u" firstAttribute="top" secondItem="jEV-jN-7qQ" secondAttribute="bottom" constant="35" id="iki-df-nlR"/>
+                            <constraint firstItem="oob-MQ-1xj" firstAttribute="top" secondItem="AVt-gx-kve" secondAttribute="bottom" constant="50" id="n50-ZH-P8R"/>
+                            <constraint firstItem="Ser-dD-bqb" firstAttribute="leading" secondItem="crQ-CK-Tpa" secondAttribute="leading" constant="35" id="nhx-eE-Rbr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="crQ-CK-Tpa"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wfG-OT-FWK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-562" y="-655"/>
+            <point key="canvasLocation" x="-562.31884057971024" y="-655.58035714285711"/>
         </scene>
         <!--LOL-->
         <scene sceneID="P8N-Mz-RVY">
@@ -427,7 +579,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x8U-ob-k6o">
                                 <rect key="frame" x="64" y="256" width="286" height="384"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvp-FN-OWo">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Gvp-FN-OWo">
                                         <rect key="frame" x="93.5" y="12" width="99.5" height="48"/>
                                         <fontDescription key="fontDescription" name="SFProRounded-Bold" family="SF Pro Rounded" pointSize="40"/>
                                         <nil key="textColor"/>
@@ -1412,7 +1564,10 @@
         <image name="coffin" width="18" height="27"/>
         <image name="cross" width="23" height="23"/>
         <image name="globe" catalog="system" width="128" height="121"/>
+        <image name="globe" width="146" height="146"/>
+        <image name="list" width="148" height="145"/>
         <image name="list.dash" catalog="system" width="128" height="85"/>
+        <image name="map" width="98" height="95"/>
         <image name="map" catalog="system" width="128" height="113"/>
         <image name="virus" width="24" height="23"/>
     </resources>
