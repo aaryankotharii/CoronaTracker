@@ -14,14 +14,9 @@ import CoreData
 
 class MapViewController: UIViewController {
     
+    //MARK: - Outlets
     @IBOutlet var mapView: MKMapView!
-    
-    
-    
     @IBOutlet var dataView: UIView!
-    
-    
-    
     @IBOutlet var countryNameLabel: UILabel!
     @IBOutlet var newCasesLabel: UILabel!
     @IBOutlet var newRecoveredLabel: UILabel!
@@ -33,23 +28,24 @@ class MapViewController: UIViewController {
     @IBOutlet var totalActiveLabel: UILabel!
     
     
-    
+    /// Manages Object Context  to save data to Database
     var moc : NSManagedObjectContext!
     
     /// Fetched Results controller to fetch data from Database
     var fetchedResultsController : NSFetchedResultsController<Country>!
     
-    
     //MARK: View Lifecycle
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         
+        /// Core Data Setup
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         moc = appDelegate.persistentContainer.viewContext
         
+        
         setupFetchedResultsController()
         loadMap()
-        super.viewDidLoad()
         
         mapView.delegate = self
 
@@ -59,7 +55,6 @@ class MapViewController: UIViewController {
     
     func setupDetailViewUI(){
         dataView.alpha = 0.86
-        dataView.layer.applySketchShadow(color: #colorLiteral(red: 0.7215686275, green: 0.8784313725, blue: 0.9490196078, alpha: 1), alpha: 1.0, x: 0, y: 0, blur: 10, spread: 10)
         dataView.layer.cornerRadius = 22
         dataView.layer.shadowColor = #colorLiteral(red: 0.7215686275, green: 0.8784313725, blue: 0.9490196078, alpha: 1).cgColor
         dataView.layer.shadowOpacity = 1.0
@@ -82,8 +77,6 @@ class MapViewController: UIViewController {
         totalActiveLabel.text = "\(totalActive)"
     }
     
-    
-    //TODO new active total active
     //TODO kCLErrorDomain 2
     
     @IBAction func tappedOnMap(_ sender: UITapGestureRecognizer) {
@@ -131,9 +124,9 @@ class MapViewController: UIViewController {
     
     func fetchChountry(_ coordinate : CLLocation, completion: @escaping (String?)->()){
         CLGeocoder().reverseGeocodeLocation(coordinate) { (placemarks, error) in
-            if let error = error {
-                print(error.localizedDescription)
+            if let error = error{
                 completion(nil)
+                //print(error.kcE)
                 return
             }
             if let placemarks = placemarks{
@@ -245,18 +238,5 @@ extension Country: MKAnnotation {
         let latDegrees = CLLocationDegrees(lat)
         let longDegrees = CLLocationDegrees(long)
         return CLLocationCoordinate2D(latitude: latDegrees, longitude: longDegrees)
-    }
-}
-
-extension CALayer {
-    func applySketchShadow(
-        color: UIColor = .black,
-        alpha: Float = 0.5,
-        x: CGFloat = 0,
-        y: CGFloat = 2,
-        blur: CGFloat = 4,
-        spread: CGFloat = 0)
-    {
-        
     }
 }

@@ -47,7 +47,7 @@ class HomeViewController: UIViewController {
     
     var countryRootView = CountryDetailView(hello: "lol")
     
-    var globalRootView = GlobeView(cases: [])
+    var globalRootView = GlobeView()
     
     override func viewDidLoad() {
         
@@ -89,7 +89,6 @@ class HomeViewController: UIViewController {
     }
     
     @IBSegueAction func goToGlobalData(_ coder: NSCoder) -> UIViewController? {
-        globalRootView = GlobeView(cases: countrycases)
         return UIHostingController(coder: coder, rootView: globalRootView .environment(\.managedObjectContext, self.moc))
     }
     @IBAction func reloadClicked(_ sender: Any) {

@@ -25,6 +25,8 @@
 		5B7E6B1B2473DA2E00023650 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E6B1A2473DA2E00023650 /* MapViewController.swift */; };
 		5BB0FA7724757BC10043A94D /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0FA7624757BC10043A94D /* ResultsTableViewController.swift */; };
 		5BB0FA792476BC640043A94D /* GlobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0FA782476BC640043A94D /* GlobeView.swift */; };
+		5BB0FA942477C6100043A94D /* Network+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0FA932477C6100043A94D /* Network+Alert.swift */; };
+		5BB0FA962477C6840043A94D /* haptic+Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0FA952477C6830043A94D /* haptic+Feedback.swift */; };
 		5BB131052471889A00110DBA /* Flag->Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB131042471889A00110DBA /* Flag->Emoji.swift */; };
 		5BB131082471A82100110DBA /* SF-Pro-Rounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB131072471A82100110DBA /* SF-Pro-Rounded-Bold.otf */; };
 		5BB1310A2471B24300110DBA /* SF-Pro-Rounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB131092471B24300110DBA /* SF-Pro-Rounded-Semibold.otf */; };
@@ -63,6 +65,8 @@
 		5B7E6B1A2473DA2E00023650 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5BB0FA7624757BC10043A94D /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
 		5BB0FA782476BC640043A94D /* GlobeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobeView.swift; sourceTree = "<group>"; };
+		5BB0FA932477C6100043A94D /* Network+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Alert.swift"; sourceTree = "<group>"; };
+		5BB0FA952477C6830043A94D /* haptic+Feedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "haptic+Feedback.swift"; sourceTree = "<group>"; };
 		5BB131042471889A00110DBA /* Flag->Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Flag->Emoji.swift"; sourceTree = "<group>"; };
 		5BB131072471A82100110DBA /* SF-Pro-Rounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Bold.otf"; sourceTree = "<group>"; };
 		5BB131092471B24300110DBA /* SF-Pro-Rounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Semibold.otf"; sourceTree = "<group>"; };
@@ -194,10 +198,12 @@
 		5BCCA7E82471606100EE6C2B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5BB0FA952477C6830043A94D /* haptic+Feedback.swift */,
 				5B4EA29D2474ECC500811D4C /* CLLocation+Equatable.swift */,
 				5BB131042471889A00110DBA /* Flag->Emoji.swift */,
 				5BE302C524745EB300FDF1A7 /* Country+Location+Constant.swift */,
 				5B4EA29B2474E3DB00811D4C /* Date+Formatter.swift */,
+				5BB0FA932477C6100043A94D /* Network+Alert.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -282,6 +288,7 @@
 				5BCCA7D22471168300EE6C2B /* CoronaTracker.xcdatamodeld in Sources */,
 				5B4EA29E2474ECC500811D4C /* CLLocation+Equatable.swift in Sources */,
 				5BCCA7CC2471168300EE6C2B /* ViewController.swift in Sources */,
+				5BB0FA962477C6840043A94D /* haptic+Feedback.swift in Sources */,
 				5B7E6B062473062500023650 /* CountryData.swift in Sources */,
 				5B7E6B122473B1C700023650 /* Legend.swift in Sources */,
 				5BB0FA7724757BC10043A94D /* ResultsTableViewController.swift in Sources */,
@@ -303,6 +310,7 @@
 				5BE091F42471741A00751057 /* HomeTableViewCell.swift in Sources */,
 				5B7E6B142473B1C700023650 /* MagnifierRect.swift in Sources */,
 				5BCCA7CA2471168300EE6C2B /* SceneDelegate.swift in Sources */,
+				5BB0FA942477C6100043A94D /* Network+Alert.swift in Sources */,
 				5B4EA29C2474E3DB00811D4C /* Date+Formatter.swift in Sources */,
 				5BE091F02471695200751057 /* Summary.swift in Sources */,
 			);
