@@ -14,8 +14,14 @@ struct GlobeView: View {
     @FetchRequest(entity: Global.entity(), sortDescriptors: []) var global : FetchedResults<Global>
     @FetchRequest(entity: Country.entity(), sortDescriptors: []) var countries : FetchedResults<Country>
     
+    
+    var cases : [countrycase]
     var body: some View {
             VStack{
+                Text("Global Stats")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(Font.system(size: 44, weight: .bold))
+                    .padding(.top,60)
                 Text("Global Stats")
                 Text((global.first?.totalconfirmed)!.stringValue)
                  ScrollView(.horizontal, showsIndicators: false){
@@ -23,7 +29,7 @@ struct GlobeView: View {
                             ForEach(countries , id:\.self){ (country:Country) in
                                 bar(value: self.calculateHeight(Int(country.total)), emoji: country.countrycode!)
                                        .onTapGesture {
-                                           print("emoji")
+                                        print(country.countrycode)
                                    }
                                }
                            }
@@ -80,9 +86,11 @@ struct bar : View {
 
 
 
+
+
 struct GlobeView_Previews: PreviewProvider {
     static var previews: some View {
-        GlobeView()
+        GlobeView(cases: [countrycase(name: "india", emoji: "hi", cases: 123456)])
     }
 }
 

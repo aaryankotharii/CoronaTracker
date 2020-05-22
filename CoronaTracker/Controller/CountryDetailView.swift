@@ -29,7 +29,6 @@ struct CountryDetailView: View {
         NavigationView {
 Spacer()
         VStack{
-            //CountryCases(country: worldData, name: hello)
             VStack{
                 Picker(selection: $index, label: Text("What is your favorite color?")) {
                    Image("virus").tag(0)

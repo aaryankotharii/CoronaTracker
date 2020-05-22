@@ -37,17 +37,9 @@ class HomeViewController: UIViewController {
     
     var search = UISearchController(searchResultsController: nil)
     
-    var countrycases : [countrycase] = []{
-        didSet{
-            DispatchQueue.main.async {
-                self.globeButton.isEnabled = self.countrycases.count > 100
-            }
-        }
-    }
+    var countrycases : [countrycase] = []
     
     var countryRootView = CountryDetailView(hello: "lol")
-    
-    var globalRootView = GlobeView()
     
     override func viewDidLoad() {
         
@@ -89,6 +81,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBSegueAction func goToGlobalData(_ coder: NSCoder) -> UIViewController? {
+        let globalRootView = GlobeView(cases: countrycases)
         return UIHostingController(coder: coder, rootView: globalRootView .environment(\.managedObjectContext, self.moc))
     }
     @IBAction func reloadClicked(_ sender: Any) {
