@@ -308,8 +308,8 @@
                     <connections>
                         <outlet property="globeButton" destination="hIB-HM-Syr" id="Aa9-b2-Kpt"/>
                         <outlet property="tableView" destination="Pob-XS-YcB" id="zWG-wX-RJW"/>
-                        <segue destination="c92-Mc-VGc" kind="show" identifier="countryData" destinationCreationSelector="goToCountryData:" id="yRZ-tt-XfE"/>
                         <segue destination="d0a-41-bph" kind="presentation" identifier="onboarding" id="eQ9-Xm-hBP"/>
+                        <segue destination="c92-Mc-VGc" kind="show" identifier="countryData" destinationCreationSelector="goToCountryData:" id="OAQ-ys-dB9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -464,37 +464,49 @@
                                         <rect key="frame" x="10" y="45.5" width="324" height="81"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="virus" translatesAutoresizingMaskIntoConstraints="NO" id="msE-RN-UWY">
-                                                <rect key="frame" x="0.0" y="0.0" width="269" height="18"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="40" id="pR2-LH-iMw"/>
+                                                </constraints>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cross" translatesAutoresizingMaskIntoConstraints="NO" id="7F6-Px-3Un">
-                                                <rect key="frame" x="0.0" y="23" width="287" height="17.5"/>
+                                                <rect key="frame" x="0.0" y="23" width="40" height="17.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="40" id="HMW-wJ-ULh"/>
+                                                </constraints>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coffin" translatesAutoresizingMaskIntoConstraints="NO" id="aKh-Vl-Fpq">
-                                                <rect key="frame" x="58.5" y="45.5" width="170" height="18"/>
+                                                <rect key="frame" x="0.0" y="45.5" width="40" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="40" id="Rab-GS-vmP"/>
+                                                </constraints>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bolt" translatesAutoresizingMaskIntoConstraints="NO" id="HHD-3M-PDp">
-                                                <rect key="frame" x="137" y="68.5" width="13" height="18"/>
+                                                <rect key="frame" x="13.5" y="68.5" width="13" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="40" id="Ks3-8a-v3z"/>
+                                                </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iR3-2R-bgt">
-                                                <rect key="frame" x="279" y="0.0" width="72.5" height="18"/>
+                                                <rect key="frame" x="50" y="0.0" width="72.5" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deaths" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Dd7-s4-CoZ">
-                                                <rect key="frame" x="279" y="45.5" width="49" height="18"/>
+                                                <rect key="frame" x="50" y="45.5" width="49" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Active" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HRq-6I-PZ8">
-                                                <rect key="frame" x="279" y="68.5" width="42.5" height="18"/>
+                                                <rect key="frame" x="50" y="68.5" width="42.5" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recovered" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sPu-Kg-SAX">
-                                                <rect key="frame" x="279" y="22.5" width="73" height="18"/>
+                                                <rect key="frame" x="50" y="22.5" width="73" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1608,8 +1620,8 @@
         <image name="bolt" width="13" height="22"/>
         <image name="coffin" width="170" height="265"/>
         <image name="cross" width="287" height="287"/>
-        <image name="globe" width="146" height="146"/>
         <image name="globe" catalog="system" width="128" height="121"/>
+        <image name="globe" width="146" height="146"/>
         <image name="list" width="148" height="145"/>
         <image name="list.dash" catalog="system" width="128" height="85"/>
         <image name="map" width="98" height="95"/>

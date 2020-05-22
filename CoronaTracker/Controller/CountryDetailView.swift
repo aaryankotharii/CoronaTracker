@@ -10,11 +10,8 @@ import SwiftUI
 
 struct CountryDetailView: View {
     @ObservedObject var country = CurrentCountryData()
-    
     var worldData : Countries!
-        
    // var countryTotalData = CountryStruct()
-        
     var hello : String = "India"
     var slug : String = "india"
     

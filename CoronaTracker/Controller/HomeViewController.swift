@@ -39,7 +39,7 @@ class HomeViewController: UIViewController {
     
     var countrycases : [countrycase] = []
     
-    var countryRootView = CountryDetailView(hello: "lol")
+    var countryRootView = CountryDetailView()
     
     //MARK:- ACTIVITY INDICATOR
     lazy var refreshControl: UIRefreshControl = {
@@ -337,7 +337,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
             self.countryRootView = CountryDetailView(worldData: worldData, hello: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
         }
         
-        performSegue(withIdentifier: "countryData", sender: nil)
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "countryData", sender: nil)
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
