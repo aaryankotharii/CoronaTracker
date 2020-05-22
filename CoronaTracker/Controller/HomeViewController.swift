@@ -12,34 +12,31 @@ import SwiftUI
 
 class HomeViewController: UIViewController {
     
+    //MARK:- Outlets
     @IBOutlet var tableView: UITableView!
-    
-    
     @IBOutlet var globeButton: UIButton!
     
-    //  @IBOutlet var searchbar: UISearchBar!
-    let cellIdentifier = "cell"
-    
+    /// Managed object context  to `save` data to Database
     var moc : NSManagedObjectContext!
     
-    /// Fetched Results controller to fetch data from Database
+    /// Fetched Results controller to `fetch` data from Database
     var fetchedResultsController : NSFetchedResultsController<Country>!
-    
-    var searchPredicate = NSPredicate()
     
     /// Search controller to help us with filtering items in the table view.
     var searchController: UISearchController!
     
-    /// Search results table view.
+    /// `Search` results table view.
     private var resultsTableController: ResultsTableViewController!
     
+    /// `Sorts` The results for tabelView
     var sort =  NSSortDescriptor(key: "name", ascending: true)
-    
-    var search = UISearchController(searchResultsController: nil)
     
     var countrycases : [countrycase] = []
     
     var countryRootView = CountryDetailView()
+    
+    let cellIdentifier = "cell"
+    let heightForCell = 170
     
     //MARK:- ACTIVITY INDICATOR
     lazy var refreshControl: UIRefreshControl = {
@@ -50,40 +47,14 @@ class HomeViewController: UIViewController {
         return refreshControl
     }()
     
+    //MARK:-  ---------- Life Cycle Methods ----------
+    
     override func viewDidLoad() {
         
-        performSegue(withIdentifier: "onboarding", sender: nil)
-        
-        resultsTableController =
-            self.storyboard?.instantiateViewController(withIdentifier: "ResultsTableController") as? ResultsTableViewController
-        // This view controller is interested in table view row selections.
-        resultsTableController.tableView.delegate = self
-        
-        searchController = UISearchController(searchResultsController: resultsTableController)
-        searchController.delegate = self
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.autocapitalizationType = .none
-        
-        searchController.searchBar.delegate = self
-        
-        
-        tableView.addSubview(refreshControl)
-
-        
         super.viewDidLoad()
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        moc = appDelegate.persistentContainer.viewContext
-        
-        let sort = NSSortDescriptor(key: "name", ascending: true)        
-        setupFetchedResultsController(sort: sort)    /// Setup fetchedResultsController
-        if fetchedResultsController.fetchedObjects?.count == 0{
-            
-            CoronaClient.getSummary(completion: handleDownload(summary:error:))
-        } else {
-            CoronaClient.getSummary(completion: handleUpdate(summary:error:))
-        }
-        resultsTableController.filteredProducts  = fetchedResultsController.fetchedObjects!
-        
+        performSegue(withIdentifier: "onboarding", sender: nil)
+        setupSearchController()
+        initialSetup()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -91,19 +62,26 @@ class HomeViewController: UIViewController {
         self.navigationItem.searchController = searchController
     }
     
+    //MARK:-  ---------- Outlets ----------
+    
+    /// Segue  To `CountryDetailView`
     @IBSegueAction func goToCountryData(_ coder: NSCoder) -> UIViewController? {
         return UIHostingController(coder: coder, rootView: countryRootView)
     }
     
+    /// Segue  To `GlobeView`
     @IBSegueAction func goToGlobalData(_ coder: NSCoder) -> UIViewController? {
         let country = fetchCountry("Algeria")
         let globalRootView = GlobeView(country: country!, cases: [])
         return UIHostingController(coder: coder, rootView: globalRootView .environment(\.managedObjectContext, self.moc))
     }
+    
+    ///  `Reload` Data
     @IBAction func reloadClicked(_ sender: Any) {
         CoronaClient.getSummary(completion: handleUpdate(summary:error:))
     }
     
+    ///  `Sort` Data
     @IBAction func sortClicked(_ sender: UIButton) {
         if sender.tag == 0{
             presentAlert(false)
@@ -116,61 +94,36 @@ class HomeViewController: UIViewController {
         CoronaClient.getSummary(completion: handleUpdate(summary:error:))
     }
     
-    enum SortType{
-        case name(state : Bool)
-        case death
-        case recovered
-        case total
-        case state(state : Bool)
-        
-        var stringValue : String {
-            switch self {
-            case .death:
-                return "Deaths"
-            case .name(state: let state):
-                return state ? "Name (Z - A)" : "Name (A - Z)"
-            case .recovered:
-                return "Recovered "
-            case .total:
-                return  "Total"
-            case .state(let state):
-                return state ? "Lowest First" : "Highest First"
-            }
-        }
+    fileprivate func setupSearchController() {
+        resultsTableController =
+            self.storyboard?.instantiateViewController(withIdentifier: "ResultsTableController") as? ResultsTableViewController
+        resultsTableController.tableView.delegate = self
+        searchController = UISearchController(searchResultsController: resultsTableController)
+        searchController.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.autocapitalizationType = .none
+        searchController.searchBar.delegate = self
     }
     
-    func presentAlert(_ state : Bool){
-        let alert = UIAlertController(title: "Sort", message: SortType.state(state: state).stringValue, preferredStyle: .actionSheet)
-        let nameSort = UIAlertAction(title: SortType.name(state: state).stringValue, style: .default) { (action) in
-            self.sort = NSSortDescriptor(key: "name", ascending: state)
-            self.setupFetchedResultsController(sort: self.sort)
-        }
-        let totalSort = UIAlertAction(title: SortType.total.stringValue, style: .default) { (action) in
-            self.sort = NSSortDescriptor(key: "total", ascending: state)
-            self.setupFetchedResultsController(sort: self.sort)
-        }
-        
-        let deathSort = UIAlertAction(title: SortType.death.stringValue, style: .default) { (action) in
-            self.sort = NSSortDescriptor(key: "deaths", ascending: state)
-            self.setupFetchedResultsController(sort: self.sort)
-        }
-        
-        let recovered = UIAlertAction(title: SortType.recovered.stringValue, style: .default) { (action) in
-            self.sort = NSSortDescriptor(key: "recoveries", ascending: state)
-            self.setupFetchedResultsController(sort: self.sort)
-        }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-        }
-        
-        alert.addAction(nameSort)
-        alert.addAction(totalSort)
-        alert.addAction(deathSort)
-        alert.addAction(recovered)
-        alert.addAction(cancel)
-        
-        self.present(alert, animated :true)
-    }
     
+    func initialSetup() {
+        
+        /// MOC setup
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        moc = appDelegate.persistentContainer.viewContext
+        
+        /// FETCH DATA
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        setupFetchedResultsController(sort: sort)    /// Setup fetchedResultsController
+        if fetchedResultsController.fetchedObjects?.count == 0{
+            CoronaClient.getSummary(completion: handleDownload(summary:error:))
+        } else {
+            CoronaClient.getSummary(completion: handleUpdate(summary:error:))
+        }
+        resultsTableController.filteredProducts  = fetchedResultsController.fetchedObjects!
+        tableView.addSubview(refreshControl)
+    }
+
     
     func handleDownload(summary:Summary? ,error:Error?){
         countrycases.removeAll()
@@ -182,7 +135,6 @@ class HomeViewController: UIViewController {
             addGlobal(summary.Global)
         } else {
             return
-                
                 print(error!.localizedDescription,"errr",error.debugDescription)
         }
     }
@@ -201,10 +153,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    
-    
-    
-    
+    /// Function to save countries to database
     func addCountry(_ country: Countries){
         let countryToSave = Country(context: moc)
         countryToSave.name = country.Country
@@ -228,6 +177,8 @@ class HomeViewController: UIViewController {
             print(error.localizedDescription)
         }
     }
+    
+    /// Function to save Global data  to database
     func addGlobal(_ global : GlobalData){
         let globalToSave = Global(context: moc)
         globalToSave.newconfirmed = Int32(global.NewConfirmed)
@@ -243,6 +194,7 @@ class HomeViewController: UIViewController {
         }
     }
     
+    /// Converts NSManagesObject to Struct
     func objectToStruct(_ country : Country)->Countries{
         let slug = country.slug!
         let newtotal = Int(country.newtotal)
@@ -261,7 +213,6 @@ class HomeViewController: UIViewController {
         return countryStruct
     }
     
-    //TODO maybe fetch again
     func objectToGlobalStruct(_ country : Countries){
         let name = country.Country
         let emoji = convertToEmoji(str: country.CountryCode)
@@ -301,6 +252,8 @@ class HomeViewController: UIViewController {
     
 }
 
+
+//MARK:- TableViewDelegate + TableViewDataSource Methods
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fetchedResultsController.sections?[0].numberOfObjects ?? 0
@@ -321,7 +274,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)    /// Deselect Row
         
-        
         // Check to see which table view cell was selected.
         if tableView === self.tableView {
             let cell = tableView.cellForRow(at: indexPath) as! HomeTableViewCell
@@ -340,15 +292,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "countryData", sender: nil)
         }
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 170
+        return heightForCell
     }
     
 }
 
+
+//MARK:- FetchedResultsController Delegate Methods
 extension HomeViewController : NSFetchedResultsControllerDelegate {
     
     //MARK:- Set FetchedResultsViewController
@@ -359,7 +312,9 @@ extension HomeViewController : NSFetchedResultsControllerDelegate {
         fetchedResultsController.delegate = self
         do{
             try fetchedResultsController.performFetch()
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -381,7 +336,6 @@ extension HomeViewController : NSFetchedResultsControllerDelegate {
             tableView.deleteRows(at: [indexPath!], with: .fade)
         case .update:
             tableView.reloadRows(at: [indexPath!], with: .fade)
-        //print("update")
         case .move:
             tableView.moveRow(at: indexPath!, to: newIndexPath!)
         @unknown default:
@@ -390,13 +344,14 @@ extension HomeViewController : NSFetchedResultsControllerDelegate {
     }
 }
 
+
+//MARK:- SearchController Delegate Methods
 extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         updateSearchResults(for: searchController.searchBar)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("cancel")
         setupFetchedResultsController(sort: sort)    /// Setup fetchedResultsController
     }
     
@@ -419,26 +374,43 @@ extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate, U
                 if let resultsController = searchController.searchResultsController as? ResultsTableViewController {
                     resultsController.filteredProducts = filteredResults!
                     resultsController.tableView.reloadData()
-                    
-                    resultsController.filteredProducts.isEmpty ? print("EMpty") : print("NOT EMPTY")
-                    //TODO add empty label
-                    
                 }
             }
         }
-        
     }
 }
-//func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-//    let topIndex = IndexPath(row: 0, section: 0)
-//    if let navController = viewController as? UINavigationController,
-//        navController.childViewControllers.count > 0 {
-//        let childController = navController.childViewControllers[0]
-//        if let vc = childController as? AlbumsTableViewController {
-//            vc.tableView.scrollToRow(at: topIndex, at: .top, animated: true)
-//        } else if let vc = childController as? ArtistsTableViewController {
-//            vc.tableView.scrollToRow(at: topIndex, at: .top, animated: true)
-//        }
-//    }
-//}
-//
+
+//MARK:- SORT ACTION SHEET FUNCTIONS
+extension HomeViewController {
+    func presentAlert(_ state : Bool){
+        let alert = UIAlertController(title: "Sort", message: SortType.state(state: state).stringValue, preferredStyle: .actionSheet)
+        let nameSort = UIAlertAction(title: SortType.name(state: state).stringValue, style: .default) { (action) in
+            self.sort = NSSortDescriptor(key: "name", ascending: state)
+            self.setupFetchedResultsController(sort: self.sort)
+        }
+        let totalSort = UIAlertAction(title: SortType.total.stringValue, style: .default) { (action) in
+            self.sort = NSSortDescriptor(key: "total", ascending: state)
+            self.setupFetchedResultsController(sort: self.sort)
+        }
+        
+        let deathSort = UIAlertAction(title: SortType.death.stringValue, style: .default) { (action) in
+            self.sort = NSSortDescriptor(key: "deaths", ascending: state)
+            self.setupFetchedResultsController(sort: self.sort)
+        }
+        
+        let recovered = UIAlertAction(title: SortType.recovered.stringValue, style: .default) { (action) in
+            self.sort = NSSortDescriptor(key: "recoveries", ascending: state)
+            self.setupFetchedResultsController(sort: self.sort)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+        }
+        
+        alert.addAction(nameSort)
+        alert.addAction(totalSort)
+        alert.addAction(deathSort)
+        alert.addAction(recovered)
+        alert.addAction(cancel)
+        
+        self.present(alert, animated :true)
+    }
+}

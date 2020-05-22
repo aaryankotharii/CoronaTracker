@@ -22,6 +22,7 @@
 		5B7E6B172473B1C700023650 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E6B0F2473B1C700023650 /* Line.swift */; };
 		5B7E6B192473B1EC00023650 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E6B182473B1EC00023650 /* Helpers.swift */; };
 		5B7E6B1B2473DA2E00023650 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E6B1A2473DA2E00023650 /* MapViewController.swift */; };
+		5B7F478224786D0B00D81D84 /* SortingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F478124786D0B00D81D84 /* SortingData.swift */; };
 		5BB0FA7724757BC10043A94D /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0FA7624757BC10043A94D /* ResultsTableViewController.swift */; };
 		5BB0FA792476BC640043A94D /* GlobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0FA782476BC640043A94D /* GlobeView.swift */; };
 		5BB0FA942477C6100043A94D /* Network+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0FA932477C6100043A94D /* Network+Alert.swift */; };
@@ -62,6 +63,7 @@
 		5B7E6B0F2473B1C700023650 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		5B7E6B182473B1EC00023650 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		5B7E6B1A2473DA2E00023650 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		5B7F478124786D0B00D81D84 /* SortingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingData.swift; sourceTree = "<group>"; };
 		5BB0FA7624757BC10043A94D /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
 		5BB0FA782476BC640043A94D /* GlobeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobeView.swift; sourceTree = "<group>"; };
 		5BB0FA932477C6100043A94D /* Network+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Alert.swift"; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				5BE302C524745EB300FDF1A7 /* Country+Location+Constant.swift */,
 				5B4EA29B2474E3DB00811D4C /* Date+Formatter.swift */,
 				5BB0FA932477C6100043A94D /* Network+Alert.swift */,
+				5B7F478124786D0B00D81D84 /* SortingData.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				5BB0FA7724757BC10043A94D /* ResultsTableViewController.swift in Sources */,
 				5B7E6B172473B1C700023650 /* Line.swift in Sources */,
 				5B7E6B1B2473DA2E00023650 /* MapViewController.swift in Sources */,
+				5B7F478224786D0B00D81D84 /* SortingData.swift in Sources */,
 				5B7E6B152473B1C700023650 /* Path+QuadCurve.swift in Sources */,
 				5BCCA7C82471168300EE6C2B /* AppDelegate.swift in Sources */,
 				5BB131052471889A00110DBA /* Flag->Emoji.swift in Sources */,
