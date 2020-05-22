@@ -14,7 +14,10 @@ class HomeViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
-  //  @IBOutlet var searchbar: UISearchBar!
+    
+    @IBOutlet var globeButton: UIButton!
+    
+    //  @IBOutlet var searchbar: UISearchBar!
     let cellIdentifier = "cell"
     
     var moc : NSManagedObjectContext!
@@ -34,22 +37,32 @@ class HomeViewController: UIViewController {
     
     var search = UISearchController(searchResultsController: nil)
     
-    var rootView = CountryDetailView(hello: "lol")
+    var countrycases : [countrycase] = []{
+        didSet{
+            DispatchQueue.main.async {
+                self.globeButton.isEnabled = self.countrycases.count > 100
+            }
+        }
+    }
+    
+    var countryRootView = CountryDetailView(hello: "lol")
+    
+    var globalRootView = GlobeView(cases: [])
     
     override func viewDidLoad() {
         
-          resultsTableController =
+        resultsTableController =
             self.storyboard?.instantiateViewController(withIdentifier: "ResultsTableController") as? ResultsTableViewController
         // This view controller is interested in table view row selections.
         resultsTableController.tableView.delegate = self
-
+        
         searchController = UISearchController(searchResultsController: resultsTableController)
         searchController.delegate = self
         searchController.searchResultsUpdater = self
         searchController.searchBar.autocapitalizationType = .none
         
         searchController.searchBar.delegate = self
-                        
+        
         super.viewDidLoad()
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         moc = appDelegate.persistentContainer.viewContext
@@ -57,25 +70,28 @@ class HomeViewController: UIViewController {
         let sort = NSSortDescriptor(key: "name", ascending: true)        
         setupFetchedResultsController(sort: sort)    /// Setup fetchedResultsController
         if fetchedResultsController.fetchedObjects?.count == 0{
-
-        CoronaClient.getSummary(completion: handleDownload(summary:error:))
+            
+            CoronaClient.getSummary(completion: handleDownload(summary:error:))
         } else {
             CoronaClient.getSummary(completion: handleUpdate(summary:error:))
         }
         resultsTableController.filteredProducts  = fetchedResultsController.fetchedObjects!
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationItem.searchController = searchController
-       // self.tableView.tableHeaderView = searchController.searchBar
     }
     
     @IBSegueAction func goToCountryData(_ coder: NSCoder) -> UIViewController? {
-        return UIHostingController(coder: coder, rootView: rootView)
+        return UIHostingController(coder: coder, rootView: countryRootView)
     }
     
+    @IBSegueAction func goToGlobalData(_ coder: NSCoder) -> UIViewController? {
+        globalRootView = GlobeView(cases: countrycases)
+        return UIHostingController(coder: coder, rootView: globalRootView .environment(\.managedObjectContext, self.moc))
+    }
     @IBAction func reloadClicked(_ sender: Any) {
         CoronaClient.getSummary(completion: handleUpdate(summary:error:))
     }
@@ -120,17 +136,17 @@ class HomeViewController: UIViewController {
         let totalSort = UIAlertAction(title: SortType.total.stringValue, style: .default) { (action) in
             self.sort = NSSortDescriptor(key: "total", ascending: state)
             self.setupFetchedResultsController(sort: self.sort)
-            }
-            
+        }
+        
         let deathSort = UIAlertAction(title: SortType.death.stringValue, style: .default) { (action) in
             self.sort = NSSortDescriptor(key: "deaths", ascending: state)
             self.setupFetchedResultsController(sort: self.sort)
-            }
-            
+        }
+        
         let recovered = UIAlertAction(title: SortType.recovered.stringValue, style: .default) { (action) in
             self.sort = NSSortDescriptor(key: "recoveries", ascending: state)
             self.setupFetchedResultsController(sort: self.sort)
-            }
+        }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
         }
         
@@ -145,57 +161,60 @@ class HomeViewController: UIViewController {
     
     
     func handleDownload(summary:Summary? ,error:Error?){
+        countrycases.removeAll()
         if let summary = summary {
-                for country in summary.Countries{
-                    addCountry(country)
+            for country in summary.Countries{
+                addCountry(country)
+                objectToGlobalStruct(country)
             }
             addGlobal(summary.Global)
         } else {
-        return
-    
-    print(error!.localizedDescription,"errr",error.debugDescription)
-}
-    }
-    
-        func handleUpdate(summary:Summary? ,error:Error?){
-            if let summary = summary {
-                    for country in summary.Countries{
-                        updateCountry(country)
-                    }
-            } else {
             return
-        
-        print(error!.localizedDescription,"errr",error.debugDescription)
-    }
+                
+                print(error!.localizedDescription,"errr",error.debugDescription)
         }
-    
-
-
-             
-
-func addCountry(_ country: Countries){
-    let countryToSave = Country(context: moc)
-    countryToSave.name = country.Country
-    countryToSave.deaths = Int32(country.TotalDeaths)
-    countryToSave.total = Int32(country.TotalConfirmed)
-    countryToSave.recoveries = Int32(country.TotalRecovered)
-    countryToSave.countrycode = country.CountryCode
-    countryToSave.slug = country.Slug
-    countryToSave.date = Date()
-    countryToSave.newtotal = Int32(country.NewConfirmed)
-    countryToSave.newdeaths = Int32(country.NewDeaths)
-    countryToSave.newrecoveries = Int32(country.NewRecovered)
-    
-    let coord = fetchCoord(country.CountryCode)
-    countryToSave.lat = coord.first ?? 0
-    countryToSave.long = coord.last ?? 0
-    
-    do{
-        try moc.save()
-    } catch {
-        print(error.localizedDescription)
     }
-}
+    
+    func handleUpdate(summary:Summary? ,error:Error?){
+        countrycases.removeAll()
+        if let summary = summary {
+            for country in summary.Countries{
+                updateCountry(country)
+                objectToGlobalStruct(country)
+            }
+        } else {
+            return
+                print(error!.localizedDescription,"errr",error.debugDescription)
+        }
+    }
+    
+    
+    
+    
+    
+    func addCountry(_ country: Countries){
+        let countryToSave = Country(context: moc)
+        countryToSave.name = country.Country
+        countryToSave.deaths = Int32(country.TotalDeaths)
+        countryToSave.total = Int32(country.TotalConfirmed)
+        countryToSave.recoveries = Int32(country.TotalRecovered)
+        countryToSave.countrycode = country.CountryCode
+        countryToSave.slug = country.Slug
+        countryToSave.date = Date()
+        countryToSave.newtotal = Int32(country.NewConfirmed)
+        countryToSave.newdeaths = Int32(country.NewDeaths)
+        countryToSave.newrecoveries = Int32(country.NewRecovered)
+        
+        let coord = fetchCoord(country.CountryCode)
+        countryToSave.lat = coord.first ?? 0
+        countryToSave.long = coord.last ?? 0
+        
+        do{
+            try moc.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
     func addGlobal(_ global : GlobalData){
         let globalToSave = Global(context: moc)
         globalToSave.newconfirmed = Int32(global.NewConfirmed)
@@ -204,6 +223,11 @@ func addCountry(_ country: Countries){
         globalToSave.totaldeaths = Int32(global.TotalDeaths)
         globalToSave.totalconfirmed = Int32(global.TotalConfirmed)
         globalToSave.totalrecovered = Int32(global.TotalRecovered)
+        do{
+            try moc.save()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     func objectToStruct(_ country : Country)->Countries{
@@ -224,34 +248,43 @@ func addCountry(_ country: Countries){
         return countryStruct
     }
     
+    //TODO maybe fetch again
+    func objectToGlobalStruct(_ country : Countries){
+        let name = country.Country
+        let emoji = convertToEmoji(str: country.CountryCode)
+        let total = country.TotalConfirmed
+        let data = countrycase(name: name , emoji: emoji, cases: Int(total))
+        countrycases.append(data)
+    }
+    
     func fetchCoord(_ code : String) -> [Double]{
         let countryCode = code.lowercased()
         let coord = countryCoord.filter { $0.key == countryCode}
         return coord.first?.value ?? [0.0]
     }
-
-func updateCountry(_ country: Countries){
-    let CountryToUpdate = fetchCountry(country.Country)
-    CountryToUpdate?.deaths = Int32(country.TotalDeaths)
-    CountryToUpdate?.total = Int32(country.TotalConfirmed)
-    CountryToUpdate?.recoveries = Int32(country.TotalRecovered)
-    CountryToUpdate?.countrycode = country.CountryCode
-    do{
-        try moc.save()
-    } catch {
-        print(error.localizedDescription)
+    
+    func updateCountry(_ country: Countries){
+        let CountryToUpdate = fetchCountry(country.Country)
+        CountryToUpdate?.deaths = Int32(country.TotalDeaths)
+        CountryToUpdate?.total = Int32(country.TotalConfirmed)
+        CountryToUpdate?.recoveries = Int32(country.TotalRecovered)
+        CountryToUpdate?.countrycode = country.CountryCode
+        do{
+            try moc.save()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
-}
-
+    
     
     //TODO new fetch request wih=thout predicate
-func fetchCountry(_ name : String)-> Country?{
-    if let countries = fetchedResultsController.fetchedObjects{
-        let country = countries.filter{ $0.name == name}
-        return country.first!
+    func fetchCountry(_ name : String)-> Country?{
+        if let countries = fetchedResultsController.fetchedObjects{
+            let country = countries.filter{ $0.name == name}
+            return country.first!
+        }
+        return nil
     }
-    return nil
-}
     
 }
 
@@ -282,13 +315,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
             let country = fetchCountry(cell.name ?? "india")
             let worldData = objectToStruct(country!)
             
-            self.rootView = CountryDetailView(worldData: worldData, hello: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
+            self.countryRootView = CountryDetailView(worldData: worldData, hello: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
         } else {
             let cell = resultsTableController.tableView.cellForRow(at: indexPath) as! HomeTableViewCell
             let country = fetchCountry(cell.name ?? "india")
             let worldData = objectToStruct(country!)
             
-            self.rootView = CountryDetailView(worldData: worldData, hello: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
+            self.countryRootView = CountryDetailView(worldData: worldData, hello: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
         }
         
         performSegue(withIdentifier: "countryData", sender: nil)
@@ -333,7 +366,7 @@ extension HomeViewController : NSFetchedResultsControllerDelegate {
             tableView.deleteRows(at: [indexPath!], with: .fade)
         case .update:
             tableView.reloadRows(at: [indexPath!], with: .fade)
-            //print("update")
+        //print("update")
         case .move:
             tableView.moveRow(at: indexPath!, to: newIndexPath!)
         @unknown default:
@@ -351,34 +384,34 @@ extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate, U
         print("cancel")
         setupFetchedResultsController(sort: sort)    /// Setup fetchedResultsController
     }
-
+    
     func updateSearchResults(for searchbar: UISearchBar) {
         if let text = searchbar.text{
             if text.count > 0 {
-
-        let fetchRequest : NSFetchRequest<Country> = Country.fetchRequest()
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-             fetchRequest.predicate = NSPredicate(format: "name contains[c] %@", text)
-            
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
-            fetchedResultsController.delegate = self
-            do{
-                try fetchedResultsController.performFetch()
-            } catch {
-                fatalError(error.localizedDescription)
+                
+                let fetchRequest : NSFetchRequest<Country> = Country.fetchRequest()
+                fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+                fetchRequest.predicate = NSPredicate(format: "name contains[c] %@", text)
+                
+                fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+                fetchedResultsController.delegate = self
+                do{
+                    try fetchedResultsController.performFetch()
+                } catch {
+                    fatalError(error.localizedDescription)
+                }
+                let filteredResults = fetchedResultsController.fetchedObjects
+                if let resultsController = searchController.searchResultsController as? ResultsTableViewController {
+                    resultsController.filteredProducts = filteredResults!
+                    resultsController.tableView.reloadData()
+                    
+                    resultsController.filteredProducts.isEmpty ? print("EMpty") : print("NOT EMPTY")
+                    //TODO add empty label
+                    
+                }
             }
-        let filteredResults = fetchedResultsController.fetchedObjects
-        if let resultsController = searchController.searchResultsController as? ResultsTableViewController {
-            resultsController.filteredProducts = filteredResults!
-            resultsController.tableView.reloadData()
-
-            resultsController.filteredProducts.isEmpty ? print("EMpty") : print("NOT EMPTY")
-            //TODO add empty label
-
         }
-    }
-        }
-
+        
     }
 }
 //func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {

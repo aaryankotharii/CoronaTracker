@@ -33,7 +33,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nku-mz-spC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1009" y="82"/>
+            <point key="canvasLocation" x="980" y="-636"/>
         </scene>
         <!--World Stats-->
         <scene sceneID="tne-QT-ifu">
@@ -265,6 +265,11 @@
                                 <rect key="frame" x="20" y="0.0" width="50" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="globe" catalog="system"/>
+                                <connections>
+                                    <segue destination="a3z-9x-sB3" kind="popoverPresentation" destinationCreationSelector="goToGlobalData:" popoverAnchorView="hIB-HM-Syr" id="a0B-WW-yaS">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
                             </button>
                         </barButtonItem>
                         <rightBarButtonItems>
@@ -301,13 +306,14 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="globeButton" destination="hIB-HM-Syr" id="Aa9-b2-Kpt"/>
                         <outlet property="tableView" destination="Pob-XS-YcB" id="zWG-wX-RJW"/>
                         <segue destination="c92-Mc-VGc" kind="show" identifier="countryData" destinationCreationSelector="goToCountryData:" id="yRZ-tt-XfE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1944.9275362318842" y="81.696428571428569"/>
+            <point key="canvasLocation" x="1864" y="-636"/>
         </scene>
         <!--Hosting Controller-->
         <scene sceneID="uPL-PM-tIb">
@@ -317,7 +323,7 @@
                 </hostingController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7eh-D7-dXu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1945" y="828"/>
+            <point key="canvasLocation" x="2788" y="-636"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="NVn-yd-Sty">
@@ -327,38 +333,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zDb-rU-1RE">
-                                <rect key="frame" x="87" y="313" width="240" height="270"/>
-                                <color key="backgroundColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PhV-wF-s2u">
+                                <rect key="frame" x="33" y="788" width="348" height="58"/>
+                                <color key="backgroundColor" red="0.91615206000000005" green="0.33354511860000002" blue="0.41475248339999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="270" id="EPa-Ic-mDl"/>
-                                    <constraint firstAttribute="width" constant="240" id="sM0-0T-WLN"/>
+                                    <constraint firstAttribute="width" secondItem="PhV-wF-s2u" secondAttribute="height" multiplier="6" id="HHz-Sc-YqQ"/>
                                 </constraints>
-                            </view>
-                            <navigationBar contentMode="scaleToFill" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DhH-CS-sht">
-                                <rect key="frame" x="0.0" y="44" width="414" height="96"/>
-                                <items>
-                                    <navigationItem title="World Stats" id="7rW-BU-mD1"/>
-                                </items>
-                            </navigationBar>
+                                <fontDescription key="fontDescription" name="SFProRounded-Bold" family="SF Pro Rounded" pointSize="22"/>
+                                <state key="normal" title="CONTINUE">
+                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="titleShadowColor" red="0.99607843139999996" green="0.14901960780000001" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AVt-gx-kve">
+                                <rect key="frame" x="144" y="42" width="117.5" height="41"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBt-9m-HOw">
+                                        <rect key="frame" x="0.0" y="0.0" width="117.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Corona Tracker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofZ-zD-MrB">
+                                        <rect key="frame" x="0.0" y="20.5" width="117.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="DhH-CS-sht" firstAttribute="trailing" secondItem="crQ-CK-Tpa" secondAttribute="trailing" id="3S1-Qb-sSw"/>
-                            <constraint firstItem="DhH-CS-sht" firstAttribute="leading" secondItem="crQ-CK-Tpa" secondAttribute="leading" id="5vA-D7-ZxR"/>
-                            <constraint firstItem="zDb-rU-1RE" firstAttribute="centerY" secondItem="nea-aU-Amn" secondAttribute="centerY" id="6e7-LD-MFZ"/>
-                            <constraint firstItem="DhH-CS-sht" firstAttribute="top" secondItem="crQ-CK-Tpa" secondAttribute="top" id="mjc-Qd-ZXr"/>
-                            <constraint firstItem="zDb-rU-1RE" firstAttribute="centerX" secondItem="nea-aU-Amn" secondAttribute="centerX" id="vZA-3i-h3d"/>
+                            <constraint firstItem="crQ-CK-Tpa" firstAttribute="trailing" secondItem="PhV-wF-s2u" secondAttribute="trailing" constant="33" id="MYQ-QY-fJv"/>
+                            <constraint firstItem="PhV-wF-s2u" firstAttribute="leading" secondItem="crQ-CK-Tpa" secondAttribute="leading" constant="33" id="a9M-5K-YuA"/>
+                            <constraint firstAttribute="bottom" secondItem="PhV-wF-s2u" secondAttribute="bottom" constant="50" id="cbp-BT-ar9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="crQ-CK-Tpa"/>
                     </view>
-                    <connections>
-                        <outlet property="someView" destination="zDb-rU-1RE" id="1wC-fA-xZL"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wfG-OT-FWK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3136.2318840579715" y="75"/>
+            <point key="canvasLocation" x="-562" y="-655"/>
         </scene>
         <!--LOL-->
         <scene sceneID="P8N-Mz-RVY">
@@ -390,7 +406,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Lb-zZ-lKc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="9wL-2X-isY" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="124.6376811594203" y="81.696428571428569"/>
+            <point key="canvasLocation" x="-561" y="100"/>
         </scene>
         <!--Map-->
         <scene sceneID="2VR-FV-GBN">
@@ -1067,17 +1083,17 @@
                                         <exclude reference="97K-FI-Wgn"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <exclude reference="qdj-F1-aZg"/>
+                                        <exclude reference="UyM-nX-WdO"/>
+                                        <exclude reference="PIY-Nj-jO7"/>
+                                        <exclude reference="upe-mI-YVp"/>
                                         <exclude reference="Kua-eW-TCS"/>
                                         <exclude reference="LaS-Kx-Zeq"/>
                                         <exclude reference="XmB-LY-pmm"/>
                                         <exclude reference="kDT-Hs-gxb"/>
-                                        <exclude reference="UyM-nX-WdO"/>
-                                        <exclude reference="PIY-Nj-jO7"/>
-                                        <exclude reference="upe-mI-YVp"/>
                                         <exclude reference="6YG-QX-lU3"/>
                                         <exclude reference="GKQ-f4-dKz"/>
                                         <exclude reference="K2U-6O-lrn"/>
-                                        <exclude reference="qdj-F1-aZg"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -1086,17 +1102,17 @@
                                         <include reference="97K-FI-Wgn"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <include reference="qdj-F1-aZg"/>
+                                        <include reference="UyM-nX-WdO"/>
+                                        <include reference="PIY-Nj-jO7"/>
+                                        <exclude reference="upe-mI-YVp"/>
                                         <include reference="Kua-eW-TCS"/>
                                         <include reference="LaS-Kx-Zeq"/>
                                         <include reference="XmB-LY-pmm"/>
                                         <include reference="kDT-Hs-gxb"/>
-                                        <include reference="UyM-nX-WdO"/>
-                                        <include reference="PIY-Nj-jO7"/>
-                                        <exclude reference="upe-mI-YVp"/>
                                         <include reference="6YG-QX-lU3"/>
                                         <include reference="GKQ-f4-dKz"/>
                                         <include reference="K2U-6O-lrn"/>
-                                        <include reference="qdj-F1-aZg"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -1163,7 +1179,17 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="121.73913043478262" y="842.41071428571422"/>
+            <point key="canvasLocation" x="980" y="258"/>
+        </scene>
+        <!--Hosting Controller-->
+        <scene sceneID="rn9-2e-KGh">
+            <objects>
+                <hostingController id="a3z-9x-sB3" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Q0y-UK-Qec"/>
+                </hostingController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5AX-i9-49W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="985" y="-1327"/>
         </scene>
         <!--Results Table View Controller-->
         <scene sceneID="hc6-BW-ab5">
@@ -1374,7 +1400,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PhJ-hc-dR7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1009" y="842"/>
+            <point key="canvasLocation" x="1864" y="-1324"/>
         </scene>
     </scenes>
     <resources>
