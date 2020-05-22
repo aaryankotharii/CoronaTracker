@@ -39,8 +39,6 @@ Spacer()
                     .padding()
             HStack{
                     LineChartView(data: country.allData?[index] ?? [], title: state[index])
-                
-            MultiLineChartView(data: [(country.current?.active ?? [], GradientColors.green), (country.current?.deaths ?? [], GradientColors.purple), (country.current?.recovered ?? [], GradientColors.orngPink)], title: "Title",legend: "Full screen")
             }
             }
             

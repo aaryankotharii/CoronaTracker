@@ -41,7 +41,18 @@ class HomeViewController: UIViewController {
     
     var countryRootView = CountryDetailView(hello: "lol")
     
+    //MARK:- ACTIVITY INDICATOR
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(loadList),for: UIControl.Event.valueChanged)
+        refreshControl.tintColor = #colorLiteral(red: 0.09505660087, green: 0.8000571132, blue: 0.7261177897, alpha: 1)
+        
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
+        
+        performSegue(withIdentifier: "onboarding", sender: nil)
         
         resultsTableController =
             self.storyboard?.instantiateViewController(withIdentifier: "ResultsTableController") as? ResultsTableViewController
@@ -54,6 +65,10 @@ class HomeViewController: UIViewController {
         searchController.searchBar.autocapitalizationType = .none
         
         searchController.searchBar.delegate = self
+        
+        
+        tableView.addSubview(refreshControl)
+
         
         super.viewDidLoad()
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
@@ -95,6 +110,10 @@ class HomeViewController: UIViewController {
         } else {
             presentAlert(true)
         }
+    }
+    
+    @objc func loadList(){
+        CoronaClient.getSummary(completion: handleUpdate(summary:error:))
     }
     
     enum SortType{
@@ -175,9 +194,10 @@ class HomeViewController: UIViewController {
                 updateCountry(country)
                 objectToGlobalStruct(country)
             }
+            if refreshControl.isRefreshing { refreshControl.endRefreshing() }   /// STOP REFRESH IF ACTIVE
         } else {
+            print(error!.localizedDescription,"errr",error.debugDescription)
             return
-                print(error!.localizedDescription,"errr",error.debugDescription)
         }
     }
     
@@ -349,7 +369,6 @@ extension HomeViewController : NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
-    
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {

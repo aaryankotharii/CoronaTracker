@@ -15,6 +15,8 @@ struct GlobeView: View {
     @FetchRequest(entity: Country.entity(), sortDescriptors: []) var countries : FetchedResults<Country>
     
     @State var country : Country
+    @State private var isShowing = true
+
     
     var cases : [countrycase]
     var body: some View {
@@ -25,6 +27,15 @@ struct GlobeView: View {
                     .padding(.top,60)
                 globalDataStack(global: global.first!)
                 countryDataStack(country: $country)
+                if isShowing {
+                    HStack{
+                VStack(alignment:.leading){
+                Text("Tap on a county to see details 👇🏻")
+                Text("Swipe to seee more")
+                }
+                        Spacer()
+                }
+                }
                 ZStack{
                  ScrollView(.horizontal, showsIndicators: false){
                            HStack{
@@ -32,14 +43,18 @@ struct GlobeView: View {
                                 bar(value: self.calculateHeight(Int(country.total)), emoji: country.countrycode!)
                                        .onTapGesture {
                                         self.country = country
-                                        print(country.countrycode)
+                                        withAnimation {
+                                            self.isShowing = false
+                                        }
                                    }
                                }
                            }
                  }
                 }
-            }.background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.7294117647, green: 0.8784313725, blue: 0.9098039216, alpha: 1)),Color(#colorLiteral(red: 0.4549019608, green: 0.7647058824, blue: 0.8235294118, alpha: 1))]), startPoint: .top, endPoint: .bottom)).edgesIgnoringSafeArea(.bottom).onAppear {
-        }
+            }.padding(.leading,15)
+                .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.7294117647, green: 0.8784313725, blue: 0.9098039216, alpha: 1)),Color(#colorLiteral(red: 0.4549019608, green: 0.7647058824, blue: 0.8235294118, alpha: 1))]), startPoint: .top, endPoint: .bottom)).edgesIgnoringSafeArea(.bottom)
+                .onAppear {
+            }
     }
     
     
