@@ -90,7 +90,11 @@ class HomeViewController: UIViewController {
     }
     
     @objc func loadList(){
+        if let objects = fetchedResultsController.fetchedObjects{
+            if objects.count > 0{
         CoronaClient.getSummary(completion: handleUpdate(summary:error:))
+            }
+        }
     }
     
     fileprivate func setupSearchController() {
@@ -138,8 +142,12 @@ class HomeViewController: UIViewController {
                 self.networkErrorAlert(title: "Internet required to download data")
                 if refreshControl.isRefreshing { refreshControl.endRefreshing() }
             }
+            if error!.localizedDescription == "The Internet connection appears to be offline."{
+                self.networkErrorAlert(title: "Internet required to update data")
+                if refreshControl.isRefreshing { refreshControl.endRefreshing() }
+            }
+            print(error!.localizedDescription,"error",error.debugDescription)
             return
-                print(error!.localizedDescription,"error",error.debugDescription)
         }
     }
     
