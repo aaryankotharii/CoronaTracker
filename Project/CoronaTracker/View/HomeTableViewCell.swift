@@ -121,14 +121,17 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     
-    
+    // ADDING LINE
     func addLine(_ graph : HomeGraph){
         let shapeLayer =  CAShapeLayer()
         
+        //LINE
         let path = UIBezierPath()
         path.move(to: graph.start)
         path.addLine(to: graph.end)
         
+        
+        //PERCENTAGE LABEL
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 24, height: 10))
         label.center = CGPoint(x: graph.start.x, y: graph.start.y+12)
         label.textAlignment = .center
@@ -138,14 +141,14 @@ class HomeTableViewCell: UITableViewCell {
         self.graphView.addSubview(label)
         
         
+        // LINE UI
         shapeLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor
         shapeLayer.strokeColor = graph.color.cgColor
         shapeLayer.lineWidth = CGFloat(width/10)
         shapeLayer.path = path.cgPath
         shapeLayer.lineCap = .round
         
-        // animate it
-        
+        // ANIMATE LINE
         graphView.layer.addSublayer(shapeLayer)
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = 0

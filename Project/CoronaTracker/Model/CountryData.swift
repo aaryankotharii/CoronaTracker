@@ -12,7 +12,6 @@ import Combine
 final class CurrentCountryData: ObservableObject {
     @Published var current : [[Double]]?
 
-    
     init(){
         self.fetch()
     }
@@ -40,6 +39,3 @@ extension CurrentCountryData{
                   }
         }
 }
-
-
-//CountryCaseCount
