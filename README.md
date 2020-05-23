@@ -1,2 +1,3 @@
-# CoronaTracker
-Corona Virus Tracker
+ <p float="left">
+ <img src ="assets/banner.png"  />      
+ </p>
