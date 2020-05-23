@@ -17,9 +17,7 @@
 		5B7F478224786D0B00D81D84 /* SortingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F478124786D0B00D81D84 /* SortingData.swift */; };
 		5B7F478B2478727400D81D84 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F47832478727200D81D84 /* Line.swift */; };
 		5B7F478C2478727400D81D84 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F47842478727300D81D84 /* LineChartView.swift */; };
-		5B7F478D2478727400D81D84 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F47852478727300D81D84 /* LineView.swift */; };
 		5B7F478E2478727400D81D84 /* MagnifierRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F47862478727400D81D84 /* MagnifierRect.swift */; };
-		5B7F478F2478727400D81D84 /* MultiLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F47872478727400D81D84 /* MultiLineChartView.swift */; };
 		5B7F47902478727400D81D84 /* IndicatorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F47882478727400D81D84 /* IndicatorPoint.swift */; };
 		5B7F47912478727400D81D84 /* Legend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F47892478727400D81D84 /* Legend.swift */; };
 		5B7F47922478727400D81D84 /* Path+QuadCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7F478A2478727400D81D84 /* Path+QuadCurve.swift */; };
@@ -59,9 +57,7 @@
 		5B7F478124786D0B00D81D84 /* SortingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingData.swift; sourceTree = "<group>"; };
 		5B7F47832478727200D81D84 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		5B7F47842478727300D81D84 /* LineChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
-		5B7F47852478727300D81D84 /* LineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		5B7F47862478727400D81D84 /* MagnifierRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagnifierRect.swift; sourceTree = "<group>"; };
-		5B7F47872478727400D81D84 /* MultiLineChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiLineChartView.swift; sourceTree = "<group>"; };
 		5B7F47882478727400D81D84 /* IndicatorPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorPoint.swift; sourceTree = "<group>"; };
 		5B7F47892478727400D81D84 /* Legend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Legend.swift; sourceTree = "<group>"; };
 		5B7F478A2478727400D81D84 /* Path+QuadCurve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Path+QuadCurve.swift"; sourceTree = "<group>"; };
@@ -111,9 +107,7 @@
 				5B7F47892478727400D81D84 /* Legend.swift */,
 				5B7F47832478727200D81D84 /* Line.swift */,
 				5B7F47842478727300D81D84 /* LineChartView.swift */,
-				5B7F47852478727300D81D84 /* LineView.swift */,
 				5B7F47862478727400D81D84 /* MagnifierRect.swift */,
-				5B7F47872478727400D81D84 /* MultiLineChartView.swift */,
 				5B7F478A2478727400D81D84 /* Path+QuadCurve.swift */,
 			);
 			path = LineChart;
@@ -295,10 +289,8 @@
 				5B7F47942478727900D81D84 /* Helpers.swift in Sources */,
 				5B7F478C2478727400D81D84 /* LineChartView.swift in Sources */,
 				5BCCA7CC2471168300EE6C2B /* ViewController.swift in Sources */,
-				5B7F478D2478727400D81D84 /* LineView.swift in Sources */,
 				5B7F478B2478727400D81D84 /* Line.swift in Sources */,
 				5BB0FA962477C6840043A94D /* haptic+Feedback.swift in Sources */,
-				5B7F478F2478727400D81D84 /* MultiLineChartView.swift in Sources */,
 				5B7E6B062473062500023650 /* CountryData.swift in Sources */,
 				5BB0FA7724757BC10043A94D /* ResultsTableViewController.swift in Sources */,
 				5B7E6B1B2473DA2E00023650 /* MapViewController.swift in Sources */,

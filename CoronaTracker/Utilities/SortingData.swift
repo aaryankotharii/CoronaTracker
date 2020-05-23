@@ -20,7 +20,7 @@ enum SortType{
         case .death:
             return "Deaths"
         case .name(state: let state):
-            return state ? "Name (Z - A)" : "Name (A - Z)"
+            return state ? "Name (A - Z)" : "Name (Z - A)"
         case .recovered:
             return "Recovered "
         case .total:
