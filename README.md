@@ -57,3 +57,9 @@
 ## Credits
 - Corona virus Data :-  [covid19api](https://covid19api.com)
 - SwiftUI Line Graph :-   [AppPear](https://github.com/AppPear/ChartView)
+
+## License
+
+ Copyright 2020 Aaryan Kothari.
+
+ Licensed under MIT License: https://opensource.org/licenses/MIT
