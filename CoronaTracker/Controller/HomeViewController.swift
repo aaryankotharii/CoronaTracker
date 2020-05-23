@@ -74,7 +74,8 @@ class HomeViewController: UIViewController {
     /// Segue  To `GlobeView`
     @IBSegueAction func goToGlobalData(_ coder: NSCoder) -> UIViewController? {
         let country = fetchCountry("Algeria")
-        let globalRootView = GlobeView(country: country!, cases: [])
+        let width = view.frame.width
+        let globalRootView = GlobeView(country: country!, width: width, cases: [])
         return UIHostingController(coder: coder, rootView: globalRootView .environment(\.managedObjectContext, self.moc))
     }
     

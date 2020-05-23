@@ -17,24 +17,22 @@ struct GlobeView: View {
     @State var country : Country
     @State private var isShowing = true
 
-    
+    var width : CGFloat
     var cases : [countrycase]
     var body: some View {
-        GeometryReader { geo in
             VStack{
                 Text("Global Stats")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(Font.system(size: 44, weight: .bold))
                     .padding(.top,60)
-                globalDataStack(global: self.global.first!, width:  geo.size.width/6)
-                countryDataStack(country: self.$country, width: geo.size.width/6)
+                globalDataStack(global: self.global.first!, width: width/6)
+                countryDataStack(country: self.$country, width: width/7)
                 if self.isShowing {
                     HStack{
                 VStack(alignment:.center){
                 Text("Tap on a county to see details 👇🏻")
                 Text("Swipe to seee more")
                 }
-                        Spacer()
                 }
                 }
                 ZStack{
@@ -52,11 +50,11 @@ struct GlobeView: View {
                            }
                  }
                 }
-            }.padding(.leading,15)
+            }
+            .padding(.leading,15)
                 .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.7294117647, green: 0.8784313725, blue: 0.9098039216, alpha: 1)),Color(#colorLiteral(red: 0.4549019608, green: 0.7647058824, blue: 0.8235294118, alpha: 1))]), startPoint: .top, endPoint: .bottom)).edgesIgnoringSafeArea(.bottom)
                 .onAppear {
             }
-        }
     }
     
     
@@ -117,14 +115,18 @@ struct GlobeView: View {
                         .frame(width: width/2, height: width/2, alignment: .center)
                         .aspectRatio(contentMode: .fit)
                     }.frame(width: width, height: width, alignment: .center)
-                    Text(title).font(.system(size: 15, weight: .bold, design: .rounded))
-                        .lineLimit(2)
+                    Text(title)
+                        .modifier(Wrap())
+                        .lineLimit(nil)
+                        .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .minimumScaleFactor(0.5)
                 Text(count)
-                }.aspectRatio(1.0, contentMode: .fit)
+                    .minimumScaleFactor(0.5)
+                }
+            .aspectRatio(1.0, contentMode: .fit)
             .padding(15)
-                    .background(Color.white.opacity(0.2))
+            .background(Color.white.opacity(0.2))
             .cornerRadius(20)
-
         }
     }
     
@@ -183,14 +185,16 @@ struct countrycase: Hashable {
     var cases : Int
 }
 
-struct GlobeView_Previews: PreviewProvider {
-    static var previews: some View {
-        GlobeView(country: Country(), cases: [])
-    }
-}
-
 extension Int32 {
     var stringValue : String{
         return String(self)
+    }
+}
+
+struct Wrap: ViewModifier {
+    func body(content: Content) -> some View {
+        GeometryReader { geometry in
+            content.frame(width: geometry.size.width)
+        }
     }
 }
