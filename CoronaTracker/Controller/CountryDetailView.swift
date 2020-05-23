@@ -48,6 +48,7 @@ struct CountryDetailView: View {
                         Text("\(self.data[self.index][1])")
                     }
                 }.font(.system(size: 16, weight: .medium, design: .rounded))
+                Spacer() 
                 LineChartView.init(data: self.country.allData?[self.index] ?? [], title: self.state[self.index],frame: CGSize(width: geo.size.width-30, height: 150))
                     .padding(.bottom,50)
             }.onAppear(perform: self.fetch)

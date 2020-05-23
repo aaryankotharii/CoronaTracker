@@ -298,11 +298,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
             let worldData = objectToStruct(country!)
             let data = [[worldData.NewConfirmed,worldData.TotalConfirmed],[worldData.NewRecovered,worldData.TotalRecovered],[worldData.NewDeaths,worldData.TotalDeaths],[0,worldData.totalActive()]]
            self.countryRootView = CountryDetailView(worldData: worldData, data: data, countryName: cell.countryNameLabel.text ?? "no", slug: country!.slug ?? "india")
-        
+        }
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "countryData", sender: nil)
         }
-    }
 }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
