@@ -28,6 +28,7 @@ struct CountryDetailView: View {
                     .offset(x: 0, y: -20)
                     .lineLimit(2)
                     .minimumScaleFactor(0.6)
+                    .frame(maxWidth: .infinity )
                 Picker(selection: self.$index, label: Text("")) {
                     Image("virus-1").resizable().tag(0)
                     Image("cross-1").resizable().tag(1)

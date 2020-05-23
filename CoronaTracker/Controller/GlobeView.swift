@@ -20,16 +20,17 @@ struct GlobeView: View {
     
     var cases : [countrycase]
     var body: some View {
+        GeometryReader { geo in
             VStack{
                 Text("Global Stats")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(Font.system(size: 44, weight: .bold))
                     .padding(.top,60)
-                globalDataStack(global: global.first!)
-                countryDataStack(country: $country)
-                if isShowing {
+                globalDataStack(global: self.global.first!, width:  geo.size.width/6)
+                countryDataStack(country: self.$country, width: geo.size.width/6)
+                if self.isShowing {
                     HStack{
-                VStack(alignment:.leading){
+                VStack(alignment:.center){
                 Text("Tap on a county to see details 👇🏻")
                 Text("Swipe to seee more")
                 }
@@ -39,7 +40,7 @@ struct GlobeView: View {
                 ZStack{
                  ScrollView(.horizontal, showsIndicators: false){
                            HStack{
-                            ForEach(countries , id:\.self){ (country:Country) in
+                            ForEach(self.countries , id:\.self){ (country:Country) in
                                 bar(value: self.calculateHeight(Int(country.total)), emoji: country.countrycode!)
                                        .onTapGesture {
                                         self.country = country
@@ -55,21 +56,23 @@ struct GlobeView: View {
                 .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.7294117647, green: 0.8784313725, blue: 0.9098039216, alpha: 1)),Color(#colorLiteral(red: 0.4549019608, green: 0.7647058824, blue: 0.8235294118, alpha: 1))]), startPoint: .top, endPoint: .bottom)).edgesIgnoringSafeArea(.bottom)
                 .onAppear {
             }
+        }
     }
     
     
     struct globalDataStack : View{
         @State var global : Global
+        var width : CGFloat
         var body: some View {
             VStack{
             ScrollView(.horizontal, showsIndicators: false){
             HStack{
-                listTab(image:0, title: "Total Confirmed", count: global.totalconfirmed.stringValue)
-                listTab(image:1, title: "Total Recoveries", count: global.totalrecovered.stringValue)
-                listTab(image:2, title: "Total Deaths", count: global.totaldeaths.stringValue)
-                listTab(image:0, title: "New Confirmed", count: global.newconfirmed.stringValue)
-                listTab(image:1, title: "New Recoveries", count: global.newrecovered.stringValue)
-                listTab(image:2, title: "New Deaths", count: global.newdeaths.stringValue)
+                listTab(image:0, title: "Total Confirmed", count: global.totalconfirmed.stringValue, width: width)
+                listTab(image:1, title: "Total Recoveries", count: global.totalrecovered.stringValue, width: width)
+                listTab(image:2, title: "Total Deaths", count: global.totaldeaths.stringValue, width: width)
+                listTab(image:0, title: "New Confirmed", count: global.newconfirmed.stringValue, width: width)
+                listTab(image:1, title: "New Recoveries", count: global.newrecovered.stringValue, width: width)
+                listTab(image:2, title: "New Deaths", count: global.newdeaths.stringValue, width: width)
             }
             }.padding(.leading,15)
                 Spacer()
@@ -79,17 +82,18 @@ struct GlobeView: View {
     
     struct countryDataStack : View{
         @Binding var country : Country
+        var width : CGFloat
         var body: some View {
             VStack(alignment:.leading){
                 Text(country.name!).font(.system(size: 35, weight: .bold, design: .rounded))
             ScrollView(.horizontal, showsIndicators: false){
             HStack{
-                listTab(image:0, title: "Total Confirmed", count: country.total.stringValue)
-                listTab(image:1, title: "Total Recoveries", count: country.recoveries.stringValue)
-                listTab(image:2, title: "Total Deaths", count: country.deaths.stringValue)
-                listTab(image:0, title: "New Confirmed", count: country.newtotal.stringValue)
-                listTab(image:1, title: "New Recoveries", count: country.newrecoveries.stringValue)
-                listTab(image:2, title: "New Deaths", count: country.newdeaths.stringValue)
+                listTab(image:0, title: "Total Confirmed", count: country.total.stringValue, width: width)
+                listTab(image:1, title: "Total Recoveries", count: country.recoveries.stringValue, width: width)
+                listTab(image:2, title: "Total Deaths", count: country.deaths.stringValue, width: width)
+                listTab(image:0, title: "New Confirmed", count: country.newtotal.stringValue, width: width)
+                listTab(image:1, title: "New Recoveries", count: country.newrecoveries.stringValue, width: width)
+                listTab(image:2, title: "New Deaths", count: country.newdeaths.stringValue, width: width)
             }
             }.padding(.leading,15)
                 Spacer()
@@ -99,25 +103,28 @@ struct GlobeView: View {
     
     
     struct listTab : View{
+        
         var image : Int
         var cases : [String] = ["virus","cross","coffin"]
         var title : String
         var count : String
+        var width : CGFloat
         var body : some View{
                 VStack(alignment:.center){
                     VStack{
                     Image(cases[image])
                         .resizable()
-                        .frame(width: 50, height: 50, alignment: .center)
+                        .frame(width: width/2, height: width/2, alignment: .center)
                         .aspectRatio(contentMode: .fit)
-                    }.frame(width: 100, height: 100, alignment: .center)
+                    }.frame(width: width, height: width, alignment: .center)
                     Text(title).font(.system(size: 15, weight: .bold, design: .rounded))
+                        .lineLimit(2)
                 Text(count)
                 }.aspectRatio(1.0, contentMode: .fit)
             .padding(15)
                     .background(Color.white.opacity(0.2))
             .cornerRadius(20)
-                    
+
         }
     }
     
