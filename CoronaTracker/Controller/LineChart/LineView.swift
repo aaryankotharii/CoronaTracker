@@ -42,18 +42,6 @@ public struct LineView: View {
     public var body: some View {
         GeometryReader{ geometry in
             VStack(alignment: .leading, spacing: 8) {
-                Group{
-                    if (self.title != nil){
-                        Text(self.title!)
-                            .font(.title)
-                            .bold().foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
-                    }
-                    if (self.legend != nil){
-                        Text(self.legend!)
-                            .font(.callout)
-                            .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.legendTextColor : self.style.legendTextColor)
-                    }
-                }.offset(x: 0, y: 20)
                 ZStack{
                     GeometryReader{ reader in
                         Rectangle()

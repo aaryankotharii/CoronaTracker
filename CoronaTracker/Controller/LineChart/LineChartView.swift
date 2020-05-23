@@ -30,7 +30,7 @@ public struct LineChartView: View {
             
         }
     }
-    let frame = CGSize(width: 180, height: 120)
+    public var frame = CGSize(width: 180, height: 120)
     private var rateValue: Int?
     
     public init(data: [Double],
@@ -40,7 +40,8 @@ public struct LineChartView: View {
                 form: CGSize? = ChartForm.medium,
                 rateValue: Int? = 14,
                 dropShadow: Bool? = true,
-                valueSpecifier: String? = "%.1f") {
+                valueSpecifier: String? = "%.1f",
+        frame : CGSize = CGSize(width: 180, height: 120)) {
         
         self.data = ChartData(points: data)
         self.title = title
@@ -51,6 +52,7 @@ public struct LineChartView: View {
         self.dropShadow = dropShadow!
         self.valueSpecifier = valueSpecifier!
         self.rateValue = rateValue
+        self.frame = frame
     }
     
     public var body: some View {
