@@ -80,7 +80,6 @@ class MapViewController: UIViewController {
     @IBAction func tappedOnMap(_ sender: UITapGestureRecognizer) {
         let tapLocation = sender.location(in: mapView)
         let coordinate = self.mapView.convert(tapLocation, toCoordinateFrom: self.mapView)
-        print(coordinate)
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         fetchChountry(location) { code in
             if let code = code {

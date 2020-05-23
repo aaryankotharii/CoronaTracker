@@ -56,7 +56,6 @@ struct CountryDetailView: View {
     }
     
     private  func fetch(){
-        print("fetching")
         self.country.fetch(slug)
     }
 }
