@@ -10,6 +10,8 @@ import UIKit
 
 //MARK:- RESULTS TABLE VIEW ( USED UNDER SEARCH CONTROLLER )
 
+//MARK: Cell is same as HomeViewController
+
 class ResultsTableViewController: UITableViewController {
     
     let tableViewCellIdentifier = "cell2"
