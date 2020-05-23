@@ -8,7 +8,7 @@
 
 import Foundation
 
-
+//MARK: Formats date for tableView cell
 extension Date{
     var homeCellDate: String{
         let formatter = DateFormatter()

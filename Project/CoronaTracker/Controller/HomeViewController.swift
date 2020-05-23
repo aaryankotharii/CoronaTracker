@@ -50,13 +50,9 @@ class HomeViewController: UIViewController {
     //MARK:-  ---------- Life Cycle Methods ----------
     
     override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        if UserDefaults.standard.value(forKey: "onboarding") == nil {
-        performSegue(withIdentifier: "onboarding", sender: nil)
-        }
         setupSearchController()
         initialSetup()
+        super.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -136,6 +132,7 @@ class HomeViewController: UIViewController {
                 objectToGlobalStruct(country)
             }
             addGlobal(summary.Global)
+            presentOnboarding()
         } else {
             if error!.localizedDescription == "The Internet connection appears to be offline."{
                 self.networkErrorAlert(title: "Internet required to download data")
@@ -258,6 +255,12 @@ class HomeViewController: UIViewController {
             return country.first!
         }
         return nil
+    }
+    
+    func presentOnboarding(){
+        if UserDefaults.standard.value(forKey: "onboarding") == nil {
+        performSegue(withIdentifier: "onboarding", sender: nil)
+        }
     }
     
 }

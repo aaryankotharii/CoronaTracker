@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import AudioToolbox
 
+/// `Better UX`
+
 extension UIDevice {
     
     // Vibrates when any error occur like invalid password etc.

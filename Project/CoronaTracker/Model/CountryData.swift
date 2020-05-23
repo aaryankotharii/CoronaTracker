@@ -10,17 +10,7 @@ import Foundation
 import Combine
 
 final class CurrentCountryData: ObservableObject {
-    @Published  var current : CountryCaseCount?
-    
-    @Published var active : [Double]?
-    @Published var dead : [Double]?
-    @Published var Recovered : [Double]?
-    @Published var confirmed : [Double]?
-    
-    
-    @Published var dailyNew : [Double]?
-    
-    @Published var allData : [[Double]]?
+    @Published var current : [[Double]]?
 
     
     init(){
@@ -37,42 +27,19 @@ extension CurrentCountryData{
             let active = result.map { $0.Active }
             let activeArray = active.map{Double($0)}
 
-                let recovered = result.map { $0.Recovered }
+            let recovered = result.map { $0.Recovered }
             let recoveredArray = recovered.map{Double($0)}
             
             let confirmed = result.map { $0.Confirmed }
-            let confirmedArray = confirmed.map{ Double($0) }
-
-            self.current = CountryCaseCount(active: activeArray, deaths: deathArray, recovered: recoveredArray)
-            self.active = activeArray
-            self.dead = deathArray
-            self.Recovered = recoveredArray
-            self.confirmed = confirmedArray
+            let confirmedArray = confirmed.map{ Double($0)}
             
-            self.allData = [confirmedArray,recoveredArray,deathArray,activeArray]
-
-            var arrayToReturn = confirmedArray
-                if arrayToReturn.count >= 0{
-                    for i in stride(from: (arrayToReturn.count-1), to: 1, by: -1) {
-                        arrayToReturn[i] = arrayToReturn[i] - arrayToReturn[i-1]
-                        self.dailyNew = arrayToReturn
+            self.current = [confirmedArray,
+                            recoveredArray,
+                            deathArray,
+                            activeArray]
                   }
-              }
-            
         }
-    }
-    
-    func getFrequencyArray(_ array : [Double]?)->[Double]{
-        var arrayToReturn = array
-        if arrayToReturn != nil{
-            if arrayToReturn!.count >= 0{
-            for i in stride(from: (arrayToReturn!.count-1), to: 1, by: -1) {
-                      arrayToReturn![i] = arrayToReturn![i] - arrayToReturn![i-1]
-                return arrayToReturn ?? []
-              }
-          }
-        }
-        return []
-    }
 }
 
+
+//CountryCaseCount

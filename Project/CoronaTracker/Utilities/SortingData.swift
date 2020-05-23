@@ -8,6 +8,7 @@
 
 import Foundation
 
+//TYPES OF SORT FOR TableView
 enum SortType{
     case name(state : Bool)
     case death
