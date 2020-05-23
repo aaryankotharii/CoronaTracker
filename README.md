@@ -53,3 +53,7 @@
  
 ## Author
 * [Aaryan Kothari](https://github.com/aaryankotharii)
+
+## Credits
+- Corona virus Data :-  [covid19api](https://covid19api.com)
+- SwiftUI Line Graph :-   [AppPear](https://github.com/AppPear/ChartView)
