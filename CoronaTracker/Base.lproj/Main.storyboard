@@ -310,9 +310,7 @@
                         <outlet property="globeButton" destination="hIB-HM-Syr" id="Aa9-b2-Kpt"/>
                         <outlet property="tableView" destination="Pob-XS-YcB" id="zWG-wX-RJW"/>
                         <segue destination="c92-Mc-VGc" kind="show" identifier="countryData" destinationCreationSelector="goToCountryData:" id="OAQ-ys-dB9"/>
-                        <segue destination="FNM-Eb-Glg" kind="popoverPresentation" identifier="onboarding" id="ib5-FU-pOG">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                        </segue>
+                        <segue destination="FNM-Eb-Glg" kind="presentation" identifier="onboarding" id="ib5-FU-pOG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -505,6 +503,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Hvm-8V-IHX"/>
                     </view>
+                    <navigationItem key="navigationItem" id="UHp-i3-Ut3"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZCd-Gm-7eD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1553,8 +1552,8 @@
         <image name="glossary" width="328" height="315"/>
         <image name="list" width="148" height="145"/>
         <image name="list.dash" catalog="system" width="128" height="85"/>
-        <image name="map" width="98" height="95"/>
         <image name="map" catalog="system" width="128" height="113"/>
+        <image name="map" width="98" height="95"/>
         <image name="virus" width="269" height="260"/>
     </resources>
 </document>

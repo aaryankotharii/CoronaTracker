@@ -33,7 +33,7 @@ class HomeViewController: UIViewController {
     
     var countrycases : [countrycase] = []
     
-    var countryRootView = CountryDetailView()
+    var countryRootView = CountryDetailView(data: [])
     
     let cellIdentifier = "cell"
     let heightForCell : CGFloat = 170
@@ -52,7 +52,9 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        if UserDefaults.standard.value(forKey: "onboarding") == nil {
         performSegue(withIdentifier: "onboarding", sender: nil)
+        }
         setupSearchController()
         initialSetup()
     }
@@ -287,27 +289,28 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
             let cell = tableView.cellForRow(at: indexPath) as! HomeTableViewCell
             let country = fetchCountry(cell.name ?? "india")
             let worldData = objectToStruct(country!)
-            
-            self.countryRootView = CountryDetailView(worldData: worldData, countryName: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
+            let data = [[worldData.NewConfirmed,worldData.TotalConfirmed],[worldData.NewRecovered,worldData.TotalRecovered],[worldData.NewDeaths,worldData.TotalDeaths],[0,worldData.totalActive()]]
+            self.countryRootView = CountryDetailView(worldData: worldData, data: data, countryName: cell.countryNameLabel.text ?? "no", slug: country!.slug ?? "india")
+           
         } else {
             let cell = resultsTableController.tableView.cellForRow(at: indexPath) as! HomeTableViewCell
             let country = fetchCountry(cell.name ?? "india")
             let worldData = objectToStruct(country!)
-            
-            self.countryRootView = CountryDetailView(worldData: worldData, countryName: cell.countryNameLabel.text ?? "no",slug: country!.slug ?? "india")
-        }
+            let data = [[worldData.NewConfirmed,worldData.TotalConfirmed],[worldData.NewRecovered,worldData.TotalRecovered],[worldData.NewDeaths,worldData.TotalDeaths],[0,worldData.totalActive()]]
+           self.countryRootView = CountryDetailView(worldData: worldData, data: data, countryName: cell.countryNameLabel.text ?? "no", slug: country!.slug ?? "india")
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "countryData", sender: nil)
         }
     }
+}
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return heightForCell
     }
     
-}
 
+}
 
 //MARK:- FetchedResultsController Delegate Methods
 extension HomeViewController : NSFetchedResultsControllerDelegate {

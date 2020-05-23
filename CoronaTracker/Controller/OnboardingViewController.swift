@@ -12,5 +12,6 @@ class OnboardingViewController: UIViewController {
     // Dissmiss onboarding screen
     @IBAction func continueClicked(_ sender: Any) {
         self.dismiss(animated:true)
+        UserDefaults.standard.setValue(false, forKey: "onboarding")
     }
 }

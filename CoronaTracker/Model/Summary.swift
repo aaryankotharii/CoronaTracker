@@ -34,4 +34,8 @@ struct Countries: Codable {
     var NewRecovered: Int
     var TotalRecovered: Int
     var  Date: String
+    
+    func totalActive()->Int{
+        return TotalConfirmed - TotalDeaths - TotalRecovered
+    }
 }
