@@ -15,25 +15,13 @@ class CoronaClient {
         
         static let base = "https://api.covid19api.com"
         
-        case countries
         case summary
-        case dayone(country:String)
-        case dayonelive(country:String)
-        case dayonetotal(country:String)
         case countryTotal(country:String)
         
         var stringValue : String{
             switch self {
-            case .countries:
-                return Endpoints.base + "/countries"
             case .summary:
                 return Endpoints.base + "/summary"
-            case .dayone(let country):
-                 return Endpoints.base + "/dayone/country/\(country)"
-            case .dayonelive(let country):
-                return Endpoints.base + "/dayone/country/\(country)/status/confirmed/live"
-            case .dayonetotal(let country):
-                return Endpoints.base + "/dayone/country/\(country)/status/confirmed"
             case .countryTotal(let country):
                 return Endpoints.base + "/total/country/\(country)"
             }
@@ -64,21 +52,7 @@ class CoronaClient {
                     completion(nil, error)
             }
         }
-        let observation = task.progress.observe(\.fractionCompleted) { progress, _ in
-          print(progress.fractionCompleted)
-        }
-        
         task.resume()
-    }
-    
-    class func FetchAllCountries(completion: @escaping ([CountryStruct], Error?) -> Void) {
-        taskForGETRequest(url: Endpoints.countries.url, responseType: CountryData.self) { (response, error) in
-            if let response = response{
-                completion(response.countries,nil)
-                return
-            }
-            completion([],error)
-        }
     }
     
     class func getSummary(completion: @escaping (Summary?, Error?) -> Void) {
@@ -97,8 +71,7 @@ class CoronaClient {
             completion(response)
             return
             }
-            print(error?.localizedDescription)
+            print(error!.localizedDescription)
         }
     }
-    
 }

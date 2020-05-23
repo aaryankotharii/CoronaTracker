@@ -252,7 +252,6 @@ class HomeViewController: UIViewController {
     }
     
     
-    //TODO new fetch request wih=thout predicate
     func fetchCountry(_ name : String)-> Country?{
         if let countries = fetchedResultsController.fetchedObjects{
             let country = countries.filter{ $0.name == name}

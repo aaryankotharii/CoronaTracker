@@ -9,21 +9,19 @@
 import UIKit
 
 class HomeTableViewCell: UITableViewCell {
-
+    
+    //MARK: Outlets
     @IBOutlet var countryNameLabel: UILabel!
-    
     @IBOutlet var graphView: UIView!
-    
-    
     @IBOutlet var totalLabel: UILabel!
     @IBOutlet var recoveredLabel: UILabel!
     @IBOutlet var deathsLabel: UILabel!
     @IBOutlet var activeLabel: UILabel!
-    
     @IBOutlet var timeLabel: UILabel!
     
-    var country : Country!
+    //MARK: ----- VARIABLES -----
     
+    var country : Country!
     
     var height : Double {
         return Double(graphView.frame.height)
@@ -36,16 +34,19 @@ class HomeTableViewCell: UITableViewCell {
     var spacing : Double{
         return width/3
     }
+    
     var total : Int = 0 {
         didSet{
             totalLabel.text = String(total)
         }
     }
+    
     var recovered : Int = 0 {
         didSet{
             recoveredLabel.text = String(recovered)
         }
     }
+    
     var deaths : Int = 0{
         didSet{
             deathsLabel.text = String(deaths)
@@ -57,42 +58,41 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     var name : String!
-
-    
     
     let colors : [UIColor] = [#colorLiteral(red: 0.9921568627, green: 0.1882352941, blue: 0.4117647059, alpha: 1),#colorLiteral(red: 0.9960784314, green: 0.6705882353, blue: 0, alpha: 1),#colorLiteral(red: 0.2549019608, green: 0.2549019608, blue: 0.2549019608, alpha: 1),#colorLiteral(red: 0.08235294118, green: 0.7960784314, blue: 0.2666666667, alpha: 1)]
-
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .none
     }
     
     func setupCell(){
         let name = country.name
-              
+        
         let emoji = convertToEmoji(str: country.countrycode ?? "us") 
-              
-              let date = country.date ?? Date()
-              
-              timeLabel.text = date.homeCellDate
-              
-              
-              countryNameLabel.text = "\(emoji) \(name ?? "")"
-              
-              
-              total = Int(country.total)
-              deaths = Int(country.deaths)
-              recovered = Int(country.recoveries)
-              
+        
+        let date = country.date ?? Date()
+        
+        timeLabel.text = date.homeCellDate
+        
+        
+        countryNameLabel.text = "\(emoji) \(name ?? "")"
+        
+        
+        total = Int(country.total)
+        deaths = Int(country.deaths)
+        recovered = Int(country.recoveries)
+        
         self.name = name ?? ""
         
         totalLabel.text = "\(total)"
-          recoveredLabel.text = "\(recovered)"
-          deathsLabel.text = "\(deaths)"
-          activeLabel.text = "\(active)"
+        recoveredLabel.text = "\(recovered)"
+        deathsLabel.text = "\(deaths)"
+        activeLabel.text = "\(active)"
     }
     
- 
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         let i = calculatePercentages()
@@ -123,9 +123,9 @@ class HomeTableViewCell: UITableViewCell {
     
     
     func addLine(_ graph : HomeGraph){
-            let shapeLayer =  CAShapeLayer()
-
-            let path = UIBezierPath()
+        let shapeLayer =  CAShapeLayer()
+        
+        let path = UIBezierPath()
         path.move(to: graph.start)
         path.addLine(to: graph.end)
         
@@ -136,26 +136,26 @@ class HomeTableViewCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 7, weight: .regular)
         label.textColor = graph.color
         self.graphView.addSubview(label)
-    
-
-            shapeLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor
+        
+        
+        shapeLayer.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0).cgColor
         shapeLayer.strokeColor = graph.color.cgColor
-            shapeLayer.lineWidth = CGFloat(width/10)
-            shapeLayer.path = path.cgPath
-            shapeLayer.lineCap = .round
-
-            // animate it
-
-            graphView.layer.addSublayer(shapeLayer)
-            let animation = CABasicAnimation(keyPath: "strokeEnd")
-            animation.fromValue = 0
-            animation.duration = 2
-            shapeLayer.add(animation, forKey: "MyAnimation")
-
+        shapeLayer.lineWidth = CGFloat(width/10)
+        shapeLayer.path = path.cgPath
+        shapeLayer.lineCap = .round
+        
+        // animate it
+        
+        graphView.layer.addSublayer(shapeLayer)
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = 0
+        animation.duration = 2
+        shapeLayer.add(animation, forKey: "MyAnimation")
+        
     }
     
     
-
+    
 }
 
 struct HomeGraph {

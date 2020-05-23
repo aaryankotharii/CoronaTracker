@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B4EA29724746B3700811D4C /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4EA29624746B3700811D4C /* SwiftUIView.swift */; };
 		5B4EA2992474DF7100811D4C /* SF-Pro-Rounded-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5B4EA2982474DF7100811D4C /* SF-Pro-Rounded-Medium.otf */; };
 		5B4EA29C2474E3DB00811D4C /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4EA29B2474E3DB00811D4C /* Date+Formatter.swift */; };
 		5B4EA29E2474ECC500811D4C /* CLLocation+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4EA29D2474ECC500811D4C /* CLLocation+Equatable.swift */; };
@@ -33,7 +32,6 @@
 		5BB1310C2471C63000110DBA /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1310B2471C63000110DBA /* DataController.swift */; };
 		5BCCA7C82471168300EE6C2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7C72471168300EE6C2B /* AppDelegate.swift */; };
 		5BCCA7CA2471168300EE6C2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */; };
-		5BCCA7CC2471168300EE6C2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7CB2471168300EE6C2B /* ViewController.swift */; };
 		5BCCA7CF2471168300EE6C2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BCCA7CD2471168300EE6C2B /* Main.storyboard */; };
 		5BCCA7D22471168300EE6C2B /* CoronaTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7D02471168300EE6C2B /* CoronaTracker.xcdatamodeld */; };
 		5BCCA7D42471168600EE6C2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BCCA7D32471168600EE6C2B /* Assets.xcassets */; };
@@ -47,7 +45,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5B4EA29624746B3700811D4C /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		5B4EA2982474DF7100811D4C /* SF-Pro-Rounded-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Medium.otf"; sourceTree = "<group>"; };
 		5B4EA29B2474E3DB00811D4C /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
 		5B4EA29D2474ECC500811D4C /* CLLocation+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocation+Equatable.swift"; sourceTree = "<group>"; };
@@ -74,7 +71,6 @@
 		5BCCA7C42471168300EE6C2B /* CoronaTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoronaTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BCCA7C72471168300EE6C2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5BCCA7CB2471168300EE6C2B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5BCCA7CE2471168300EE6C2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5BCCA7D12471168300EE6C2B /* CoronaTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoronaTracker.xcdatamodel; sourceTree = "<group>"; };
 		5BCCA7D32471168600EE6C2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,6 +95,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B3A83FC24792CC600633F25 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				5BCCA7D02471168300EE6C2B /* CoronaTracker.xcdatamodeld */,
+				5BB1310B2471C63000110DBA /* DataController.swift */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		5B3A83FD24792CD400633F25 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				5BCCA7E1247138D800EE6C2B /* CoronaClient.swift */,
+				5BCCA7E324713B5F00EE6C2B /* Country.swift */,
+				5BE091EF2471695200751057 /* Summary.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		5B3A83FE24792D3000633F25 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				5BCCA7CD2471168300EE6C2B /* Main.storyboard */,
+				5BCCA7D32471168600EE6C2B /* Assets.xcassets */,
+				5BCCA7D52471168600EE6C2B /* LaunchScreen.storyboard */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		5B7E6B072473B1C700023650 /* LineChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,13 +174,8 @@
 				5BCCA7E0247138A500EE6C2B /* Controller */,
 				5BCCA7C72471168300EE6C2B /* AppDelegate.swift */,
 				5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */,
-				5BCCA7CB2471168300EE6C2B /* ViewController.swift */,
-				5BCCA7CD2471168300EE6C2B /* Main.storyboard */,
-				5BCCA7D32471168600EE6C2B /* Assets.xcassets */,
-				5BCCA7D52471168600EE6C2B /* LaunchScreen.storyboard */,
+				5B3A83FE24792D3000633F25 /* Assets */,
 				5BCCA7D82471168600EE6C2B /* Info.plist */,
-				5BCCA7D02471168300EE6C2B /* CoronaTracker.xcdatamodeld */,
-				5B4EA29624746B3700811D4C /* SwiftUIView.swift */,
 			);
 			path = CoronaTracker;
 			sourceTree = "<group>";
@@ -163,10 +183,8 @@
 		5BCCA7DE247138A300EE6C2B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5BCCA7E1247138D800EE6C2B /* CoronaClient.swift */,
-				5BCCA7E324713B5F00EE6C2B /* Country.swift */,
-				5BE091EF2471695200751057 /* Summary.swift */,
-				5BB1310B2471C63000110DBA /* DataController.swift */,
+				5B3A83FC24792CC600633F25 /* Core Data */,
+				5B3A83FD24792CD400633F25 /* Networking */,
 				5B7E6B052473062500023650 /* CountryData.swift */,
 			);
 			path = Model;
@@ -288,7 +306,6 @@
 				5B4EA29E2474ECC500811D4C /* CLLocation+Equatable.swift in Sources */,
 				5B7F47942478727900D81D84 /* Helpers.swift in Sources */,
 				5B7F478C2478727400D81D84 /* LineChartView.swift in Sources */,
-				5BCCA7CC2471168300EE6C2B /* ViewController.swift in Sources */,
 				5B7F478B2478727400D81D84 /* Line.swift in Sources */,
 				5BB0FA962477C6840043A94D /* haptic+Feedback.swift in Sources */,
 				5B7E6B062473062500023650 /* CountryData.swift in Sources */,
@@ -305,7 +322,6 @@
 				5BCCA7E2247138D800EE6C2B /* CoronaClient.swift in Sources */,
 				5BCCA7E424713B5F00EE6C2B /* Country.swift in Sources */,
 				5B7F47922478727400D81D84 /* Path+QuadCurve.swift in Sources */,
-				5B4EA29724746B3700811D4C /* SwiftUIView.swift in Sources */,
 				5BB0FA792476BC640043A94D /* GlobeView.swift in Sources */,
 				5BE091F42471741A00751057 /* HomeTableViewCell.swift in Sources */,
 				5BB0FA982478491B0043A94D /* OnboardingViewController.swift in Sources */,
