@@ -34,6 +34,7 @@
 		5BC1734F247E5B330043AF2A /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC1734E247E5B330043AF2A /* TodayViewController.swift */; };
 		5BC17352247E5B330043AF2A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BC17350247E5B330043AF2A /* MainInterface.storyboard */; };
 		5BC17356247E5B330043AF2A /* Today Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5BC17349247E5B330043AF2A /* Today Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5BC1735C247EB10B0043AF2A /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC1735B247EB10B0043AF2A /* UIView+extension.swift */; };
 		5BCCA7C82471168300EE6C2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7C72471168300EE6C2B /* AppDelegate.swift */; };
 		5BCCA7CA2471168300EE6C2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */; };
 		5BCCA7CF2471168300EE6C2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BCCA7CD2471168300EE6C2B /* Main.storyboard */; };
@@ -101,6 +102,7 @@
 		5BC1734E247E5B330043AF2A /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		5BC17351247E5B330043AF2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		5BC17353247E5B330043AF2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5BC1735B247EB10B0043AF2A /* UIView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
 		5BCCA7C42471168300EE6C2B /* CoronaTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoronaTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BCCA7C72471168300EE6C2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				5BC1734E247E5B330043AF2A /* TodayViewController.swift */,
 				5BC17350247E5B330043AF2A /* MainInterface.storyboard */,
 				5BC17353247E5B330043AF2A /* Info.plist */,
+				5BC1735B247EB10B0043AF2A /* UIView+extension.swift */,
 			);
 			path = "Today Extension";
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BC1735C247EB10B0043AF2A /* UIView+extension.swift in Sources */,
 				5BC1734F247E5B330043AF2A /* TodayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
