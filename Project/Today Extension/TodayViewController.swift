@@ -15,6 +15,14 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
     
     @IBOutlet var totalLabel: UILabel!
     
+    @IBOutlet var recoveredLabel: UILabel!
+    
+    
+    @IBOutlet var deathsLabel: UILabel!
+    
+    @IBOutlet var activeLabel: UILabel!
+    
+    
     var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation: CLLocation?
     
@@ -25,7 +33,6 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         locationManager.requestLocation()
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,7 +53,12 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         
         getSummary { (result, error) in
             if let result = result{
+                //let india = result.Countries.filter{ $0.Country == "India"}
                 self.totalLabel.text = "\(result.Countries[0].TotalConfirmed)"
+                self.recoveredLabel.text = "\(result.Countries[0].TotalRecovered)"
+                self.deathsLabel.text = "\(result.Countries[0].TotalDeaths)"
+                self.activeLabel.text = "\(result.Countries[0].totalActive())"
+
                 completionHandler(NCUpdateResult.newData)
             } else {
                 
@@ -54,6 +66,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
                 
             }
         }
+        updateWidget()
     }
     
     func getSummary(completion: @escaping (Summary?, Error?) -> Void){
@@ -79,7 +92,40 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         task.resume()
     }
     
- 
+ func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+      currentLocation = locations[0]
+  }
+
+  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+      print(error.localizedDescription)
+  }
+  
+  func updateWidget()
+  {
+       if currentLocation != nil {
+        fetchChountry(currentLocation!) { (country) in
+            print(country)
+        }
+
+        }
+  }
+    
+    
+    func fetchChountry(_ coordinate : CLLocation, completion: @escaping (String?)->()){
+        CLGeocoder().reverseGeocodeLocation(coordinate) { (placemarks, error) in
+            if let error = error{
+                print(error.localizedDescription)
+                completion(nil)
+                return
+            }
+            if let placemarks = placemarks{
+                let placemark = placemarks.first
+                if let country = placemark?.country{
+                    completion(country)
+                }
+            }
+        }
+    }
 }
 
 

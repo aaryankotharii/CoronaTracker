@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import SwiftUI
+import CoreLocation
 
 class HomeViewController: UIViewController {
     
@@ -47,12 +48,17 @@ class HomeViewController: UIViewController {
         return refreshControl
     }()
     
+        var locationManager: CLLocationManager = CLLocationManager()
+    
     //MARK:-  ---------- Life Cycle Methods ----------
     
     override func viewDidLoad() {
         setupSearchController()
         initialSetup()
         super.viewDidLoad()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        locationManager.requestLocation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -434,4 +440,27 @@ extension HomeViewController {
         
         self.present(alert, animated :true)
     }
+}
+
+
+extension HomeViewController : CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+         print("error:: \(error.localizedDescription)")
+    }
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.requestLocation()
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+        if locations.first != nil {
+            print("location:: (location)")
+        }
+
+    }
+
 }
