@@ -30,6 +30,10 @@
 		5BB131082471A82100110DBA /* SF-Pro-Rounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB131072471A82100110DBA /* SF-Pro-Rounded-Bold.otf */; };
 		5BB1310A2471B24300110DBA /* SF-Pro-Rounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5BB131092471B24300110DBA /* SF-Pro-Rounded-Semibold.otf */; };
 		5BB1310C2471C63000110DBA /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1310B2471C63000110DBA /* DataController.swift */; };
+		5BC1734C247E5B330043AF2A /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC1734B247E5B330043AF2A /* NotificationCenter.framework */; };
+		5BC1734F247E5B330043AF2A /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC1734E247E5B330043AF2A /* TodayViewController.swift */; };
+		5BC17352247E5B330043AF2A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BC17350247E5B330043AF2A /* MainInterface.storyboard */; };
+		5BC17356247E5B330043AF2A /* Today Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5BC17349247E5B330043AF2A /* Today Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5BCCA7C82471168300EE6C2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7C72471168300EE6C2B /* AppDelegate.swift */; };
 		5BCCA7CA2471168300EE6C2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */; };
 		5BCCA7CF2471168300EE6C2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BCCA7CD2471168300EE6C2B /* Main.storyboard */; };
@@ -43,6 +47,30 @@
 		5BE091F42471741A00751057 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE091F32471741A00751057 /* HomeTableViewCell.swift */; };
 		5BE302C624745EB300FDF1A7 /* Country+Location+Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE302C524745EB300FDF1A7 /* Country+Location+Constant.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5BC17354247E5B330043AF2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5BCCA7BC2471168300EE6C2B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5BC17348247E5B330043AF2A;
+			remoteInfo = "Today Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5BC1735A247E5B330043AF2A /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5BC17356247E5B330043AF2A /* Today Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5B4EA2982474DF7100811D4C /* SF-Pro-Rounded-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Medium.otf"; sourceTree = "<group>"; };
@@ -68,6 +96,11 @@
 		5BB131072471A82100110DBA /* SF-Pro-Rounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Bold.otf"; sourceTree = "<group>"; };
 		5BB131092471B24300110DBA /* SF-Pro-Rounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Semibold.otf"; sourceTree = "<group>"; };
 		5BB1310B2471C63000110DBA /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		5BC17349247E5B330043AF2A /* Today Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Today Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5BC1734B247E5B330043AF2A /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		5BC1734E247E5B330043AF2A /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		5BC17351247E5B330043AF2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		5BC17353247E5B330043AF2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BCCA7C42471168300EE6C2B /* CoronaTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoronaTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BCCA7C72471168300EE6C2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +118,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5BC17346247E5B330043AF2A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5BC1734C247E5B330043AF2A /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5BCCA7C12471168300EE6C2B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -148,11 +189,40 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		5BC17344247E5AEF0043AF2A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5BCCA7C72471168300EE6C2B /* AppDelegate.swift */,
+				5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		5BC1734A247E5B330043AF2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5BC1734B247E5B330043AF2A /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5BC1734D247E5B330043AF2A /* Today Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5BC1734E247E5B330043AF2A /* TodayViewController.swift */,
+				5BC17350247E5B330043AF2A /* MainInterface.storyboard */,
+				5BC17353247E5B330043AF2A /* Info.plist */,
+			);
+			path = "Today Extension";
+			sourceTree = "<group>";
+		};
 		5BCCA7BB2471168300EE6C2B = {
 			isa = PBXGroup;
 			children = (
 				5BCCA7C62471168300EE6C2B /* CoronaTracker */,
 				5BB131062471A81500110DBA /* Fonts */,
+				5BC1734D247E5B330043AF2A /* Today Extension */,
+				5BC1734A247E5B330043AF2A /* Frameworks */,
 				5BCCA7C52471168300EE6C2B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -161,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				5BCCA7C42471168300EE6C2B /* CoronaTracker.app */,
+				5BC17349247E5B330043AF2A /* Today Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -172,9 +243,8 @@
 				5BCCA7DE247138A300EE6C2B /* Model */,
 				5BCCA7DF247138A400EE6C2B /* View */,
 				5BCCA7E0247138A500EE6C2B /* Controller */,
-				5BCCA7C72471168300EE6C2B /* AppDelegate.swift */,
-				5BCCA7C92471168300EE6C2B /* SceneDelegate.swift */,
 				5B3A83FE24792D3000633F25 /* Assets */,
+				5BC17344247E5AEF0043AF2A /* Helpers */,
 				5BCCA7D82471168600EE6C2B /* Info.plist */,
 			);
 			path = CoronaTracker;
@@ -229,6 +299,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5BC17348247E5B330043AF2A /* Today Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5BC17357247E5B330043AF2A /* Build configuration list for PBXNativeTarget "Today Extension" */;
+			buildPhases = (
+				5BC17345247E5B330043AF2A /* Sources */,
+				5BC17346247E5B330043AF2A /* Frameworks */,
+				5BC17347247E5B330043AF2A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Today Extension";
+			productName = "Today Extension";
+			productReference = 5BC17349247E5B330043AF2A /* Today Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		5BCCA7C32471168300EE6C2B /* CoronaTracker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5BCCA7DB2471168600EE6C2B /* Build configuration list for PBXNativeTarget "CoronaTracker" */;
@@ -236,10 +323,12 @@
 				5BCCA7C02471168300EE6C2B /* Sources */,
 				5BCCA7C12471168300EE6C2B /* Frameworks */,
 				5BCCA7C22471168300EE6C2B /* Resources */,
+				5BC1735A247E5B330043AF2A /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				5BC17355247E5B330043AF2A /* PBXTargetDependency */,
 			);
 			name = CoronaTracker;
 			productName = CoronaTracker;
@@ -256,6 +345,9 @@
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Aaryan Kothari";
 				TargetAttributes = {
+					5BC17348247E5B330043AF2A = {
+						CreatedOnToolsVersion = 11.4;
+					};
 					5BCCA7C32471168300EE6C2B = {
 						CreatedOnToolsVersion = 11.4;
 					};
@@ -275,11 +367,20 @@
 			projectRoot = "";
 			targets = (
 				5BCCA7C32471168300EE6C2B /* CoronaTracker */,
+				5BC17348247E5B330043AF2A /* Today Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5BC17347247E5B330043AF2A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5BC17352247E5B330043AF2A /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5BCCA7C22471168300EE6C2B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -296,6 +397,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5BC17345247E5B330043AF2A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5BC1734F247E5B330043AF2A /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5BCCA7C02471168300EE6C2B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -334,7 +443,23 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		5BC17355247E5B330043AF2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5BC17348247E5B330043AF2A /* Today Extension */;
+			targetProxy = 5BC17354247E5B330043AF2A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		5BC17350247E5B330043AF2A /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5BC17351247E5B330043AF2A /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		5BCCA7CD2471168300EE6C2B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -354,6 +479,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5BC17358247E5B330043AF2A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = F8CHS6PHQS;
+				INFOPLIST_FILE = "Today Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ak.CoronaTracker.Today-Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5BC17359247E5B330043AF2A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = F8CHS6PHQS;
+				INFOPLIST_FILE = "Today Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ak.CoronaTracker.Today-Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		5BCCA7D92471168600EE6C2B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -471,6 +634,7 @@
 		5BCCA7DC2471168600EE6C2B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F8CHS6PHQS;
@@ -489,6 +653,7 @@
 		5BCCA7DD2471168600EE6C2B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F8CHS6PHQS;
@@ -507,6 +672,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5BC17357247E5B330043AF2A /* Build configuration list for PBXNativeTarget "Today Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5BC17358247E5B330043AF2A /* Debug */,
+				5BC17359247E5B330043AF2A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5BCCA7BF2471168300EE6C2B /* Build configuration list for PBXProject "CoronaTracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
