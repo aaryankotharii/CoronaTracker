@@ -14,12 +14,8 @@ import CoreLocation
 class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManagerDelegate {
     
     @IBOutlet var totalLabel: UILabel!
-    
     @IBOutlet var recoveredLabel: UILabel!
-    
-    
     @IBOutlet var deathsLabel: UILabel!
-    
     @IBOutlet var activeLabel: UILabel!
     
     
@@ -39,7 +35,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         super.viewDidAppear(animated)
         print("appear")
         var currentSize: CGSize = self.preferredContentSize
-        currentSize.height = 100.0
+        currentSize.height = 90.0
         self.preferredContentSize = currentSize
     }
     
@@ -53,11 +49,11 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         
         getSummary { (result, error) in
             if let result = result{
-                //let india = result.Countries.filter{ $0.Country == "India"}
-                self.totalLabel.text = "\(result.Countries[0].TotalConfirmed)"
-                self.recoveredLabel.text = "\(result.Countries[0].TotalRecovered)"
-                self.deathsLabel.text = "\(result.Countries[0].TotalDeaths)"
-                self.activeLabel.text = "\(result.Countries[0].totalActive())"
+                let india = result.Countries.filter{ $0.CountryCode == "IN"}
+                self.totalLabel.text = "\(india[0].TotalConfirmed)"
+                self.recoveredLabel.text = "\(india[0].TotalRecovered)"
+                self.deathsLabel.text = "\(india[0].TotalDeaths)"
+                self.activeLabel.text = "\(india[0].totalActive())"
 
                 completionHandler(NCUpdateResult.newData)
             } else {
